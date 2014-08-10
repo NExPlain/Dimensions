@@ -1,0 +1,235 @@
+/* header & footer */
+
+header {
+	min-width: 900px;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+}
+header .inner {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px 30px 15px;
+}
+header .inner::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+header .inner > div {
+	display: inline-block;
+}
+.site-title {
+	font-size: 24px;
+	font-weight: bold;
+	font-family: cursive;
+	padding-left: 45px;
+	float: left;
+}
+.site-search {
+	float: left;
+}
+.site-logo {
+	width: 45px;
+	position: absolute;
+	top: 10px;
+	margin-left: -55px;
+}
+.site-navigation {
+	float: right;
+}
+.site-navigation ul {
+	list-style: none;
+	margin: 0;
+}
+.site-navigation li {
+	display: inline-block;
+	font-size: 14px;
+}
+.site-navigation a {
+	display: inline-block;
+	padding: 5px 10px;
+}
+.site-navigation a:hover {
+	text-decoration: none !important;
+	background: #eee;
+}
+.site-navigation li.current a,
+.site-navigation li.current a:hover {
+	color: #333 !important;
+	background: none;
+	cursor: default;
+}
+.site-main {
+	width: 900px;
+	margin: 20px auto 40px;
+	padding: 0 30px;
+}
+
+.site-footer {
+	border-top: 1px solid #ddd;
+	background: #f0f0f0;
+	min-width: 900px;
+	width: 100%;
+}
+.site-footer .inner {
+	width: 900px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 20px 20px;
+	color: #888;
+	line-height: 1.5em;
+}
+
+/* universal */
+
+.page-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+/* browse.php */
+
+.browse .model-line {
+	list-style: none;
+	margin: 20px 0;
+}
+.browse .model-cell {
+	display: inline-block;
+	border: 1px solid #ddd;
+	margin: 0 10px;
+	vertical-align: top;
+	box-shadow: 1px 2px 6px rgba(0,0,0,0.1);
+}
+.browse .model-cell:first-child {
+	margin-left: 0;
+}
+.browse .model-cell:last-child {
+	margin-right: 0;
+}
+.browse .model-image {
+	width: 205px;
+	height: 205px;
+}
+.browse .model-info {
+	padding: 10px 15px;
+	width: 175px;
+}
+.browse .model-title {
+	font-weight: bold;
+}
+.browse .model-author {
+	color: #999;
+	padding-top: 5px;
+}
+
+/* my-profile.php */
+
+.my-profile section {
+	width: 500px;
+}
+.my-profile .section-title {
+	font-size: 20px;
+	margin: 15px 0 0 0;
+	padding: 0;
+	border-bottom: 1px solid #ccc;
+}
+.my-profile form {
+	margin: 0;
+}
+.my-profile .form-horizontal .controls {
+	padding-top: 5px;
+	margin-bottom: 5px;
+}
+.my-profile .form-horizontal .control-group .edit-link {
+	display: none;
+	margin-left: 20px;
+}
+.my-profile .form-horizontal .control-group:hover .edit-link {
+	display: inline;
+}
+.my-profile .form-horizontal .nesting-form {
+	padding-top: 0;
+	margin-bottom: 10px;
+}
+.my-profile .form-horizontal .nesting-form .btn {
+	margin-top: 5px;
+}
+.my-profile .form-horizontal .control-label {
+	text-align: left;
+}
+.my-profile .form-horizontal .control-group {
+	padding: 3px 0;
+	margin-bottom: 0;
+	border-bottom: 1px solid #ddd;
+}
+.my-profile .form-horizontal .clickable {
+	cursor: pointer;
+}
+.my-profile .inline-form label {
+	float: left;
+	line-height: 30px;
+	margin: 0 20px 0 0;
+}
+.my-profile .inline-form .form-line {
+	margin: 0 0 6px 0;
+}
+.my-profile .inline-form .inline-btn {
+	margin-left: 15px;
+}
+.my-profile .edit-link .icon,
+.my-profile .del-link .icon {
+	margin-right: 5px;
+}
+.my-profile .model-item {
+	padding: 8px 0;
+	border-bottom: 1px solid #ddd;
+}
+.my-profile .model-options {
+	float: right;
+	margin-right: 10px;
+	display: none;
+}
+.my-profile .model-item:hover .model-options {
+	display: inline;
+}
+.my-profile .model-item .model-option {
+	margin-left: 20px;
+}
+
+/* showcase.php */
+.showcase .model-caption {
+	margin: 15px 0;
+}
+.showcase .model-title {
+	font-size: 20px;
+	margin: 0;
+}
+.showcase .model-meta {
+	color: #999;
+}
+.showcase .model-meta .author {
+	margin-right: 15px;
+}
+.showcase .site-main::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.showcase .primary {
+	width: 650px;
+	float: left;
+}
+.showcase .secondary {
+	width: 220px;
+	float: right;
+}
+.showcase .secondary .widget {
+	margin: 20px 0;
+}
+.showcase .secondary .widget:first-child {
+	margin-top: 0;
+}
+.showcase .secondary .widget:last-child {
+	margin-bottom: 0;
+}
