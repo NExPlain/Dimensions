@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class ModelController
+ *
+ * @author Renfei Song
+ */
 class ModelController {
     private $dbc;
 
@@ -27,6 +32,13 @@ class ModelController {
         mysqli_close($this->dbc);
     }
 
+    /**
+     * Load details of specified model and increase times of view by one.
+     *
+     * @param $id
+     *
+     * @return bool Success or not (failures are mostly caused by invalid model IDs).
+     */
     public function load($id)
     {
         $query = "SELECT * FROM dimensions_models INNER JOIN dimensions_users ON dimensions_users.id = dimensions_models.uploader WHERE dimensions_models.id = '$id'";
@@ -59,6 +71,11 @@ class ModelController {
         }
     }
 
+    /**
+     * List all models.
+     *
+     * @see browse.php
+     */
     public function list_all_models()
     {
         $query = "SELECT isprivate, dimensions_models.id AS id, title, username FROM dimensions_models INNER JOIN dimensions_users ON dimensions_models.uploader = dimensions_users.id";
@@ -97,6 +114,16 @@ HTML;
 HTML;
     }
 
+    /**
+     * @param $title
+     * @param $uploader_id
+     * @param $model
+     * @param $scale
+     * @param $private
+     * @param $desc
+     *
+     * @return bool Always return true.
+     */
     public function upload_model($title, $uploader_id, $model, $scale, $private, $desc)
     {
         $query = "SELECT * FROM dimensions_models WHERE uploader = '$uploader_id'";

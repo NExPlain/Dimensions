@@ -3,6 +3,7 @@
  * Dimensions functions and definitions
  *
  * Set up the site and provide some helper functions.
+ * Should be included in every Dimensions presentation layer files.
  *
  * @author Renfei Song
  */

@@ -8,7 +8,7 @@ require_once "functions.php";
 require_once "ModelController.class.php";
 get_header("浏览所有模型"); ?>
 
-<h1 class="page-title">所有模型</h1>
+    <h1 class="page-title">所有模型</h1>
 
 <?php
 $model_controller = new ModelController();

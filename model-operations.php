@@ -1,4 +1,10 @@
 <?php
+/**
+ * The AJAX-backing-up script for operations related to a model.
+ *
+ * @see showcase.php
+ * @author Renfei Song
+ */
 
 require_once "define.php";
 

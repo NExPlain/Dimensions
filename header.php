@@ -2,7 +2,7 @@
 /**
  * The Header of our site
  *
- * Displays all of the <head> section and everything up till <div id="main-content">
+ * Displays all of the <head> section and everything up till <div id="centrum" class="site-main">
  *
  * @author Renfei Song
  */

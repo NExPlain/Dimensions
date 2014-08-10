@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class UserController
+ *
+ * @author Renfei Song
+ */
 class UserController {
 
     private $dbc;
@@ -27,6 +32,9 @@ class UserController {
         mysqli_close($this->dbc);
     }
 
+    /**
+     * Identify current logged-in user.
+     */
     public function init()
     {
         if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])) {
@@ -49,6 +57,14 @@ class UserController {
         }
     }
 
+    /**
+     * @param $new_password
+     * @param $old_password
+     * @param $msg
+     * @param $msg_type
+     *
+     * @return bool Success or not.
+     */
     public function change_password($new_password, $old_password, &$msg, &$msg_type)
     {
         if (empty($new_password)) {
@@ -68,6 +84,11 @@ class UserController {
         return true;
     }
 
+    /**
+     * List all models that current user has uploaded.
+     *
+     * @see my-profile.php
+     */
     public function list_models_uploaded()
     {
         echo "<div id=\"models-list\">";
@@ -85,6 +106,16 @@ class UserController {
         echo "</div>";
     }
 
+    /**
+     * @param $email
+     * @param $username
+     * @param $password1
+     * @param $password2
+     * @param $msg
+     * @param $msg_type
+     *
+     * @return bool Success or not.
+     */
     public function register($email, $username, $password1, $password2, &$msg, &$msg_type)
     {
         $query = "SELECT * FROM dimensions_users WHERE email = '$email'";
@@ -115,6 +146,14 @@ class UserController {
         return true;
     }
 
+    /**
+     * @param $email
+     * @param $password
+     * @param $msg
+     * @param $msg_type
+     *
+     * @return bool Success or not.
+     */
     public function login($email, $password, &$msg, &$msg_type)
     {
         if (empty($email) || empty($password)) {
@@ -141,6 +180,13 @@ class UserController {
         return true;
     }
 
+    /**
+     * Determines if current user likes the specified model.
+     *
+     * @param $model_id
+     *
+     * @return bool
+     */
     public function current_user_like($model_id)
     {
         $query = "SELECT * FROM dimensions_likes WHERE model_id = '$model_id' AND user_id = '".$this->id."'";
@@ -148,6 +194,13 @@ class UserController {
         return mysqli_num_rows($result) != 0;
     }
 
+    /**
+     * Determines if current user has favourited the specified model.
+     *
+     * @param $model_id
+     *
+     * @return bool
+     */
     public function current_user_fav($model_id)
     {
         $query = "SELECT * FROM dimensions_favs WHERE model_id = '$model_id' AND user_id = '".$this->id."'";

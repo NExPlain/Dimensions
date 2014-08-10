@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Class CommentController
+ *
+ * Handles all database-related operations about comments.
+ *
+ * @author Renfei Song
+ */
 class CommentController {
 
     private $dbc;
@@ -19,6 +25,11 @@ class CommentController {
         mysqli_close($this->dbc);
     }
 
+    /**
+     * Load all comments of specified model.
+     *
+     * @param $model_id
+     */
     public function load($model_id)
     {
         $query = "SELECT comments.id AS comment_id, user_id, username, email, content, comment_date FROM dimensions_comments AS comments INNER JOIN dimensions_users AS users ON comments.user_id = users.id WHERE comments.model_id = '$model_id'";
