@@ -18,7 +18,7 @@ $result = mysqli_query($dbc, $query);
 $row = mysqli_fetch_array($result);
 $current_userid = $row['id'];
 
-$query = "select * from dimensions_models where uploader = '$current_userid'";
+$query = "select * from dimensions_models where uploader_id = '$current_userid'";
 $result = mysqli_query($dbc, $query) or die("cannot-execute");
 $to_upload = mysqli_num_rows($result) + 1;
 

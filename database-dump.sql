@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: 2014-08-10 17:49:12
+-- Generation Time: 2014-08-10 18:48:00
 -- 服务器版本： 5.5.34
 -- PHP Version: 5.5.10
 
@@ -23,10 +23,10 @@ USE `dimensions`;
 --
 
 DROP TABLE IF EXISTS `dimensions_comments`;
-CREATE TABLE `dimensions_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `model_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `dimensions_comments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `model_id` bigint(20) NOT NULL,
   `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
@@ -39,10 +39,10 @@ CREATE TABLE `dimensions_comments` (
 --
 
 DROP TABLE IF EXISTS `dimensions_favs`;
-CREATE TABLE `dimensions_favs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `model_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `dimensions_favs` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `model_id` bigint(20) NOT NULL,
   `fav_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
@@ -54,10 +54,10 @@ CREATE TABLE `dimensions_favs` (
 --
 
 DROP TABLE IF EXISTS `dimensions_likes`;
-CREATE TABLE `dimensions_likes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `model_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `dimensions_likes` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `model_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   `like_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
@@ -69,22 +69,44 @@ CREATE TABLE `dimensions_likes` (
 --
 
 DROP TABLE IF EXISTS `dimensions_models`;
-CREATE TABLE `dimensions_models` (
+CREATE TABLE IF NOT EXISTS `dimensions_models` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'model id',
+  `title` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `uploader_id` int(11) NOT NULL,
+  `format` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `model_name` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `file_stamp` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `scale` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `is_private` smallint(6) NOT NULL DEFAULT '0',
+  `is_forsale` smallint(6) NOT NULL DEFAULT '0',
+  `price` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci,
+  `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `views` int(11) NOT NULL DEFAULT '0',
   `downloads` int(11) NOT NULL DEFAULT '0',
-  `title` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `uploader` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `modelfile` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `stamp` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `scale` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rotation` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isprivate` smallint(6) NOT NULL DEFAULT '0',
-  `description` longtext COLLATE utf8_unicode_ci,
-  `lastupdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `image_1` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image_2` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image_3` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image_4` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image_5` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=442 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `dimensions_purchases`
+--
+
+DROP TABLE IF EXISTS `dimensions_purchases`;
+CREATE TABLE IF NOT EXISTS `dimensions_purchases` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `model_id` bigint(20) NOT NULL,
+  `purchase_price` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `purchase_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -93,7 +115,7 @@ CREATE TABLE `dimensions_models` (
 --
 
 DROP TABLE IF EXISTS `dimensions_users`;
-CREATE TABLE `dimensions_users` (
+CREATE TABLE IF NOT EXISTS `dimensions_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(500) COLLATE utf8_unicode_ci NOT NULL,

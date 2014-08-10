@@ -50,7 +50,7 @@ class UserController {
                 $this->balance = $row['balance'];
                 $this->join_date = $row['joindate'];
                 $this->hashed_password = $row['userpswd'];
-                $query = "SELECT * FROM dimensions_models WHERE uploader = '".$this->id."'";
+                $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->id."'";
                 $result = mysqli_query($this->dbc, $query);
                 $this->upload_count = mysqli_num_rows($result);
             }
@@ -92,7 +92,7 @@ class UserController {
     public function list_models_uploaded()
     {
         echo "<div id=\"models-list\">";
-        $query = "SELECT * FROM dimensions_models WHERE uploader = '".$this->id."'";
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->id."'";
         $result = mysqli_query($this->dbc, $query);
         while ($row = mysqli_fetch_array($result)) {
             print("<div class=\"model-item\">");

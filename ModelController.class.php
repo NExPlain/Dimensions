@@ -12,7 +12,7 @@ class ModelController {
     public $scale;
     public $model_location;
     public $title;
-    public $private;
+    public $is_private;
     public $likes;
     public $views;
     public $downloads;
@@ -41,18 +41,18 @@ class ModelController {
      */
     public function load($id)
     {
-        $query = "SELECT * FROM dimensions_models INNER JOIN dimensions_users ON dimensions_users.id = dimensions_models.uploader WHERE dimensions_models.id = '$id'";
+        $query = "SELECT * FROM dimensions_models INNER JOIN dimensions_users ON dimensions_users.id = dimensions_models.uploader_id WHERE dimensions_models.id = '$id'";
         $result = mysqli_query($this->dbc, $query);
         if ($row = mysqli_fetch_array($result)) {
             $this->id = $id;
             $this->scale = $row["scale"] != "" ? $row["scale"] : 1.0;
-            $this->model_location = "upload/".$row["stamp"]."/".$row["modelfile"];
+            $this->model_location = "upload/".$row["file_stamp"]."/".$row["model_name"];
             $this->title = $row["title"];
-            $this->private = $row['isprivate'];
-            $this->last_update = $row["lastupdate"];
+            $this->is_private = $row['is_private'];
+            $this->last_update = $row["last_update"];
             $this->description = $row["description"];
             $this->uploader_username = $row["username"];
-            $this->uploader_id = $row["uploader"];
+            $this->uploader_id = $row["uploader_id"];
             $this->views = $row["views"] + 1;
             $this->downloads = $row["downloads"];
 
@@ -78,7 +78,7 @@ class ModelController {
      */
     public function list_all_models()
     {
-        $query = "SELECT isprivate, dimensions_models.id AS id, title, username FROM dimensions_models INNER JOIN dimensions_users ON dimensions_models.uploader = dimensions_users.id";
+        $query = "SELECT is_private, dimensions_models.id AS id, title, username, image_1, file_stamp FROM dimensions_models INNER JOIN dimensions_users ON dimensions_models.uploader_id = dimensions_users.id";
         $result = mysqli_query($this->dbc, $query);
         echo <<<HTML
         <div class="model-grid">
@@ -86,7 +86,7 @@ class ModelController {
 HTML;
         $counter = 0;
         while ($row = mysqli_fetch_array($result)) {
-            if ($row['isprivate'] == 1)
+            if ($row['is_private'] == 1)
                 continue;
             if ((++$counter - 1) % 4 == 0) {
                 echo <<<HTML
@@ -98,7 +98,7 @@ HTML;
             <li class="model-cell">
                 <div class="model-preview">
                     <a href='showcase.php?id={$row["id"]}'>
-                        <img src="image/screenshot/{$row["id"]}.png" class="model-image">
+                        <img src="upload/{$row["file_stamp"]}/{$row["image_1"]}" class="model-image">
                     </a>
                 </div>
                 <div class="model-info">
@@ -126,11 +126,11 @@ HTML;
      */
     public function upload_model($title, $uploader_id, $model, $scale, $private, $desc)
     {
-        $query = "SELECT * FROM dimensions_models WHERE uploader = '$uploader_id'";
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '$uploader_id'";
         $result = mysqli_query($this->dbc, $query);
         $to_upload = mysqli_num_rows($result) + 1;
         $location = $uploader_id . "/" . $to_upload;
-        $query = "INSERT INTO dimensions_models (title, uploader, modelfile, stamp, scale, isprivate, description) ".
+        $query = "INSERT INTO dimensions_models (title, uploader_id, model_name, file_stamp, scale, is_private, description) ".
             "VALUES ('$title','$uploader_id','$model','$location','$scale','$private','$desc')";
         mysqli_query($this->dbc, $query);
         return true;

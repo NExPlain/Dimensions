@@ -1,18 +1,20 @@
-<?php   
-
-	require_once('../define.php');
+<?php
+/**
+ * Initial page for model editor
+ *
+ * @author Renfei Song & Three.js
+ */
+require_once "../define.php";
 	
 	if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])
 	&& sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {	
 		$id = $_GET["id"];
-		$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die("Cannot connect to database 7.");
-		$query = "select * from dimensions_models inner join dimensions_users on dimensions_users.id = dimensions_models.uploader where dimensions_models.id = '$id'";
-		// id, title, author, uploader, type, modelfile, stamp, scale, rotation, description
-		// lastupdate, id, username, email, password, joindate, uploads, activated
-		$result = mysqli_query($dbc, $query) or die("Cannot execute database query 9.");
+		$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+		$query = "select * from dimensions_models inner join dimensions_users on dimensions_users.id = dimensions_models.uploader_id where dimensions_models.id = '$id'";
+		$result = mysqli_query($dbc, $query);
 		if ($row = mysqli_fetch_array($result)) {
 			if ($row['username'] == $_COOKIE['username']) {
-				$fileUri = "/dimensions/upload/".$row["stamp"]."/".$row["modelfile"];
+				$fileUri = "/dimensions/upload/".$row["file_stamp"]."/".$row["model_name"];
 			} else {
 				// Authorization failure.
 				exitAbnormally();

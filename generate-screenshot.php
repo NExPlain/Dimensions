@@ -16,7 +16,7 @@ if (isset($_GET["id"])) {
     $result = mysqli_query($dbc, $query) or die("{'STATUS':'QUERY_FAILURE'}");
     if ($row = mysqli_fetch_array($result)) {
         $scale = $row["scale"] != "" ? $row["scale"] : 1.0;
-        $file_model_loc = "upload/".$row["stamp"]."/".$row["modelfile"];
+        $file_model_loc = "upload/".$row["file_stamp"]."/".$row["model_name"];
     } else {
         echo "{'STATUS':'ID_INVALID'}";
         exit;
