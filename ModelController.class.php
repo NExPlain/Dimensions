@@ -78,7 +78,7 @@ class ModelController {
      */
     public function list_all_models()
     {
-        $query = "SELECT is_private, dimensions_models.id AS id, title, username, image_1, file_stamp FROM dimensions_models INNER JOIN dimensions_users ON dimensions_models.uploader_id = dimensions_users.id";
+        $query = "SELECT is_private, dimensions_models.id AS id, title, username, image_0, file_stamp FROM dimensions_models INNER JOIN dimensions_users ON dimensions_models.uploader_id = dimensions_users.id";
         $result = mysqli_query($this->dbc, $query);
         echo <<<HTML
         <div class="model-grid">
@@ -98,7 +98,7 @@ HTML;
             <li class="model-cell">
                 <div class="model-preview">
                     <a href='showcase.php?id={$row["id"]}'>
-                        <img src="upload/{$row["file_stamp"]}/{$row["image_1"]}" class="model-image">
+                        <img src="upload/{$row["file_stamp"]}/{$row["image_0"]}" class="model-image">
                     </a>
                 </div>
                 <div class="model-info">
@@ -113,27 +113,4 @@ HTML;
         </div>
 HTML;
     }
-
-    /**
-     * @param $title
-     * @param $uploader_id
-     * @param $model
-     * @param $scale
-     * @param $private
-     * @param $desc
-     *
-     * @return bool Always return true.
-     */
-    public function upload_model($title, $uploader_id, $model, $scale, $private, $desc)
-    {
-        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '$uploader_id'";
-        $result = mysqli_query($this->dbc, $query);
-        $to_upload = mysqli_num_rows($result) + 1;
-        $location = $uploader_id . "/" . $to_upload;
-        $query = "INSERT INTO dimensions_models (title, uploader_id, model_name, file_stamp, scale, is_private, description) ".
-            "VALUES ('$title','$uploader_id','$model','$location','$scale','$private','$desc')";
-        mysqli_query($this->dbc, $query);
-        return true;
-    }
-
 }

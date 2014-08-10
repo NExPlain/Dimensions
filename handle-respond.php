@@ -1,6 +1,6 @@
 <?php
 /**
- * Receive POST request when posting a comment.
+ * Receives POST request when posting a comment.
  *
  * @see showcase.php
  * @author Renfei Song

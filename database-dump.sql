@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: 2014-08-10 18:48:00
+-- Generation Time: 2014-08-10 22:04:39
 -- 服务器版本： 5.5.34
 -- PHP Version: 5.5.10
 
@@ -23,7 +23,7 @@ USE `dimensions`;
 --
 
 DROP TABLE IF EXISTS `dimensions_comments`;
-CREATE TABLE IF NOT EXISTS `dimensions_comments` (
+CREATE TABLE `dimensions_comments` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `model_id` bigint(20) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `dimensions_comments` (
 --
 
 DROP TABLE IF EXISTS `dimensions_favs`;
-CREATE TABLE IF NOT EXISTS `dimensions_favs` (
+CREATE TABLE `dimensions_favs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `model_id` bigint(20) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `dimensions_favs` (
 --
 
 DROP TABLE IF EXISTS `dimensions_likes`;
-CREATE TABLE IF NOT EXISTS `dimensions_likes` (
+CREATE TABLE `dimensions_likes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `model_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `dimensions_likes` (
 --
 
 DROP TABLE IF EXISTS `dimensions_models`;
-CREATE TABLE IF NOT EXISTS `dimensions_models` (
+CREATE TABLE `dimensions_models` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'model id',
   `title` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `uploader_id` int(11) NOT NULL,
@@ -78,19 +78,19 @@ CREATE TABLE IF NOT EXISTS `dimensions_models` (
   `file_stamp` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `scale` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `is_private` smallint(6) NOT NULL DEFAULT '0',
-  `is_forsale` smallint(6) NOT NULL DEFAULT '0',
-  `price` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `price` varchar(500) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   `description` longtext COLLATE utf8_unicode_ci,
   `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `views` int(11) NOT NULL DEFAULT '0',
   `downloads` int(11) NOT NULL DEFAULT '0',
-  `image_1` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `image_2` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `image_3` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `image_4` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  `image_5` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image_0` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `image_1` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_2` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_3` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_4` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_5` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=442 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=447 ;
 
 -- --------------------------------------------------------
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `dimensions_models` (
 --
 
 DROP TABLE IF EXISTS `dimensions_purchases`;
-CREATE TABLE IF NOT EXISTS `dimensions_purchases` (
+CREATE TABLE `dimensions_purchases` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `model_id` bigint(20) NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `dimensions_purchases` (
 --
 
 DROP TABLE IF EXISTS `dimensions_users`;
-CREATE TABLE IF NOT EXISTS `dimensions_users` (
+CREATE TABLE `dimensions_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
