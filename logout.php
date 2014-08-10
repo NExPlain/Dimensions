@@ -4,11 +4,7 @@
  *
  * @author Renfei Song
  */
-if (isset($_COOKIE['user'])) {
-    setcookie('user', '', time() - 3600);
-}
-if (isset($_COOKIE['mask'])) {
-    setcookie('mask', '', time() - 3600);
-}
-$home_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dimensions/browse.php';
-header('Location: ' . $home_url);
+setcookie('username', '', time() - 3600);
+setcookie('mask', '', time() - 3600);
+setcookie('email', '', time() - 3600);
+header("Location: index.php");

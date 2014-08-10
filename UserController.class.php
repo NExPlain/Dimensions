@@ -175,8 +175,7 @@ class UserController {
         setcookie('username', $username, time() + (60 * 60 * 24 * 30));
         setcookie('mask', sha1($email.$username), time() + (60 * 60 * 24 * 30));
         setcookie('email', $email, time() + (60 * 60 * 24 * 30));
-        $home_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dimensions/browse.php';
-        header('Location: ' . $home_url);
+        header("Location: index.php");
         return true;
     }
 
