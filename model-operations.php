@@ -10,7 +10,7 @@ require_once "define.php";
 
 $op = $_GET['op'];
 $model_id = $_GET['model_id'];
-$user_id = $_GET['user_id'];
+$user_id = @$_GET['user_id'];
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 mysqli_query($dbc, "set names utf8");
@@ -31,4 +31,15 @@ if ($op == "add_like") {
         $query = "INSERT INTO dimensions_likes (user_id, model_id) VALUES ('$user_id', '$model_id')";
         mysqli_query($dbc, $query);
     }
+}
+
+if ($op == "delete") {
+    $queries[0] = "DELETE FROM dimensions_models WHERE id = '$model_id'";
+    $queries[1] = "DELETE FROM dimensions_comments WHERE model_id = '$model_id'";
+    $queries[2] = "DELETE FROM dimensions_favs WHERE model_id = '$model_id'";
+    $queries[3] = "DELETE FROM dimensions_likes WHERE model_id = '$model_id'";
+    foreach ($queries as $query) {
+        mysqli_query($dbc, $query);
+    }
+    header("Location: my-profile.php");
 }

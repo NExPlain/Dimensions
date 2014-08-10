@@ -99,7 +99,7 @@ class UserController {
             print("<a href='showcase.php?id=".$row["id"]."'>".$row["title"]."</a>");
             print("<span class='model-options'>");
             print("<a class='model-option edit-link' href='editor/index.php?id=".$row["id"]."'><i class='icon icon-pencil'></i>编辑</a>");
-            print("<a class='model-option del-link' href='delete-model.php?fr=myprof&id=".$row["id"]."'><i class='icon icon-trash'></i>删除</a>");
+            print("<a class='model-option del-link' href='model-operations.php?op=delete&model_id=".$row["id"]."'><i class='icon icon-trash'></i>删除</a>");
             print("</span>");
             print("</div>");
         }
