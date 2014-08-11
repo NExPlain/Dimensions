@@ -16,7 +16,7 @@ class CommentController {
     public function __construct()
     {
         $this->dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        mysqli_query($this->dbc, "set names utf8");
+        mysqli_query($this->dbc, "SET NAMES UTF8");
         $this->comments = array();
     }
 

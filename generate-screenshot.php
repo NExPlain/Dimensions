@@ -12,7 +12,7 @@ $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die("Cannot connect
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $query = "select * from dimensions_models where dimensions_models.id = '$id'";
+    $query = "SELECT * FROM dimensions_models WHERE dimensions_models.id = '$id'";
     $result = mysqli_query($dbc, $query) or die("{'STATUS':'QUERY_FAILURE'}");
     if ($row = mysqli_fetch_array($result)) {
         $scale = $row["scale"] != "" ? $row["scale"] : 1.0;

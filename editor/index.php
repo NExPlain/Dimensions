@@ -10,7 +10,7 @@ require_once "../define.php";
 	&& sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {	
 		$id = $_GET["id"];
 		$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-		$query = "select * from dimensions_models inner join dimensions_users on dimensions_users.id = dimensions_models.uploader_id where dimensions_models.id = '$id'";
+		$query = "SELECT * FROM dimensions_models INNER JOIN dimensions_users ON dimensions_users.id = dimensions_models.uploader_id WHERE dimensions_models.id = '$id'";
 		$result = mysqli_query($dbc, $query);
 		if ($row = mysqli_fetch_array($result)) {
 			if ($row['username'] == $_COOKIE['username']) {

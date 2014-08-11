@@ -13,7 +13,7 @@ $model_id = $_GET['model_id'];
 $user_id = @$_GET['user_id'];
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-mysqli_query($dbc, "set names utf8");
+mysqli_query($dbc, "SET NAMES UTF8");
 
 if ($op == "add_fav") {
     $query = "SELECT * FROM dimensions_favs WHERE model_id = '$model_id' AND user_id = '$user_id'";

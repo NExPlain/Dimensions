@@ -9,7 +9,7 @@
 require_once "define.php";
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-mysqli_query($dbc, "set names utf8");
+mysqli_query($dbc, "SET NAMES UTF8");
 
 if (isset($_POST['respond'])) {
     $user_id = $_POST['user_id'];
