@@ -233,3 +233,6 @@ header .inner > div {
 .showcase .secondary .widget:last-child {
 	margin-bottom: 0;
 }
+.showcase #stage {
+	background: url("../img/dark-heavypaper.png") repeat;
+}
