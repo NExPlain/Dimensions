@@ -42,25 +42,31 @@ get_header($title . " - 查看模型"); ?>
         </div>
     </div>
     <div class="primary">
-        <div id="arena"></div>
+        <div id="stage"></div>
         <?php if (!empty($model_controller->description)): ?>
         <div class='model-description'>
             <?php echo $model_controller->description; ?>
         </div>
         <?php endif; ?>
         <div class="model-options">
-            <?php if ($user_controller->current_user_like($model_controller->id)): ?>
-                <button class="btn like disabled">我喜欢</button>
-            <?php else: ?>
-                <button class="btn like">喜欢</button>
-            <?php endif; ?>
-            <?php if ($user_controller->current_user_fav($model_controller->id)): ?>
-                <button class="btn fav disabled">已收藏</button>
-            <?php else: ?>
-                <button class="btn fav">收藏</button>
-            <?php endif; ?>
-            <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
-            <a class="btn respond" href="#respond">发表评论</a>
+            <div class="operations">
+                <?php if ($user_controller->current_user_like($model_controller->id)): ?>
+                    <button class="btn like disabled">我喜欢</button>
+                <?php else: ?>
+                    <button class="btn like">喜欢</button>
+                <?php endif; ?>
+                <?php if ($user_controller->current_user_fav($model_controller->id)): ?>
+                    <button class="btn fav disabled">已收藏</button>
+                <?php else: ?>
+                    <button class="btn fav">收藏</button>
+                <?php endif; ?>
+                <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
+                <a class="btn respond" href="#respond">发表评论</a>
+            </div>
+
+            <div class="tools">
+                <button class="btn auto-rotate">自动旋转</button>
+            </div>
         </div>
         <div class="comment-area">
             <h2 class="comment-title"><?php echo $comment_controller->comment_count ?> 个回应</h2>
@@ -120,52 +126,24 @@ get_header($title . " - 查看模型"); ?>
         <?php endif; ?>
     </div>
 
-
-    <script>
-        $(".model-options .like").click(function() {
-            if ($(".model-options .like").hasClass("disabled")) {
-                return;
-            }
-            $.ajax({
-                url: "model-operations.php?op=add_like&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
-            }).done(function(html) {
-                $(".model-options .like").addClass("disabled").html("我喜欢");
-            });
-        });
-
-        $(".model-options .fav").click(function() {
-            if ($(".model-options .fav").hasClass("disabled")) {
-                return;
-            }
-            $.ajax({
-                url: "model-operations.php?op=add_fav&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
-            }).done(function(html) {
-                $(".model-options .fav").addClass("disabled").html("已收藏");
-            });
-        });
-    </script>
-
-
     <script src="lib/core/jquery/jquery-1.10.2.min.js"></script>
     <script src="lib/webgl/Three.js"></script>
-    <script src="lib/webgl/FlyControls.js"></script>
-    <script src="lib/webgl/Stats.js"></script>
+    <script src="lib/webgl/OrbitControls.js"></script>
     <script>
-        var container, scene, camera, renderer, model, flyControls;
+
+        /* WebGL */
+
+        var container, scene, camera, renderer, model, controls;
         var scale = <?php echo $model_controller->scale; ?>;
         var clock = new THREE.Clock();
 
-        container = document.getElementById('arena');
+        container = document.getElementById('stage');
         init();
-        animate();
-        $('#arena').height(450);
-        $('#arena').width(650);
+        run();
 
         function init() {
-            // scene
+            // Scene & Camera
             scene = new THREE.Scene();
-
-            // camera
             var width = 650;
             var height = 450;
             var viewAngel = 45;
@@ -177,25 +155,25 @@ get_header($title . " - 查看模型"); ?>
             camera.position.set(0, 150, 400);
             camera.lookAt(scene.position);
 
-            // renderer
+            // Renderer
             renderer = new THREE.WebGLRenderer({ antialias:true });
             renderer.setSize(width, height);
             container.appendChild(renderer.domElement);
 
-            // flyControls
-            flyControls = new THREE.FlyControls(camera);
-            flyControls.movementSpeed = 100;
-            flyControls.domElement = container;
-            flyControls.rollSpeed = Math.PI / 24;
-            flyControls.autoForward = false;
-            flyControls.dragToLook = true;
+            // Controls
+            controls = new THREE.OrbitControls(camera);
+            controls.keyPanSpeed = 15.0;
 
-            // light
+            // Point Light
             var light = new THREE.PointLight(0xffffff);
             light.position.set(-100,200,100);
             scene.add(light);
 
-            // floor
+            // Ambient Light
+            var ambientLight = new THREE.AmbientLight(0x111111);
+            scene.add(ambientLight);
+
+            // Floor
             var floorTexture = new THREE.ImageUtils.loadTexture('lib/img/floor.jpg');
             floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
             floorTexture.repeat.set(10, 10);
@@ -206,42 +184,62 @@ get_header($title . " - 查看模型"); ?>
             floor.rotation.x = Math.PI / 2;
             scene.add(floor);
 
-            // skybox
+            // Sky box
             var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
             var skyBoxMaterial = new THREE.MeshBasicMaterial({ color: 0x9999ff, side: THREE.BackSide });
             var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
             scene.add(skyBox);
 
-            // fog
+            // Fog
             scene.fog = new THREE.FogExp2(0x9999ff, 0.00025);
 
             var jsonLoader = new THREE.JSONLoader();
-            jsonLoader.load("<?php echo $model_controller->model_location; ?>", addModelToScene);
-
-            var ambientLight = new THREE.AmbientLight(0x111111);
-            scene.add(ambientLight);
+            jsonLoader.load("<?php echo $model_controller->model_location; ?>", function(geometry, materials) {
+                var material = new THREE.MeshFaceMaterial(materials);
+                model = new THREE.Mesh(geometry, material);
+                model.scale.set(scale, scale, scale);
+                scene.add(model);
+            });
         }
 
-        function addModelToScene(geometry, materials) {
-            var material = new THREE.MeshFaceMaterial(materials);
-            model = new THREE.Mesh(geometry, material);
-            model.scale.set(scale, scale, scale);
-            scene.add(model);
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            render();
-            update();
-        }
-
-        function update() {
-            flyControls.update(clock.getDelta());
-        }
-
-        function render() {
+        function run() {
+            controls.update();
             renderer.render(scene, camera);
+            requestAnimationFrame(run);
         }
+
+        /* Miscellaneous */
+
+        $(".operations .like").click(function() {
+            if ($(".operations .like").hasClass("disabled")) {
+                return;
+            }
+            $.ajax({
+                url: "model-operations.php?op=add_like&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
+            }).done(function(html) {
+                $(".operations .like").addClass("disabled").html("我喜欢");
+            });
+        });
+
+        $(".operations .fav").click(function() {
+            if ($(".operations .fav").hasClass("disabled")) {
+                return;
+            }
+            $.ajax({
+                url: "model-operations.php?op=add_fav&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
+            }).done(function(html) {
+                $(".operations .fav").addClass("disabled").html("已收藏");
+            });
+        });
+
+        $(".tools .auto-rotate").click(function() {
+            controls.autoRotate = !controls.autoRotate;
+            if ($(this).hasClass("disabled")) {
+                $(this).removeClass("disabled");
+            } else {
+                $(this).addClass("disabled");
+            }
+        });
     </script>
 <?php
 endif;
