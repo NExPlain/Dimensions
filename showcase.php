@@ -133,11 +133,10 @@ get_header($title . " - 查看模型"); ?>
 
         /* WebGL */
 
-        var container, scene, camera, renderer, model, controls;
+        var scene, camera, renderer, model, controls;
         var scale = <?php echo $model_controller->scale; ?>;
         var clock = new THREE.Clock();
-
-        container = document.getElementById('stage');
+        var container = document.getElementById('stage');
         init();
         run();
 
@@ -161,8 +160,12 @@ get_header($title . " - 查看模型"); ?>
             container.appendChild(renderer.domElement);
 
             // Controls
-            controls = new THREE.OrbitControls(camera);
+            controls = new THREE.OrbitControls(camera, container);
             controls.keyPanSpeed = 15.0;
+            controls.keys = { LEFT: 65, UP: 87, RIGHT: 68, BOTTOM: 83 };
+            controls.zoomSpeed = 0.6;
+            controls.rotateSpeed = 0.6;
+            controls.maxDistance = 2000;
 
             // Point Light
             var light = new THREE.PointLight(0xffffff);
@@ -234,11 +237,7 @@ get_header($title . " - 查看模型"); ?>
 
         $(".tools .auto-rotate").click(function() {
             controls.autoRotate = !controls.autoRotate;
-            if ($(this).hasClass("disabled")) {
-                $(this).removeClass("disabled");
-            } else {
-                $(this).addClass("disabled");
-            }
+            $(this).toggleClass("disabled");
         });
     </script>
 <?php
