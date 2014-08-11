@@ -243,7 +243,6 @@ get_header($title . " - 查看模型"); ?>
             renderer.render(scene, camera);
         }
     </script>
-    <script src="http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=391036"></script>
 <?php
 endif;
 get_footer();

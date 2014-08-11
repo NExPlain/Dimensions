@@ -114,7 +114,7 @@ HTML;
     }
 
     /**
-     *
+     * Determine if there are related models for current shown model.
      *
      * @return bool
      * @see list_related_models
