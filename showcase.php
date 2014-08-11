@@ -8,6 +8,7 @@
 require_once "functions.php";
 require_once "ModelController.class.php";
 require_once "CommentController.class.php";
+
 $invalid_id = true;
 if (isset($_GET["id"])) {
     $model_controller = new ModelController();
@@ -24,8 +25,8 @@ if ($invalid_id)
     $title = "模型不存在";
 else
     $title = $model_controller->title;
-get_header($title . " - 查看模型");
-?>
+
+get_header($title . " - 查看模型"); ?>
 
 <?php if ($invalid_id): ?>
     <h1 class="page-title">查看模型</h1>

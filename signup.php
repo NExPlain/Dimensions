@@ -6,6 +6,7 @@
  */
 
 require_once "functions.php";
+
 get_header("注册");
 
 $success = false;

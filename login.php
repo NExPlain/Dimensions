@@ -20,8 +20,7 @@ if (isset($_POST['submit'])) {
  * of UserController's login() function, therefore get_header() function below
  * will never be invoked.
  */
-get_header("登录");
-?>
+get_header("登录"); ?>
 
 <?php 
 	if (!empty($msg)) echo "<div class='alert alert-".$msg_type."'>" . $msg . "</div>";

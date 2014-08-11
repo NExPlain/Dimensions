@@ -5,7 +5,9 @@
  * @see showcase.php
  * @author Renfei Song
  */
+
 require_once "define.php";
+
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 mysqli_query($dbc, "set names utf8");
 

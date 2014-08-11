@@ -4,6 +4,7 @@
  *
  * @author Renfei Song
  */
+
 setcookie('username', '', time() - 3600);
 setcookie('mask', '', time() - 3600);
 setcookie('email', '', time() - 3600);
