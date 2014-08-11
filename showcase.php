@@ -43,6 +43,25 @@ get_header($title . " - 查看模型"); ?>
     </div>
     <div class="primary">
         <div id="arena"></div>
+        <?php if (!empty($model_controller->description)): ?>
+        <div class='model-description'>
+            <?php echo $model_controller->description; ?>
+        </div>
+        <?php endif; ?>
+        <div class="model-options">
+            <?php if ($user_controller->current_user_like($model_controller->id)): ?>
+                <button class="btn like disabled">我喜欢</button>
+            <?php else: ?>
+                <button class="btn like">喜欢</button>
+            <?php endif; ?>
+            <?php if ($user_controller->current_user_fav($model_controller->id)): ?>
+                <button class="btn fav disabled">已收藏</button>
+            <?php else: ?>
+                <button class="btn fav">收藏</button>
+            <?php endif; ?>
+            <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
+            <a class="btn respond" href="#respond">发表评论</a>
+        </div>
         <div class="comment-area">
             <h2 class="comment-title"><?php echo $comment_controller->comment_count ?> 个回应</h2>
             <div class="comment-body">
@@ -55,8 +74,8 @@ get_header($title . " - 查看模型"); ?>
             <?php endforeach; ?>
             </div>
         </div>
-        <div class="respond-area">
-            <h2 class="respond-title">发表看法</h2>
+        <div class="respond-area" id="respond">
+            <h2 class="respond-title">发表评论</h2>
             <div class="respond-body">
             <?php if ($user_controller->logged_in): ?>
                 <form method="post" action="handle-respond.php" class="respond-form">
@@ -74,12 +93,6 @@ get_header($title . " - 查看模型"); ?>
         </div>
     </div>
     <div class="secondary">
-        <?php if (!empty($model_controller->description)): ?>
-        <div class='widget description'>
-            <?php echo $model_controller->description; ?>
-        </div>
-        <?php endif; ?>
-
         <div class="widget statistics">
             <ul>
                 <li><?php echo $model_controller->likes ?> 位用户喜欢</li>
@@ -89,45 +102,45 @@ get_header($title . " - 查看模型"); ?>
         </div>
 
         <div class="widget share">
-            分享
+            <h3 class="widget-title">分享这个模型</h3>
+            <div class="bdsharebuttonbox">
+                <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+            </div>
+            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
         </div>
 
-        <div class="widget options">
-            <?php if ($user_controller->current_user_like($model_controller->id)): ?>
-                <button class="btn like disabled">我喜欢</button>
-            <?php else: ?>
-                <button class="btn like">喜欢</button>
-            <?php endif; ?>
-            <?php if ($user_controller->current_user_fav($model_controller->id)): ?>
-                <button class="btn fav disabled">已收藏</button>
-            <?php else: ?>
-                <button class="btn fav">收藏</button>
-            <?php endif; ?>
-            <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
+        <?php if ($model_controller->has_related_models()): ?>
+        <div class="widget related">
+            <h3 class="widget-title">该用户的其他上传</h3>
+            <?php $model_controller->list_related_models() ?>
         </div>
+        <?php endif; ?>
     </div>
 
 
     <script>
-        $(".options .like").click(function() {
-            if ($(".options .like").hasClass("disabled")) {
+        $(".model-options .like").click(function() {
+            if ($(".model-options .like").hasClass("disabled")) {
                 return;
             }
             $.ajax({
                 url: "model-operations.php?op=add_like&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
             }).done(function(html) {
-                $(".options .like").addClass("disabled").html("我喜欢");
+                $(".model-options .like").addClass("disabled").html("我喜欢");
             });
         });
 
-        $(".options .fav").click(function() {
-            if ($(".options .fav").hasClass("disabled")) {
+        $(".model-options .fav").click(function() {
+            if ($(".model-options .fav").hasClass("disabled")) {
                 return;
             }
             $.ajax({
                 url: "model-operations.php?op=add_fav&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
             }).done(function(html) {
-                $(".options .fav").addClass("disabled").html("已收藏");
+                $(".model-options .fav").addClass("disabled").html("已收藏");
             });
         });
     </script>
@@ -177,13 +190,6 @@ get_header($title . " - 查看模型"); ?>
             flyControls.autoForward = false;
             flyControls.dragToLook = true;
 
-            // stat
-// 				stats = new Stats();
-// 				stats.domElement.style.position = 'absolute';
-// 				stats.domElement.style.bottom = '0px';
-// 				stats.domElement.style.zIndex = 100;
-// 				container.appendChild(stats.domElement);
-
             // light
             var light = new THREE.PointLight(0xffffff);
             light.position.set(-100,200,100);
@@ -231,13 +237,13 @@ get_header($title . " - 查看模型"); ?>
 
         function update() {
             flyControls.update(clock.getDelta());
-// 			stats.update();
         }
 
         function render() {
             renderer.render(scene, camera);
         }
     </script>
+    <script src="http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=391036"></script>
 <?php
 endif;
 get_footer();

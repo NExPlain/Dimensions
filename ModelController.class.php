@@ -112,4 +112,40 @@ HTML;
         </div>
 HTML;
     }
+
+    /**
+     *
+     *
+     * @return bool
+     * @see list_related_models
+     * @see showcase.php
+     */
+    public function has_related_models()
+    {
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->uploader_id."' AND id != '".$this->id."'";
+        $result = mysqli_query($this->dbc, $query);
+        return mysqli_num_rows($result) != 0;
+    }
+
+    /**
+     * List related models (uploaded by the same user)
+     *
+     * @see showcase.php
+     */
+    public function list_related_models()
+    {
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->uploader_id."' AND id != '".$this->id."'";
+        $result = mysqli_query($this->dbc, $query);
+        echo "<ul>";
+        while ($row = mysqli_fetch_array($result)) {
+            echo <<<HTML
+            <li>
+                <a href="showcase.php?id={$row['id']}" title="{$row['title']}">
+                    <img alt="{$row['title']}" src="upload/{$row['file_stamp']}/{$row['image_0']}">
+                </a>
+            </li>
+HTML;
+        }
+        echo "</ul>";
+    }
 }
