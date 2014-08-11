@@ -20,3 +20,8 @@ function get_footer()
 {
     require_once "footer.php";
 }
+
+function is_page($page_name)
+{
+    return basename($_SERVER['SCRIPT_NAME'], ".php") == $page_name;
+}

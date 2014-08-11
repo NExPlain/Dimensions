@@ -59,12 +59,11 @@ header .inner > div {
 	background: none;
 	cursor: default;
 }
-.site-main {
+.site-content {
 	width: 900px;
-	margin: 20px auto 40px;
-	padding: 0 30px;
+	margin: 0 auto;
+	padding: 15px 0;
 }
-
 .site-footer {
 	border-top: 1px solid #ddd;
 	background: #f0f0f0;
@@ -86,6 +85,14 @@ header .inner > div {
 	font-size: 24px;
 	font-weight: bold;
 	margin: 10px 0;
+}
+
+/* index.php */
+
+.index canvas {
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 
 /* browse.php */

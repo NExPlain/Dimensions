@@ -6,15 +6,8 @@
  */
 
 require_once "functions.php";
-get_header("Dimensions");
-?>
 
-<div id="circles">
-
-</div>
-
-<script src="lib/webgl/Three.js"></script>
-<script src="lib/webgl/index-animation.js"></script>
+get_header("Dimensions"); ?>
 
 <?php
 get_footer();
