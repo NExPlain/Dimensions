@@ -94,13 +94,15 @@ class UserController {
         $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->id."'";
         $result = mysqli_query($this->dbc, $query);
         while ($row = mysqli_fetch_array($result)) {
-            print("<div class=\"model-item\">");
-            print("<a href='showcase.php?id=".$row["id"]."'>".$row["title"]."</a>");
-            print("<span class='model-options'>");
-            print("<a class='model-option edit-link' href='editor/index.php?id=".$row["id"]."'><i class='icon icon-pencil'></i>编辑</a>");
-            print("<a class='model-option del-link' href='model-operations.php?op=delete&model_id=".$row["id"]."'><i class='icon icon-trash'></i>删除</a>");
-            print("</span>");
-            print("</div>");
+            echo <<<HTML
+            <div class="model-item">
+                <a href="showcase.php?id={$row["id"]}">{$row["title"]}</a>
+                <span class="model-options">
+                    <a class="model-option edit-link" href="editor/index.php?id={$row["id"]}"><i class="icon icon-pencil"></i>编辑</a>
+                    <a class="model-option del-link" href="model-operations.php?op=delete&model_id={$row["id"]}"><i class="icon icon-trash"></i>删除</a>
+                </span>
+            </div>
+HTML;
         }
         echo "</div>";
     }
