@@ -66,7 +66,7 @@ get_header($title . " - 查看模型"); ?>
 
             <div class="tools">
                 <button class="btn auto-rotate">自动旋转</button>
-                <button class="btn ambient-light">环境光</button>
+                <button class="btn switch-sky sky-light">切换背景</button>
             </div>
         </div>
         <div class="comment-area">
@@ -102,9 +102,9 @@ get_header($title . " - 查看模型"); ?>
     <div class="secondary">
         <div class="widget statistics">
             <ul>
-                <li><?php echo $model_controller->likes ?> 位用户喜欢</li>
-                <li><?php echo $model_controller->downloads ?> 次下载</li>
-                <li><?php echo $model_controller->views ?> 次浏览</li>
+                <li class="likes"><?php echo $model_controller->likes ?> 位用户喜欢</li>
+                <li class="downloads"><?php echo $model_controller->downloads ?> 次下载</li>
+                <li class="views"><?php echo $model_controller->views ?> 次浏览</li>
             </ul>
         </div>
 
@@ -130,12 +130,31 @@ get_header($title . " - 查看模型"); ?>
     <script src="lib/core/jquery/jquery-1.10.2.min.js"></script>
     <script src="lib/webgl/Three.js"></script>
     <script src="lib/webgl/OrbitControls.js"></script>
+    <script type="x-shader/x-vertex" id="vertexShader">
+        varying vec3 vWorldPosition;
+        void main() {
+            vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+            vWorldPosition = worldPosition.xyz;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentShader">
+        uniform vec3 topColor;
+        uniform vec3 bottomColor;
+        uniform float offset;
+        uniform float exponent;
+        varying vec3 vWorldPosition;
+        void main() {
+            float h = normalize( vWorldPosition + offset ).y;
+            gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( h, exponent ), 0.0 ) ), 1.0 );
+        }
+    </script>
     <script>
-
         /* WebGL */
 
-        var scene, camera, renderer, controls, ambientLights, pointLight;
-        var lightModeAmbient = false;
+        var scene, camera, renderer;
+        var controls, hemisphereLight, pointLight;
+        var sky;
 
         init();
         run();
@@ -143,8 +162,9 @@ get_header($title . " - 查看模型"); ?>
         function init() {
             // Scene & Camera
             scene = new THREE.Scene();
-            var width = 650;
-            var height = 450;
+            scene.fog = new THREE.Fog( 0xffffff, 1000, 10000 );
+            var width = 650 - 10;
+            var height = 450 - 10;
             var viewAngel = 45;
             var aspect = width / height;
             var near = 0.1;
@@ -155,10 +175,13 @@ get_header($title . " - 查看模型"); ?>
             scene.add(camera);
 
             // Renderer
-            renderer = new THREE.WebGLRenderer({ antialias:true });
+            renderer = new THREE.WebGLRenderer({antialias: true});
+            renderer.setClearColor(scene.fog.color, 1);
             renderer.setSize(width, height);
             var container = document.getElementById('stage');
             container.appendChild(renderer.domElement);
+            renderer.gammaInput = true;
+            renderer.gammaOutput = true;
 
             // Controls
             controls = new THREE.OrbitControls(camera, container);
@@ -169,57 +192,57 @@ get_header($title . " - 查看模型"); ?>
             controls.autoRotateSpeed = 6.5;
             controls.maxDistance = 3000;
 
-            // Ambient Lights (A set of point lights)
-            ambientLights = new Array(8);
-            for (var ix = 0; ix < 8; ++ix) {
-                ambientLights[ix] = new THREE.PointLight(0xEEEEEE);
-                ambientLights[ix].intensity = 0.0;
-                scene.add(ambientLights[ix]);
-            }
-            ambientLights[0].position.set( 200,  200,  200);
-            ambientLights[1].position.set( 200,  200, -200);
-            ambientLights[2].position.set( 200, -200,  200);
-            ambientLights[3].position.set( 200, -200, -200);
-            ambientLights[4].position.set(-200,  200,  200);
-            ambientLights[5].position.set(-200,  200, -200);
-            ambientLights[6].position.set(-200, -200,  200);
-            ambientLights[7].position.set(-200, -200, -200);
+            // Hemisphere Light
+            hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.25);
+            hemisphereLight.color.setHSL(0.6, 1, 0.75);
+            hemisphereLight.groundColor.setHSL(0.1, 0.8, 0.7);
+            hemisphereLight.position.y = 1000;
+            hemisphereLight.intensity = 0.7;
+            scene.add(hemisphereLight);
 
             // Point Light
             pointLight = new THREE.PointLight(0xFFFFFF);
-            pointLight.intensity = 1.0;
+            pointLight.intensity = 1.15;
             pointLight.position.set(-100, 200, 100);
             scene.add(pointLight);
 
-            // Floor
-            var floorTexture = new THREE.ImageUtils.loadTexture('lib/img/floor.jpg');
-            floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-            floorTexture.repeat.set(10, 10);
-            var floorMaterial = new THREE.MeshBasicMaterial({ map: floorTexture, side: THREE.DoubleSide });
-            var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
-            var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-            floor.position.y = -0.5;
-            floor.rotation.x = Math.PI / 2;
-            //scene.add(floor);
-
-            // Background
-            var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
-            var skyBoxMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.BackSide });
-            var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
-            //scene.add(skyBox);
-
-            // Fog
-            //scene.fog = new THREE.FogExp2(0x9999ff, 0.0005);
+            // Sky (light)
+            setSky(0x0077ff, 0xffffff);
 
             // Load Model
             var jsonLoader = new THREE.JSONLoader();
             jsonLoader.load("<?php echo $model_controller->model_location; ?>", function(geometry, materials) {
-                var material = new THREE.MeshFaceMaterial(materials);
-                var model = new THREE.Mesh(geometry, material);
-                var scale = <?php echo $model_controller->scale; ?>;
-                model.scale.set(scale, scale, scale);
-                scene.add(model);
+                loadModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
             });
+        }
+
+        function setSky(topColor, bottomColor) {
+            scene.remove(sky);
+            var vertexShader = document.getElementById('vertexShader').textContent;
+            var fragmentShader = document.getElementById('fragmentShader').textContent;
+            var uniforms = {
+                topColor: 	 { type: "c", value: new THREE.Color( topColor ) },
+                bottomColor: { type: "c", value: new THREE.Color( bottomColor ) },
+                offset:		 { type: "f", value: 400 },
+                exponent:	 { type: "f", value: 0.6 }
+            }
+            if (topColor == 0x0077ff) {
+                // Use hemisphere light's color as light sky's top color.
+                uniforms.topColor.value.copy(hemisphereLight.color);
+            }
+            // Set fog color to sky's bottom color.
+            scene.fog.color.copy(uniforms.bottomColor.value);
+            var skyGeo = new THREE.SphereGeometry(4000, 32, 15);
+            var skyMat = new THREE.ShaderMaterial({vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide});
+            sky = new THREE.Mesh(skyGeo, skyMat);
+            scene.add(sky);
+        }
+
+        function loadModel(geometry, materials, x, y, z, scale) {
+            var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
+            mesh.position.set( x, y, z );
+            mesh.scale.set( scale, scale, scale );
+            scene.add( mesh );
         }
 
         function run() {
@@ -256,22 +279,15 @@ get_header($title . " - 查看模型"); ?>
             controls.autoRotate = !controls.autoRotate;
             $(this).toggleClass("disabled");
         });
-
-        $(".tools .ambient-light").click(function() {
-            $(this).toggleClass("disabled");
-            if (lightModeAmbient == true) {
-                ambientLights.forEach(function(pointLight) {
-                    pointLight.intensity = 0.0;
-                });
-                pointLight.intensity = 1.0;
-            } else {
-                pointLight.intensity = 0.0;
-                ambientLights.forEach(function(pointLight) {
-                    pointLight.intensity = 0.5;
-                });
-            }
-            lightModeAmbient = !lightModeAmbient;
+        $(".tools .switch-sky").click(function() {
+            if ($(this).hasClass("sky-light"))
+                setSky(0x111111, 0x444444);
+            else
+                setSky(0x0077ff, 0xffffff);
+            $(this).toggleClass("sky-light");
         });
+
+
     </script>
 
 <?php

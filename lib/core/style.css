@@ -1,12 +1,26 @@
+/* universal */
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+}
+
+.page-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 10px 0;
+}
+
 /* header & footer */
 
 header {
-	min-width: 900px;
+	min-width: 920px;
 	width: 100%;
 	border-bottom: 1px solid #ddd;
+	background: #ffffff;
 }
 header .inner {
-	max-width: 900px;
+	max-width: 920px;
 	margin: 0 auto;
 	padding: 20px 30px 15px;
 }
@@ -24,6 +38,7 @@ header .inner > div {
 	font-family: cursive;
 	padding-left: 45px;
 	float: left;
+	line-height: 1;
 }
 .site-search {
 	float: left;
@@ -60,31 +75,23 @@ header .inner > div {
 	cursor: default;
 }
 .site-content {
-	width: 900px;
+	width: 920px;
 	margin: 0 auto;
 	padding: 15px 0;
 }
 .site-footer {
 	border-top: 1px solid #ddd;
 	background: #f0f0f0;
-	min-width: 900px;
+	min-width: 920px;
 	width: 100%;
 }
 .site-footer .inner {
-	width: 900px;
+	width: 920px;
 	margin: 0 auto;
 	text-align: center;
 	padding: 20px 20px;
 	color: #888;
 	line-height: 1.5em;
-}
-
-/* universal */
-
-.page-title {
-	font-size: 24px;
-	font-weight: bold;
-	margin: 10px 0;
 }
 
 /* index.php */
@@ -206,14 +213,18 @@ header .inner > div {
 
 /* showcase.php */
 .showcase .model-caption {
-	margin: 15px 0;
+	margin: 10px 0 20px;
 }
 .showcase .model-title {
-	font-size: 20px;
+	font-size: 19px;
+	color: rgb(68,68,68);
+	font-weight: 500;
 	margin: 0;
 }
 .showcase .model-meta {
-	color: #999;
+	color: rgb(153,153,153);
+	font-weight: normal;
+	font-size: 13px;
 }
 .showcase .model-meta .author {
 	margin-right: 15px;
@@ -226,6 +237,17 @@ header .inner > div {
 .showcase .primary {
 	width: 650px;
 	float: left;
+}
+.showcase #stage {
+	width: 642px;
+	height: 442px;
+	padding: 4px;
+	background: #efefef;
+	border-radius: 3px;
+}
+.showcase canvas {
+	border: 1px solid #dbdbdb;
+	border-radius: 2px;
 }
 .showcase .secondary {
 	width: 220px;
@@ -240,6 +262,28 @@ header .inner > div {
 .showcase .secondary .widget:last-child {
 	margin-bottom: 0;
 }
-.showcase #stage {
-	background: url("../img/dark-heavypaper.png") repeat;
+.showcase .secondary .widget-title {
+	font-size: 17px;
+	color: rgb(68,68,68);
+}
+.showcase .secondary .statistics ul {
+	margin: 0;
+	color: rgb(153, 153, 153);
+}
+.showcase .secondary .related ul {
+	margin: 0;
+}
+.showcase .secondary .related li {
+	display: inline-block;
+	margin-bottom: 15px;
+	width: 85px;
+}
+.showcase .secondary .related li:nth-child(2n) {
+	margin-left: 15px;
+}
+.showcase .secondary .related a {
+	display: inline-block;
+}
+.showcase .secondary .related img {
+	background: ;
 }
