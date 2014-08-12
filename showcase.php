@@ -79,9 +79,12 @@ get_header($title . " - 查看模型"); ?>
             <div class="comment-body">
             <?php foreach ($comment_controller->comments as $comment): ?>
                 <div class="comment-item" id="comment-<?php echo $comment["comment_id"] ?>">
-                    <div class="comment-author"><?php echo $comment["user_name"] ?></div>
-                    <div class="comment-content"><?php echo $comment["comment_content"] ?></div>
-                    <div class="comment-date"><?php echo $comment["comment_date"] ?></div>
+                    <img class="comment-author-avatar" src="<?php echo $comment["comment_author_avatar_url"] ?>">
+                    <div class="comment-detail">
+                        <div class="comment-author"><?php echo $comment["user_name"] ?></div>
+                        <div class="comment-content"><?php echo $comment["comment_content"] ?></div>
+                        <div class="comment-date"><?php echo $comment["comment_date"] ?></div>
+                    </div>
                 </div>
             <?php endforeach; ?>
             </div>
@@ -90,14 +93,17 @@ get_header($title . " - 查看模型"); ?>
             <h2 class="respond-title">发表评论</h2>
             <div class="respond-body">
             <?php if ($user_controller->logged_in): ?>
-                <form method="post" action="handle-respond.php" class="respond-form">
-                    <label>
-                        <textarea name="content"></textarea>
-                    </label>
-                    <input type="hidden" name="model_id" value="<?php echo $model_controller->id ?>">
-                    <input type="hidden" name="user_id" value="<?php echo $user_controller->id ?>">
-                    <input type="submit" class="btn" name="respond" value="发表">
-                </form>
+                <img class="user-avatar" src="<?php echo $user_controller->avatar_url ?>">
+                <div class="respond-form-wrapper">
+                    <form method="post" action="handle-respond.php" class="respond-form">
+                        <label>
+                            <textarea name="content" placeholder="留下一条评论" rows="4"></textarea>
+                        </label>
+                        <input type="hidden" name="model_id" value="<?php echo $model_controller->id ?>">
+                        <input type="hidden" name="user_id" value="<?php echo $user_controller->id ?>">
+                        <input type="submit" class="btn submit-button" name="respond" value="发表评论">
+                    </form>
+                </div>
             <?php else: ?>
                 <div class="login-required">您需要先<a href="login.php">登录</a>才能发表评论。</div>
             <?php endif; ?>

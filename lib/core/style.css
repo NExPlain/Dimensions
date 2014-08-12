@@ -316,6 +316,117 @@ header .inner > div {
 	margin-bottom: 10px;
 	line-height: 1;
 }
+/* Comments */
+.showcase .comment-title,
+.showcase .respond-title {
+	font-size: 19px;
+	color: #333;
+}
+.showcase .comment-item {
+	padding: 15px 20px;
+	background: #f8f8f8;
+	border: 1px solid #eee;
+	border-radius: 3px;
+	margin-bottom: 20px;
+}
+.showcase .comment-item:last-child {
+	margin-bottom: 0;
+}
+.showcase .comment-item::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.showcase .comment-author-avatar {
+	width: 64px;
+	height: 64px;
+	border-radius: 6px;
+	border: 1px solid #eee;
+	float: left;
+	margin: 4px 15px 0 0;
+}
+.showcase .comment-author {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.showcase .comment-date {
+	color: rgb(153,153,153);
+	margin-top: 5px;
+}
+.showcase .user-avatar {
+	width: 64px;
+	height: 64px;
+	border-radius: 6px;
+	border: 1px solid #eee;
+	display: inline-block;
+	vertical-align: top;
+}
+.showcase .respond-body {
+	position: relative;
+}
+.showcase .respond-form-wrapper {
+	display: inline-block;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin-left: 20px;
+}
+.showcase .respond-form-wrapper::after,
+.showcase .respond-form-wrapper::before{
+	position: absolute;
+	top: 15px;
+	left: 75px;
+	right: 100%;
+	width: 0;
+	height: 0;
+	display: block;
+	content: " ";
+	border-color: transparent;
+	border-style: solid solid outset;
+}
+.showcase .respond-form-wrapper::after {
+	border-width: 7px;
+	border-right-color: #ffffff;
+	margin-top: 1px;
+	margin-left: 2px;
+}
+.showcase .respond-form-wrapper::before {
+	border-right-color: #dddddd;
+	border-width: 8px;
+}
+.showcase .respond-form {
+	margin: 0;
+	padding: 10px;
+}
+.showcase .respond-form::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.showcase .respond-form label {
+	margin: 0;
+}
+.showcase .respond-form textarea {
+	width: 515px;
+	margin: 0 0 10px;
+	padding: 10px;
+	background-color: #fafafa;
+	color:#333;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	outline: none;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+	transition: none;
+	resize: vertical;
+}
+.showcase .respond-form textarea:focus {
+	background-color: #ffffff;
+	border-color: #51a7e8;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
+}
+.showcase .respond-form .submit-button {
+	float: right;
+}
+/* Sidebar */
 .showcase .secondary {
 	width: 220px;
 	float: right;
