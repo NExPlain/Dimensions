@@ -45,18 +45,21 @@ get_header($title . " - 查看模型"); ?>
         </div>
     </div>
     <div class="primary">
-        <div id="stage">
+        <div class="model-area">
+            <div id="stage"></div>
             <div class="tools">
                 <div class="button auto-rotate"><div class="inner"></div></div>
                 <div class="button switch-sky sky-light"><div class="inner"></div></div>
                 <div class="button expand"><div class="inner"></div></div>
             </div>
+            <?php if (!empty($model_controller->description)): ?>
+                <div class='model-description'>
+                    <img src="<?php echo $model_controller->cover_image_url ?>" class="model-cover-image">
+                    <h3 class="widget-title">模型介绍</h3>
+                    <?php echo $model_controller->description; ?>
+                </div>
+            <?php endif; ?>
         </div>
-        <?php if (!empty($model_controller->description)): ?>
-        <div class='model-description'>
-            <?php echo $model_controller->description; ?>
-        </div>
-        <?php endif; ?>
         <div class="model-options">
             <?php if ($user_controller->current_user_like($model_controller->id)): ?>
                 <button class="btn like disabled">我喜欢</button>
@@ -165,8 +168,8 @@ get_header($title . " - 查看模型"); ?>
             // Scene & Camera
             scene = new THREE.Scene();
             scene.fog = new THREE.Fog( 0xffffff, 1000, 10000 );
-            var width = 650 - 10;
-            var height = 450 - 10;
+            var width = 650 - 20;
+            var height = 450 - 20;
             var viewAngel = 45;
             var aspect = width / height;
             var near = 0.1;
@@ -290,7 +293,7 @@ get_header($title . " - 查看模型"); ?>
         });
 
         var mouse_over_stage = false;
-        $("#stage").hover(function() {
+        $(".model-area").hover(function() {
             mouse_over_stage = true;
             $(".tools").fadeIn();
         }, function() {

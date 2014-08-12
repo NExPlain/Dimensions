@@ -246,21 +246,23 @@ header .inner > div {
 	width: 650px;
 	float: left;
 }
-.showcase #stage {
-	width: 642px;
-	height: 442px;
-	padding: 4px;
-	background: #efefef;
+.showcase .model-area {
+	padding: 9px;
+	background: #f5f5f5;
 	border-radius: 3px;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
+	box-shadow: 2px 2px 4px #eee;
 }
-.showcase canvas {
-	border: 1px solid #dbdbdb;
-	border-radius: 2px;
+.showcase #stage {
+	/* Let's do the math: 630px(width) + 10px(padding+border) * 2 = 650px(outer width) */
+	width: 630px;
+	height: 440px;
 }
 .showcase .tools {
 	position: absolute;
-	margin-top: 395px;
-	margin-left: 500px;
+	margin-top: -55px;
+	margin-left: 490px;
 }
 .showcase .tools .button {
 	background: rgba(0,0,0,0.65);
@@ -293,6 +295,26 @@ header .inner > div {
 }
 .showcase .tools .expand .inner {
 	background-image: url("../img/expand.png");
+}
+.showcase .model-description {
+	margin: 5px 0;
+}
+.showcase .model-description::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.showcase .model-cover-image {
+	max-width: 100px;
+	max-height: 72px;
+	float: left;
+	margin-right: 15px;
+}
+.showcase .model-description .widget-title {
+	font-size: 16px;
+	color: #8aba56;
+	margin-bottom: 10px;
+	line-height: 1;
 }
 .showcase .secondary {
 	width: 220px;

@@ -21,6 +21,8 @@ class ModelController {
     public $uploader_username;
     public $uploader_avatar_url;
 
+    public $cover_image_url;
+
     public function __construct()
     {
         $this->dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -56,6 +58,7 @@ class ModelController {
             $this->uploader_avatar_url = "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar']);
             $this->views = $row["views"] + 1;
             $this->downloads = $row["downloads"];
+            $this->cover_image_url = "upload/" . $row["file_stamp"] . "/" .$row["image_0"];
 
             // Calculate times of "like" operation
             $query = "SELECT count(*) AS likes FROM dimensions_models INNER JOIN dimensions_likes ON dimensions_models.id = dimensions_likes.model_id WHERE dimensions_models.id = '$id'";
