@@ -319,7 +319,7 @@ header .inner > div {
 /* Comments */
 .showcase .comment-title,
 .showcase .respond-title {
-	font-size: 19px;
+	font-size: 17px;
 	color: #333;
 }
 .showcase .comment-item {
@@ -447,6 +447,16 @@ header .inner > div {
 .showcase .secondary .statistics ul {
 	margin: 0;
 	color: rgb(153, 153, 153);
+}
+.showcase .secondary .statistics li {
+	line-height: 25px;
+}
+.showcase .secondary .statistics .glyphicon {
+	margin-right: 5px;
+}
+.showcase .secondary .statistics .glyphicon::before {
+	position: relative;
+	top: 1px;
 }
 .showcase .secondary .related ul {
 	margin: 0;

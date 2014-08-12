@@ -74,6 +74,7 @@ get_header($title . " - 查看模型"); ?>
             <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
             <a class="btn respond" href="#respond">发表评论</a>
         </div>
+        <?php if ($comment_controller->has_comments()): ?>
         <div class="comment-area">
             <h2 class="comment-title"><?php echo $comment_controller->comment_count ?> 个回应</h2>
             <div class="comment-body">
@@ -89,6 +90,7 @@ get_header($title . " - 查看模型"); ?>
             <?php endforeach; ?>
             </div>
         </div>
+        <?php endif; ?>
         <div class="respond-area" id="respond">
             <h2 class="respond-title">发表评论</h2>
             <div class="respond-body">
@@ -105,7 +107,7 @@ get_header($title . " - 查看模型"); ?>
                     </form>
                 </div>
             <?php else: ?>
-                <div class="login-required">您需要先<a href="login.php">登录</a>才能发表评论。</div>
+                <a href="login.php" class="btn">登录以发表评论</a>
             <?php endif; ?>
             </div>
         </div>
@@ -113,9 +115,9 @@ get_header($title . " - 查看模型"); ?>
     <div class="secondary">
         <div class="widget statistics">
             <ul>
-                <li class="likes"><?php echo $model_controller->likes ?> 位用户喜欢</li>
-                <li class="downloads"><?php echo $model_controller->downloads ?> 次下载</li>
-                <li class="views"><?php echo $model_controller->views ?> 次浏览</li>
+                <li class="likes"><span class="glyphicon glyphicon-heart"></span><?php echo $model_controller->likes ?> 位用户喜欢</li>
+                <li class="downloads"><span class="glyphicon glyphicon-download"></span><?php echo $model_controller->downloads ?> 次下载</li>
+                <li class="views"><span class="glyphicon glyphicon-eye-open"></span><?php echo $model_controller->views ?> 次浏览</li>
             </ul>
         </div>
 

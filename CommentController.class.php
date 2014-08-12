@@ -48,4 +48,14 @@ class CommentController {
             $this->comments[] = $comment;
         }
     }
+
+    /**
+     * Determine if current model has any commnents.
+     *
+     * @return bool
+     */
+    public function has_comments()
+    {
+        return $this->comment_count > 0;
+    }
 } 

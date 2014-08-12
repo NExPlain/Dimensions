@@ -38,6 +38,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
     <script src="lib/core/bootstrap/js/bootstrap.min.js"></script>
     <link href="lib/core/reset.css" rel="stylesheet" media="screen">
     <link href="lib/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="lib/core/bootstrap/v3-icons/bootstrap-fonts.css" rel="stylesheet" media="screen">
     <link href="lib/core/style.css" rel="stylesheet" media="screen">
 </head>
 
