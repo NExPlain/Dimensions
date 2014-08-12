@@ -32,13 +32,16 @@ get_header($title . " - 查看模型"); ?>
     <h1 class="page-title">查看模型</h1>
     <div class="alert alert-warning"><strong>错误：</strong>你无权查看该模型或该模型不存在。</div>
 <?php else: ?>
-    <div class="model-caption">
-        <h1 class="model-title">
-            <?php echo $model_controller->title ?>
-        </h1>
-        <div class="model-meta">
-            <span class="author">作者：<?php echo $model_controller->uploader_username ?></span>
-            <span class="date"><?php echo $model_controller->last_update ?></span>
+    <div class="model-header">
+        <img class="author-avatar" src="<?php echo $model_controller->uploader_avatar_url ?>">
+        <div class="model-caption">
+            <h1 class="model-title">
+                <?php echo $model_controller->title ?>
+            </h1>
+            <div class="model-meta">
+                <span class="author">作者：<?php echo $model_controller->uploader_username ?></span>
+                <span class="date"><?php echo $model_controller->last_update ?></span>
+            </div>
         </div>
     </div>
     <div class="primary">

@@ -212,8 +212,16 @@ header .inner > div {
 }
 
 /* showcase.php */
-.showcase .model-caption {
+.showcase .model-header {
 	margin: 10px 0 20px;
+}
+.showcase .author-avatar {
+	width: 54px;
+	height: 54px;
+	border-radius: 50%;
+	background: #ddd;
+	float: left;
+	margin: 6px 18px 0 0;
 }
 .showcase .model-title {
 	font-size: 19px;
@@ -285,5 +293,4 @@ header .inner > div {
 	display: inline-block;
 }
 .showcase .secondary .related img {
-	background: ;
 }

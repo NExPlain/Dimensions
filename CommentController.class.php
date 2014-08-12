@@ -32,7 +32,7 @@ class CommentController {
      */
     public function load($model_id)
     {
-        $query = "SELECT comments.id AS comment_id, user_id, username, email, content, comment_date FROM dimensions_comments AS comments INNER JOIN dimensions_users AS users ON comments.user_id = users.id WHERE comments.model_id = '$model_id'";
+        $query = "SELECT comments.id AS comment_id, user_id, username, email, content, comment_date, avatar FROM dimensions_comments AS comments INNER JOIN dimensions_users AS users ON comments.user_id = users.id WHERE comments.model_id = '$model_id'";
         $result = mysqli_query($this->dbc, $query);
         $this->comment_count = mysqli_num_rows($result);
         while ($row = mysqli_fetch_array($result)) {
@@ -42,7 +42,8 @@ class CommentController {
                 "user_email" => $row['email'],
                 "comment_content" => $row['content'],
                 "comment_date" => $row['comment_date'],
-                "comment_id" => $row['comment_id']
+                "comment_id" => $row['comment_id'],
+                "comment_author_avatar_url" => "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar'])
             );
             $this->comments[] = $comment;
         }

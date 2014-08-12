@@ -19,6 +19,7 @@ class ModelController {
     public $description;
     public $uploader_id;
     public $uploader_username;
+    public $uploader_avatar_url;
 
     public function __construct()
     {
@@ -52,6 +53,7 @@ class ModelController {
             $this->description = $row["description"];
             $this->uploader_username = $row["username"];
             $this->uploader_id = $row["uploader_id"];
+            $this->uploader_avatar_url = "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar']);
             $this->views = $row["views"] + 1;
             $this->downloads = $row["downloads"];
 

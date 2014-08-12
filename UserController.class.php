@@ -17,6 +17,7 @@ class UserController {
     public $balance;
     public $join_date;
     public $upload_count;
+    public $avatar_url;
 
     public function __construct()
     {
@@ -49,6 +50,7 @@ class UserController {
                 $this->balance = $row['balance'];
                 $this->join_date = $row['joindate'];
                 $this->hashed_password = $row['userpswd'];
+                $this->avatar_url = "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar']);
                 $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->id."'";
                 $result = mysqli_query($this->dbc, $query);
                 $this->upload_count = mysqli_num_rows($result);
