@@ -254,14 +254,12 @@ header .inner > div {
 	border: 1px solid #ddd;
 	box-shadow: 2px 2px 4px #eee;
 }
-.showcase #stage {
-	/* Let's do the math: 630px(width) + 10px(padding+border) * 2 = 650px(outer width) */
-	width: 630px;
-	height: 440px;
+.showcase canvas {
+	display: block;
 }
 .showcase .tools {
 	position: absolute;
-	margin-top: -55px;
+	margin-top: -45px;
 	margin-left: 490px;
 }
 .showcase .tools .button {
@@ -295,6 +293,15 @@ header .inner > div {
 }
 .showcase .tools .expand .inner {
 	background-image: url("../img/expand.png");
+}
+#stage:-webkit-full-screen .expand {
+	display: none;
+}
+#stage:-webkit-full-screen .tools {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	display: block !important;
 }
 .showcase .model-description {
 	margin: 5px 0;

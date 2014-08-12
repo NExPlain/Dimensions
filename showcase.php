@@ -46,11 +46,13 @@ get_header($title . " - 查看模型"); ?>
     </div>
     <div class="primary">
         <div class="model-area">
-            <div id="stage"></div>
-            <div class="tools">
-                <div class="button auto-rotate"><div class="inner"></div></div>
-                <div class="button switch-sky sky-light"><div class="inner"></div></div>
-                <div class="button expand"><div class="inner"></div></div>
+            <div id="stage">
+                <div id="canvas"></div>
+                <div class="tools">
+                    <div class="button auto-rotate"><div class="inner"></div></div>
+                    <div class="button switch-sky sky-light"><div class="inner"></div></div>
+                    <div class="button expand"><div class="inner"></div></div>
+                </div>
             </div>
             <?php if (!empty($model_controller->description)): ?>
                 <div class='model-description'>
@@ -163,108 +165,166 @@ get_header($title . " - 查看模型"); ?>
         }
     </script>
     <script>
+
         /* WebGL */
 
         var scene, camera, renderer;
-        var controls, hemisphereLight, pointLight;
-        var sky;
+        var controls, hemisphereLight, pointLight, sky;
+        var size_width = 650 - 20;
+        var size_height = 450 - 20;
 
-        init();
-        run();
+        var webgl_manager = {
 
-        function init() {
-            // Scene & Camera
-            scene = new THREE.Scene();
-            scene.fog = new THREE.Fog( 0xffffff, 1000, 10000 );
-            var width = 650 - 20;
-            var height = 450 - 20;
-            var viewAngel = 45;
-            var aspect = width / height;
-            var near = 0.1;
-            var far = 20000;
-            camera = new THREE.PerspectiveCamera(viewAngel, aspect, near, far);
-            camera.position.set(0, 150, 400);
-            camera.lookAt(scene.position);
-            scene.add(camera);
+            init: function(width, height) {
+                // Scene & Camera
+                scene = new THREE.Scene();
+                scene.fog = new THREE.Fog( 0xffffff, 1000, 10000 );
+                var viewAngel = 45;
+                var aspect = width / height;
+                var near = 0.1;
+                var far = 20000;
+                camera = new THREE.PerspectiveCamera(viewAngel, aspect, near, far);
+                camera.position.set(0, 150, 400);
+                camera.lookAt(scene.position);
+                scene.add(camera);
 
-            // Renderer
-            renderer = new THREE.WebGLRenderer({antialias: true});
-            renderer.setClearColor(scene.fog.color, 1);
-            renderer.setSize(width, height);
-            var container = document.getElementById('stage');
-            container.appendChild(renderer.domElement);
-            renderer.gammaInput = true;
-            renderer.gammaOutput = true;
+                // Renderer
+                renderer = new THREE.WebGLRenderer({antialias: true});
+                renderer.setClearColor(scene.fog.color, 1);
+                renderer.setSize(width, height);
+                var container = document.getElementById('canvas');
+                container.appendChild(renderer.domElement);
+                renderer.gammaInput = true;
+                renderer.gammaOutput = true;
 
-            // Controls
-            controls = new THREE.OrbitControls(camera, container);
-            controls.keyPanSpeed = 15.0;
-            controls.keys = { LEFT: 65, UP: 87, RIGHT: 68, BOTTOM: 83 };
-            controls.zoomSpeed = 0.6;
-            controls.rotateSpeed = 1.0;
-            controls.autoRotateSpeed = 6.5;
-            controls.maxDistance = 3000;
+                // Controls
+                controls = new THREE.OrbitControls(camera, container);
+                controls.keyPanSpeed = 15.0;
+                controls.keys = { LEFT: 65, UP: 87, RIGHT: 68, BOTTOM: 83 };
+                controls.zoomSpeed = 0.6;
+                controls.rotateSpeed = 1.0;
+                controls.autoRotateSpeed = 6.5;
+                controls.maxDistance = 3000;
 
-            // Hemisphere Light
-            hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.25);
-            hemisphereLight.color.setHSL(0.6, 1, 0.75);
-            hemisphereLight.groundColor.setHSL(0.1, 0.8, 0.7);
-            hemisphereLight.position.y = 1000;
-            hemisphereLight.intensity = 0.7;
-            scene.add(hemisphereLight);
+                // Hemisphere Light
+                hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.25);
+                hemisphereLight.color.setHSL(0.6, 1, 0.75);
+                hemisphereLight.groundColor.setHSL(0.1, 0.8, 0.7);
+                hemisphereLight.position.y = 1000;
+                hemisphereLight.intensity = 0.7;
+                scene.add(hemisphereLight);
 
-            // Point Light
-            pointLight = new THREE.PointLight(0xFFFFFF);
-            pointLight.intensity = 1.15;
-            pointLight.position.set(-100, 200, 100);
-            scene.add(pointLight);
+                // Point Light
+                pointLight = new THREE.PointLight(0xFFFFFF);
+                pointLight.intensity = 1.15;
+                pointLight.position.set(-100, 200, 100);
+                scene.add(pointLight);
 
-            // Sky (light)
-            setSky(0x0077ff, 0xffffff);
+                // Sky (light)
+                webgl_manager.setSky(0x0077ff, 0xffffff);
 
-            // Load Model
-            var jsonLoader = new THREE.JSONLoader();
-            jsonLoader.load("<?php echo $model_controller->model_location; ?>", function(geometry, materials) {
-                loadModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
-            });
-        }
+                // Load Model
+                var jsonLoader = new THREE.JSONLoader();
+                jsonLoader.load("<?php echo $model_controller->model_location; ?>", function(geometry, materials) {
+                    webgl_manager.loadModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
+                });
+            },
 
-        function setSky(topColor, bottomColor) {
-            scene.remove(sky);
-            var vertexShader = document.getElementById('vertexShader').textContent;
-            var fragmentShader = document.getElementById('fragmentShader').textContent;
-            var uniforms = {
-                topColor:    {type: "c", value: new THREE.Color(topColor)},
-                bottomColor: {type: "c", value: new THREE.Color(bottomColor)},
-                offset:      {type: "f", value: 400},
-                exponent:    {type: "f", value: 0.6}
+            loadModel: function(geometry, materials, x, y, z, scale) {
+                var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+                mesh.position.set(x, y, z);
+                mesh.scale.set(scale, scale, scale);
+                scene.add(mesh);
+            },
+
+            run: function() {
+                controls.update();
+                renderer.render(scene, camera);
+                requestAnimationFrame(webgl_manager.run);
+            },
+
+            setSky: function(topColor, bottomColor) {
+                scene.remove(sky);
+                var vertexShader = document.getElementById('vertexShader').textContent;
+                var fragmentShader = document.getElementById('fragmentShader').textContent;
+                var uniforms = {
+                    topColor:    {type: "c", value: new THREE.Color(topColor)},
+                    bottomColor: {type: "c", value: new THREE.Color(bottomColor)},
+                    offset:      {type: "f", value: 400},
+                    exponent:    {type: "f", value: 0.6}
+                }
+                if (topColor == 0x0077ff) {
+                    // Use hemisphere light's color as light sky's top color.
+                    uniforms.topColor.value.copy(hemisphereLight.color);
+                }
+                // Set fog color to sky's bottom color.
+                scene.fog.color.copy(uniforms.bottomColor.value);
+                var skyGeo = new THREE.SphereGeometry(4000, 32, 15);
+                var skyMat = new THREE.ShaderMaterial({vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide});
+                sky = new THREE.Mesh(skyGeo, skyMat);
+                scene.add(sky);
+            },
+
+            resize: function(width, height) {
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            },
+
+            enterFullscreen: function() {
+                var stage = document.getElementById('stage');
+                stage.webkitRequestFullscreen();
+                webgl_manager.resize(screen.width, screen.height);
+            },
+
+            onLeaveFullscreen: function() {
+                webgl_manager.resize(size_width, size_height);
             }
-            if (topColor == 0x0077ff) {
-                // Use hemisphere light's color as light sky's top color.
-                uniforms.topColor.value.copy(hemisphereLight.color);
+        };
+
+        webgl_manager.init(size_width, size_height);
+        webgl_manager.run();
+
+        /* Toolbar */
+
+        $(".tools .auto-rotate").click(function() {
+            controls.autoRotate = !controls.autoRotate;
+            $(this).toggleClass("enabled");
+        });
+
+        $(".tools .switch-sky").click(function() {
+            if ($(this).hasClass("sky-light"))
+                webgl_manager.setSky(0x111111, 0x444444);
+            else
+                webgl_manager.setSky(0x0077ff, 0xffffff);
+            $(this).toggleClass("sky-light");
+        });
+
+        $(".tools .expand").click(function() {
+            webgl_manager.enterFullscreen();
+        });
+
+        $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', function() {
+            if (document.webkitFullscreenElement == null) {
+                webgl_manager.onLeaveFullscreen();
             }
-            // Set fog color to sky's bottom color.
-            scene.fog.color.copy(uniforms.bottomColor.value);
-            var skyGeo = new THREE.SphereGeometry(4000, 32, 15);
-            var skyMat = new THREE.ShaderMaterial({vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide});
-            sky = new THREE.Mesh(skyGeo, skyMat);
-            scene.add(sky);
-        }
+        });
 
-        function loadModel(geometry, materials, x, y, z, scale) {
-            var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-            mesh.position.set(x, y, z);
-            mesh.scale.set(scale, scale, scale);
-            scene.add(mesh);
-        }
+        var mouse_over_stage = false;
 
-        function run() {
-            controls.update();
-            renderer.render(scene, camera);
-            requestAnimationFrame(run);
-        }
+        $(".model-area").hover(function() {
+            mouse_over_stage = true;
+            $(".tools").fadeIn();
+        }, function() {
+            mouse_over_stage = false;
+            setTimeout(function() {
+                if (!mouse_over_stage) {
+                    $(".tools").fadeOut();
+                }
+            }, 200);
+        });
 
-        /* Miscellaneous */
+        /* Model Options */
 
         $(".model-options .like").click(function() {
             if ($(".operations .like").hasClass("disabled")) {
@@ -288,30 +348,6 @@ get_header($title . " - 查看模型"); ?>
             });
         });
 
-        $(".tools .auto-rotate").click(function() {
-            controls.autoRotate = !controls.autoRotate;
-            $(this).toggleClass("enabled");
-        });
-        $(".tools .switch-sky").click(function() {
-            if ($(this).hasClass("sky-light"))
-                setSky(0x111111, 0x444444);
-            else
-                setSky(0x0077ff, 0xffffff);
-            $(this).toggleClass("sky-light");
-        });
-
-        var mouse_over_stage = false;
-        $(".model-area").hover(function() {
-            mouse_over_stage = true;
-            $(".tools").fadeIn();
-        }, function() {
-            mouse_over_stage = false;
-            setTimeout(function() {
-                if (!mouse_over_stage) {
-                    $(".tools").fadeOut();
-                }
-            }, 200);
-        });
     </script>
 
 <?php

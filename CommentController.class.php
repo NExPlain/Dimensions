@@ -50,7 +50,7 @@ class CommentController {
     }
 
     /**
-     * Determine if current model has any commnents.
+     * Determine if current model has any comments.
      *
      * @return bool
      */
