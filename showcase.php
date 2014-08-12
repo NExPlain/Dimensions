@@ -221,10 +221,10 @@ get_header($title . " - 查看模型"); ?>
             var vertexShader = document.getElementById('vertexShader').textContent;
             var fragmentShader = document.getElementById('fragmentShader').textContent;
             var uniforms = {
-                topColor: 	 { type: "c", value: new THREE.Color( topColor ) },
-                bottomColor: { type: "c", value: new THREE.Color( bottomColor ) },
-                offset:		 { type: "f", value: 400 },
-                exponent:	 { type: "f", value: 0.6 }
+                topColor:    {type: "c", value: new THREE.Color(topColor)},
+                bottomColor: {type: "c", value: new THREE.Color(bottomColor)},
+                offset:      {type: "f", value: 400},
+                exponent:    {type: "f", value: 0.6}
             }
             if (topColor == 0x0077ff) {
                 // Use hemisphere light's color as light sky's top color.
@@ -239,10 +239,10 @@ get_header($title . " - 查看模型"); ?>
         }
 
         function loadModel(geometry, materials, x, y, z, scale) {
-            var mesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial( materials ) );
-            mesh.position.set( x, y, z );
-            mesh.scale.set( scale, scale, scale );
-            scene.add( mesh );
+            var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+            mesh.position.set(x, y, z);
+            mesh.scale.set(scale, scale, scale);
+            scene.add(mesh);
         }
 
         function run() {
