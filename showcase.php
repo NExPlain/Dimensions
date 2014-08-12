@@ -45,32 +45,31 @@ get_header($title . " - 查看模型"); ?>
         </div>
     </div>
     <div class="primary">
-        <div id="stage"></div>
+        <div id="stage">
+            <div class="tools">
+                <div class="button auto-rotate"><div class="inner"></div></div>
+                <div class="button switch-sky sky-light"><div class="inner"></div></div>
+                <div class="button expand"><div class="inner"></div></div>
+            </div>
+        </div>
         <?php if (!empty($model_controller->description)): ?>
         <div class='model-description'>
             <?php echo $model_controller->description; ?>
         </div>
         <?php endif; ?>
         <div class="model-options">
-            <div class="operations">
-                <?php if ($user_controller->current_user_like($model_controller->id)): ?>
-                    <button class="btn like disabled">我喜欢</button>
-                <?php else: ?>
-                    <button class="btn like">喜欢</button>
-                <?php endif; ?>
-                <?php if ($user_controller->current_user_fav($model_controller->id)): ?>
-                    <button class="btn fav disabled">已收藏</button>
-                <?php else: ?>
-                    <button class="btn fav">收藏</button>
-                <?php endif; ?>
-                <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
-                <a class="btn respond" href="#respond">发表评论</a>
-            </div>
-
-            <div class="tools">
-                <button class="btn auto-rotate">自动旋转</button>
-                <button class="btn switch-sky sky-light">切换背景</button>
-            </div>
+            <?php if ($user_controller->current_user_like($model_controller->id)): ?>
+                <button class="btn like disabled">我喜欢</button>
+            <?php else: ?>
+                <button class="btn like">喜欢</button>
+            <?php endif; ?>
+            <?php if ($user_controller->current_user_fav($model_controller->id)): ?>
+                <button class="btn fav disabled">已收藏</button>
+            <?php else: ?>
+                <button class="btn fav">收藏</button>
+            <?php endif; ?>
+            <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
+            <a class="btn respond" href="#respond">发表评论</a>
         </div>
         <div class="comment-area">
             <h2 class="comment-title"><?php echo $comment_controller->comment_count ?> 个回应</h2>
@@ -256,7 +255,7 @@ get_header($title . " - 查看模型"); ?>
 
         /* Miscellaneous */
 
-        $(".operations .like").click(function() {
+        $(".model-options .like").click(function() {
             if ($(".operations .like").hasClass("disabled")) {
                 return;
             }
@@ -267,7 +266,7 @@ get_header($title . " - 查看模型"); ?>
             });
         });
 
-        $(".operations .fav").click(function() {
+        $(".model-options .fav").click(function() {
             if ($(".operations .fav").hasClass("disabled")) {
                 return;
             }
@@ -280,7 +279,7 @@ get_header($title . " - 查看模型"); ?>
 
         $(".tools .auto-rotate").click(function() {
             controls.autoRotate = !controls.autoRotate;
-            $(this).toggleClass("disabled");
+            $(this).toggleClass("enabled");
         });
         $(".tools .switch-sky").click(function() {
             if ($(this).hasClass("sky-light"))
@@ -290,7 +289,18 @@ get_header($title . " - 查看模型"); ?>
             $(this).toggleClass("sky-light");
         });
 
-
+        var mouse_over_stage = false;
+        $("#stage").hover(function() {
+            mouse_over_stage = true;
+            $(".tools").fadeIn();
+        }, function() {
+            mouse_over_stage = false;
+            setTimeout(function() {
+                if (!mouse_over_stage) {
+                    $(".tools").fadeOut();
+                }
+            }, 200);
+        });
     </script>
 
 <?php
