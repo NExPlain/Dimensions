@@ -46,22 +46,25 @@ get_header($title . " - 查看模型"); ?>
     </div>
     <div class="primary">
         <div class="model-area<?php if ($model_controller->is_free() == false) echo " model-preview" ?>">
-            <div id="stage">
-                <div id="canvas">
-                    <?php
-                    if ($model_controller->is_free() == false) {
-                        echo '<img src="'.$model_controller->cover_image_url.'" class="preview-image">';
-                    }
-                    ?>
-                </div>
-                <?php if ($model_controller->is_free() == true): ?>
-                    <div class="tools">
-                        <div class="button auto-rotate"><div class="inner"></div></div>
-                        <div class="button switch-sky sky-light"><div class="inner"></div></div>
-                        <div class="button expand"><div class="inner"></div></div>
+            <div class="stage-wrapper">
+                <div id="stage" class="stage">
+                    <div id="canvas">
+                        <?php
+                        if ($model_controller->is_free() == false) {
+                            echo '<img src="'.$model_controller->cover_image_url.'" class="preview-image">';
+                        }
+                        ?>
                     </div>
-                <?php endif; ?>
+                    <?php if ($model_controller->is_free() == true): ?>
+                        <div class="tools">
+                            <div class="tool-button auto-rotate"><div class="inner"></div></div>
+                            <div class="tool-button switch-sky sky-light"><div class="inner"></div></div>
+                            <div class="tool-button expand"><div class="inner"></div></div>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
+
             <?php if ($model_controller->is_free() == false): ?>
                 <div class='model-image-selector'>
                     <div class="inner" style="width: <?php echo count($model_controller->image_urls) * 86 + 6 ?>px">
@@ -90,19 +93,19 @@ get_header($title . " - 查看模型"); ?>
         </div>
         <div class="model-options">
             <?php if ($user_controller->current_user_like($model_controller->id)): ?>
-                <button class="btn like disabled">我喜欢</button>
+                <button class="button button-white like disabled">我喜欢</button>
             <?php else: ?>
-                <button class="btn like">喜欢</button>
+                <button class="button button-white like">喜欢</button>
             <?php endif; ?>
             <?php if ($user_controller->current_user_fav($model_controller->id)): ?>
-                <button class="btn fav disabled">已收藏</button>
+                <button class="button button-white fav disabled">已收藏</button>
             <?php else: ?>
-                <button class="btn fav">收藏</button>
+                <button class="button button-white fav">收藏</button>
             <?php endif; ?>
             <?php if ($model_controller->is_free()): ?>
-                <a class="btn download" href="<?php echo $model_controller->model_location ?>">下载</a>
+                <a class="button button-white download" href="<?php echo $model_controller->model_location ?>">下载</a>
             <?php endif; ?>
-            <a class="btn respond" href="#respond">发表评论</a>
+            <a class="button button-white respond" href="#respond">发表评论</a>
         </div>
         <?php if ($model_controller->is_free() == false): ?>
             <div class="purchase-area">
@@ -110,7 +113,7 @@ get_header($title . " - 查看模型"); ?>
                 <div class="purchase-body">
                     <div class="model-description"><?php echo $model_controller->description ?></div>
                     <div class="purchase-description">* 该模型为付费模型，您需要购买后可享受无限期的下载或即时浏览服务。</div>
-                    <button class="btn btn-success purchase-button">立即购买 (¥<?php echo $model_controller->price ?>)</button>
+                    <button class="button button-green purchase-button">立即购买 (¥<?php echo $model_controller->price ?>)</button>
                 </div>
             </div>
         <?php endif; ?>
@@ -143,11 +146,11 @@ get_header($title . " - 查看模型"); ?>
                         </label>
                         <input type="hidden" name="model_id" value="<?php echo $model_controller->id ?>">
                         <input type="hidden" name="user_id" value="<?php echo $user_controller->id ?>">
-                        <input type="submit" class="btn submit-button" name="respond" value="发表评论">
+                        <input type="submit" class="button button-green submit-button" name="respond" value="发表评论">
                     </form>
                 </div>
             <?php else: ?>
-                <a href="login.php" class="btn">登录以发表评论</a>
+                <a href="login.php" class="button button-white">登录以发表评论</a>
             <?php endif; ?>
             </div>
         </div>
