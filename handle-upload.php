@@ -48,7 +48,7 @@ if (!is_dir($dir)) {
 
 /* Move files in */
 
-if (!isset($_FILES["model_file"]) || !isset($_FILES["cover_image"])) {
+if ($_FILES["model_file"]["error"] != UPLOAD_ERR_OK || $_FILES["cover_image"]["error"] != UPLOAD_ERR_OK) {
     echo json_encode(array(
         "result" => "false",
         "message" => "model_file or cover_image not found."
@@ -61,27 +61,24 @@ $model_name = $_FILES["model_file"]["name"];
 move_uploaded_file($_FILES["cover_image"]["tmp_name"], $dir . FILE_SLASH . $_FILES["cover_image"]["name"]);
 $images[0] = $_FILES["cover_image"]["name"];
 
-if (isset($_FILES["textures"])) {
-    for ($i = 0; $i < count($_FILES["textures"]["tmp_name"]); ++$i) {
-        if (isset($_FILES["textures"]["tmp_name"][$i])) {
-            move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["textures"]["name"][$i]);
-        }
+for ($i = 0; $i < count($_FILES["textures"]["tmp_name"]); ++$i) {
+    if ($_FILES["textures"]["error"][$i] == UPLOAD_ERR_OK) {
+        move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["textures"]["name"][$i]);
     }
 }
-if (isset($_FILES["images"])) {
-    for ($i = 0; $i < 5; ++$i) {
-        if (isset($_FILES["images"]["tmp_name"][$i])) {
-            move_uploaded_file($_FILES["images"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["images"]["name"][$i]);
-            $images[$i + 1] = $_FILES["images"]["name"][$i];
-        } else {
-            $images[$i + 1] = "";
-        }
+
+for ($i = 0; $i < 5; ++$i) {
+    if ($_FILES["images"]["error"][$i] == UPLOAD_ERR_OK) {
+        move_uploaded_file($_FILES["images"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["images"]["name"][$i]);
+        $images[$i + 1] = $_FILES["images"]["name"][$i];
+    } else {
+        $images[$i + 1] = "";
     }
 }
 
 /* Get other fields */
 
-if (!isset($_POST['title'])) {
+if (empty($_POST['title'])) {
     echo json_encode(array(
         "result" => "false",
         "message" => "title not found."
@@ -90,17 +87,35 @@ if (!isset($_POST['title'])) {
 }
 
 $title = $_POST['title'];
-$scale = isset($_POST['scale']) ? $_POST['scale'] : 1;
-$price = isset($_POST['price']) ? $_POST['price'] : 0;
-$description = isset($_POST['description']) ? $_POST['description'] : "";
+$price = empty($_POST['price']) ? 0 : $_POST['price'];
+$description = $_POST['description'];
+$tags = isset($_POST['tags']) ? $_POST['tags'] : array();
+$license_id = empty($_POST['license']) ? 0 : $_POST['license'];
+array_unique($tags);
 
 /* Update database */
 
-$query = "INSERT INTO dimensions_models (title, uploader_id, model_name, file_stamp, scale, is_private, price, description, image_0, image_1, image_2, image_3, image_4, image_5) ".
-    "VALUES ('$title','$uploader_id','$model_name','$file_stamp','$scale',0,'$price','$description','$images[0]','$images[1]','$images[2]','$images[3]','$images[4]','$images[5]')";
+// insert model
+
+$query = "INSERT INTO dimensions_models (title, uploader_id, model_name, file_stamp, scale, is_private, price, description, license_id, image_0, image_1, image_2, image_3, image_4, image_5) ".
+    "VALUES ('$title','$uploader_id','$model_name','$file_stamp','1.0',0,'$price','$description','$license_id','$images[0]','$images[1]','$images[2]','$images[3]','$images[4]','$images[5]')";
 mysqli_query($dbc, $query);
 
 $uploaded_id = mysqli_insert_id($dbc);
+
+// update tags
+
+foreach ($tags as $tag) {
+    $query = "SELECT * FROM dimensions_tags WHERE display_name = '$tag'";
+    $result = mysqli_query($dbc, $query);
+    if ($row = mysqli_fetch_array($result)) {
+       $tag_id = $row['id'];
+    } else {
+        mysqli_query($dbc, "INSERT INTO dimensions_tags (display_name) VALUES ('$tag')");
+        $tag_id = mysqli_insert_id($dbc);
+    }
+    mysqli_query($dbc, "INSERT INTO dimensions_tagging (tag_id, model_id) VALUES ('$tag_id', '$uploaded_id')");
+}
 
 /**
  * If it is a API call then echo the destination URL.

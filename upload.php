@@ -52,7 +52,7 @@ get_header("上传模型"); ?>
                 <label class="field-label" for="images">预览图</label>
                 <input type="file" class="file-selector" name="images[]" id="images" accept="image/*" multiple>
                 <input type="text" class="file-confirm images disabled" disabled>
-                <p class="field-note">注意：您最多可上传 5 张预览图。</p>
+                <p class="field-note">提示：您最多可上传 5 张预览图。</p>
             </div>
             <div class="form-field">
                 <label class="field-label" for="price">定价</label>
@@ -100,7 +100,11 @@ get_header("上传模型"); ?>
             if ($(this).hasClass("paied")) {
                 $(".paid-model-fields").slideDown();
             } else {
-                $(".paid-model-fields").slideUp();
+                $(".paid-model-fields").slideUp(400, function() {
+                    $("#price").val("");
+                    $("#images").val("");
+                    $(".file-confirm.images").val("");
+                });
             }
         }
     });

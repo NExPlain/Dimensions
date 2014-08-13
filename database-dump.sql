@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: 2014-08-12 18:41:57
+-- Generation Time: 2014-08-13 23:40:00
 -- 服务器版本： 5.5.34
 -- PHP Version: 5.5.10
 
@@ -30,7 +30,7 @@ CREATE TABLE `dimensions_comments` (
   `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,21 @@ CREATE TABLE `dimensions_favs` (
   `model_id` bigint(20) NOT NULL,
   `fav_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `dimensions_licenses`
+--
+
+DROP TABLE IF EXISTS `dimensions_licenses`;
+CREATE TABLE `dimensions_licenses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -60,7 +74,7 @@ CREATE TABLE `dimensions_likes` (
   `user_id` bigint(20) NOT NULL,
   `like_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -83,6 +97,7 @@ CREATE TABLE `dimensions_models` (
   `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `views` int(11) NOT NULL DEFAULT '0',
   `downloads` int(11) NOT NULL DEFAULT '0',
+  `license_id` int(11) NOT NULL DEFAULT '0',
   `image_0` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   `image_1` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image_2` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -90,7 +105,7 @@ CREATE TABLE `dimensions_models` (
   `image_4` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image_5` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=447 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -111,6 +126,33 @@ CREATE TABLE `dimensions_purchases` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `dimensions_tagging`
+--
+
+DROP TABLE IF EXISTS `dimensions_tagging`;
+CREATE TABLE `dimensions_tagging` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tag_id` bigint(20) NOT NULL,
+  `model_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `dimensions_tags`
+--
+
+DROP TABLE IF EXISTS `dimensions_tags`;
+CREATE TABLE `dimensions_tags` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `display_name` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `dimensions_users`
 --
 
@@ -124,4 +166,4 @@ CREATE TABLE `dimensions_users` (
   `balance` int(11) NOT NULL DEFAULT '0',
   `avatar` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=32 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
