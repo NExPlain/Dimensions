@@ -17,5 +17,5 @@ $result = mysqli_query($dbc, $query);
 if (mysqli_num_rows($result) == 0) {
     echo "false";
 } else {
-    echo "true";
+    echo mysqli_insert_id($dbc);
 }
