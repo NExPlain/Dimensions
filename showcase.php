@@ -375,7 +375,9 @@ get_header($title . " - 查看模型"); ?>
                 if ($(this).hasClass("active") == false) {
                     $(".preview-thumbnail.active").removeClass("active");
                     $(this).addClass("active");
+                    $(".preview-image").hide();
                     $(".preview-image").attr('src', $(this).data('image-src'));
+                    $(".preview-image").fadeIn(350);
                 }
             });
 
