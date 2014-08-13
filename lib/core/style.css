@@ -261,6 +261,10 @@ header .inner > div {
 .showcase #stage {
 	padding: 9px 9px 10px;
 }
+.showcase #canvas {
+	width: 630px;
+	height: 430px;
+}
 .showcase canvas {
 	display: block;
 }
@@ -330,11 +334,20 @@ header .inner > div {
 	margin: 0 0 10px;
 	line-height: 1;
 }
-/* Purchase */
+/* Preview & Purchase */
+.showcase .model-preview #canvas {
+	text-align: center;
+}
+.showcase .model-preview #canvas::before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em;
+}
 .showcase .preview-image {
-	width: 630px;
-	height: auto;
-	max-height: 650px;
+	max-width: 630px;
+	max-height: 430px;
 }
 .showcase .model-image-selector {
 	border-top: 1px solid #ddd;

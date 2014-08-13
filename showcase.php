@@ -45,7 +45,7 @@ get_header($title . " - 查看模型"); ?>
         </div>
     </div>
     <div class="primary">
-        <div class="model-area">
+        <div class="model-area<?php if ($model_controller->is_free() == false) echo " model-preview" ?>">
             <div id="stage">
                 <div id="canvas">
                     <?php
@@ -372,9 +372,11 @@ get_header($title . " - 查看模型"); ?>
         <script>
 
             $(".preview-thumbnail").click(function() {
-                $(".preview-thumbnail.active").removeClass("active");
-                $(this).addClass("active");
-                $(".preview-image").attr('src', $(this).data('image-src'));
+                if ($(this).hasClass("active") == false) {
+                    $(".preview-thumbnail.active").removeClass("active");
+                    $(this).addClass("active");
+                    $(".preview-image").attr('src', $(this).data('image-src'));
+                }
             });
 
         </script>
@@ -386,24 +388,24 @@ get_header($title . " - 查看模型"); ?>
         /* Model Options */
 
         $(".model-options .like").click(function() {
-            if ($(".operations .like").hasClass("disabled")) {
+            if ($(".model-options .like").hasClass("disabled")) {
                 return;
             }
             $.ajax({
                 url: "model-operations.php?op=add_like&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
             }).done(function(html) {
-                $(".operations .like").addClass("disabled").html("我喜欢");
+                $(".model-options .like").addClass("disabled").html("我喜欢");
             });
         });
 
         $(".model-options .fav").click(function() {
-            if ($(".operations .fav").hasClass("disabled")) {
+            if ($(".model-options .fav").hasClass("disabled")) {
                 return;
             }
             $.ajax({
                 url: "model-operations.php?op=add_fav&user_id=<?php echo $user_controller->id ?>&model_id=<?php echo $model_controller->id ?>"
             }).done(function(html) {
-                $(".operations .fav").addClass("disabled").html("已收藏");
+                $(".model-options .fav").addClass("disabled").html("已收藏");
             });
         });
 
