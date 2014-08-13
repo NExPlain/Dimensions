@@ -117,7 +117,7 @@ get_header("上传模型"); ?>
 <script>
     $("#license").selectize();
     $("#tags").selectize({
-        plugins: ['remove_button','restore_on_backspace','drag_drop'],
+        plugins: ['remove_button','restore_on_backspace'],
         persist: false,
         create: true
     });
