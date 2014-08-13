@@ -126,7 +126,7 @@ foreach ($tags as $tag) {
 if (isset($_GET['api']) && $_GET['api'] == "true") {
     echo json_encode(array(
         "result" => "true",
-        "message" => "showcase.php?id=" . $uploaded_id
+        "message" => "$uploaded_id"
     ));
 } else {
     header("Location: showcase.php?id=" . $uploaded_id);

@@ -38,7 +38,7 @@ false
 ```
 {"result":"true","message":"811"}
 ```
-* 失败：JSON 字符串，其中`result`为`false`，`message`为错误信息。例如
+* 失败：JSON 字符串，其中`result`为`false`；`message`为错误信息。例如
 ```
 {"result":"false","message":"title not found."}
 ```
