@@ -211,7 +211,12 @@ header .inner > div {
 	margin-left: 20px;
 }
 
+/* upload.php */
+
+
+
 /* showcase.php */
+
 .showcase .model-header {
 	margin: 10px 0 20px;
 }
@@ -247,12 +252,14 @@ header .inner > div {
 	float: left;
 }
 .showcase .model-area {
-	padding: 9px;
 	background: #f5f5f5;
 	border-radius: 3px;
 	margin-bottom: 20px;
 	border: 1px solid #ddd;
 	box-shadow: 2px 2px 4px #eee;
+}
+.showcase #stage {
+	padding: 9px 9px 10px;
 }
 .showcase canvas {
 	display: block;
@@ -304,7 +311,7 @@ header .inner > div {
 	display: block !important;
 }
 .showcase .model-description {
-	margin: 5px 0;
+	padding: 0 9px 9px;
 }
 .showcase .model-description::after {
 	content: "";
@@ -320,8 +327,81 @@ header .inner > div {
 .showcase .model-description .widget-title {
 	font-size: 16px;
 	color: #8aba56;
-	margin-bottom: 10px;
+	margin: 0 0 10px;
 	line-height: 1;
+}
+/* Purchase */
+.showcase .preview-image {
+	width: 630px;
+	height: auto;
+	max-height: 650px;
+}
+.showcase .model-image-selector {
+	border-top: 1px solid #ddd;
+}
+.showcase .model-image-selector .inner {
+	margin: 0 auto;
+	/* width was set inline-ly via PHP code */
+}
+.showcase .preview-thumbnail {
+	display: inline-block;
+	cursor: pointer;
+	border-right: 1px solid #ddd;
+	padding: 8px;
+}
+.showcase .preview-thumbnail-image {
+	height: 50px;
+	width: 70px;
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	/* background image was set inline-ly via PHP code; */
+}
+.showcase .preview-thumbnail:first-child {
+	border-left: 1px solid #ddd;
+}
+.showcase .preview-thumbnail.active {
+	background: #e6e6e6;
+	cursor: default;
+}
+.showcase .preview-thumbnail.active::before,
+.showcase .preview-thumbnail.active::after {
+	width: 0;
+	height: 0;
+	content: " ";
+	position: absolute;
+	margin-top: -9px;
+}
+.showcase .preview-thumbnail.active::before {
+	border-left: 13px solid transparent;
+	border-right: 13px solid transparent;
+	border-top: 11px solid #ddd;
+	margin-left: 21px;
+}
+.showcase .preview-thumbnail.active::after {
+	border-left: 11px solid transparent;
+	border-right: 11px solid transparent;
+	border-top: 9px solid #f5f5f5;
+	margin-left: -47px;
+}
+.showcase .purchase-area {
+	margin: 25px 0;
+}
+.showcase .purchase-area .purchase-title {
+	font-size: 17px;
+	color: rgb(68,68,68);
+	line-height: 1;
+	margin: 0 0 15px;
+}
+.showcase .purchase-area .model-description {
+	padding: 0;
+	margin: 10px 0;
+}
+.showcase .purchase-area .purchase-description {
+	font-size: 13px;
+	color: rgb(153, 153, 153);
+	margin: 10px 0;
 }
 /* Comments */
 .showcase .comment-title,
@@ -367,6 +447,9 @@ header .inner > div {
 	border: 1px solid #eee;
 	display: inline-block;
 	vertical-align: top;
+}
+.showcase .respond-area {
+	margin: 25px 0;
 }
 .showcase .respond-body {
 	position: relative;

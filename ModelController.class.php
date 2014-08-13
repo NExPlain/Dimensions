@@ -22,6 +22,8 @@ class ModelController {
     public $uploader_avatar_url;
 
     public $cover_image_url;
+    public $price;
+    public $image_urls;
 
     public function __construct()
     {
@@ -58,7 +60,14 @@ class ModelController {
             $this->uploader_avatar_url = "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar']);
             $this->views = $row["views"] + 1;
             $this->downloads = $row["downloads"];
-            $this->cover_image_url = "upload/" . $row["file_stamp"] . "/" .$row["image_0"];
+            $this->cover_image_url = "upload/" . $row["file_stamp"] . "/" . $row["image_0"];
+
+            $this->price = intval($row['price']);
+            for ($ix = 0; $ix <= 5; ++$ix) {
+                if (!empty($row['image_' . $ix])) {
+                    $this->image_urls[] = "upload/" . $row["file_stamp"] . "/" . $row['image_' . $ix];
+                }
+            }
 
             // Calculate times of "like" operation
             $query = "SELECT count(*) AS likes FROM dimensions_models INNER JOIN dimensions_likes ON dimensions_models.id = dimensions_likes.model_id WHERE dimensions_models.id = '$id'";
@@ -152,5 +161,15 @@ HTML;
 HTML;
         }
         echo "</ul>";
+    }
+
+    /**
+     * Determine if the model is free.
+     *
+     * @return bool
+     */
+    public function is_free()
+    {
+        return $this->price == 0;
     }
 }
