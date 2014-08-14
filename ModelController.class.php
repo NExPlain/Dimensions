@@ -91,40 +91,34 @@ class ModelController {
      */
     public function list_all_models()
     {
-        $query = "SELECT is_private, dimensions_models.id AS id, title, username, image_0, file_stamp FROM dimensions_models INNER JOIN dimensions_users ON dimensions_models.uploader_id = dimensions_users.id";
+        $query = "SELECT id FROM dimensions_models";
         $result = mysqli_query($this->dbc, $query);
-        echo <<<HTML
-        <div class="model-grid">
-            <ol class="model-line">
-HTML;
-        $counter = 0;
+        echo '<ul class="models-list">';
         while ($row = mysqli_fetch_array($result)) {
-            if ($row['is_private'] == 1)
-                continue;
-            if ((++$counter - 1) % 4 == 0) {
-                echo <<<HTML
-                    </ol>
-                <ol class="model-line">
-HTML;
-            }
+            $id = $row['id'];
+            $this->load($id);
+            $badge = $this->price == 0 ? '<div class="item pricing-badge free">Free</div>' : '<div class="item pricing-badge premium">Premium</div>';
             echo <<<HTML
-            <li class="model-cell">
-                <div class="model-preview">
-                    <a href='showcase.php?id={$row["id"]}'>
-                        <img src="upload/{$row["file_stamp"]}/{$row["image_0"]}" class="model-image">
-                    </a>
+            <li class="model-item">
+                <div class="model-card">
+                    <div class="inner">
+                        <a class="preview-image" href="showcase.php?id=$this->id" style="background-image:url($this->cover_image_url)"></a>
+                        <div class="floating">
+                            $badge
+                            <div class="item views"><span class="icon glyphicon glyphicon-eye-open"></span>$this->views</div>
+                            <div class="item likes"><span class="icon glyphicon glyphicon-heart"></span>$this->likes</div>
+                        </div>
+                        <div class="title">$this->title</div>
+                    </div>
                 </div>
-                <div class="model-info">
-                    <div class="model-title">{$row["title"]}</div>
-                    <div class="model-author">{$row["username"]}</div>
+                <div class="author">
+                    <img class="avatar" src="$this->uploader_avatar_url">
+                    <div class="name">$this->uploader_username</div>
                 </div>
             </li>
 HTML;
         }
-        echo <<<HTML
-            </ol>
-        </div>
-HTML;
+        echo '</ul>';
     }
 
     /**

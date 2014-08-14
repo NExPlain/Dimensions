@@ -8,14 +8,14 @@
 require_once "functions.php";
 require_once "ModelController.class.php";
 
+$model_controller = new ModelController();
 get_header("浏览所有模型"); ?>
 
 <h1 class="page-title">所有模型</h1>
 
-<?php
-$model_controller = new ModelController();
-$model_controller->list_all_models();
-?>
+<div class="all-models">
+    <?php $model_controller->list_all_models(); ?>
+</div>
 
 <?php
 get_footer();

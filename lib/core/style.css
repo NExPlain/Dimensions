@@ -8,7 +8,7 @@ body {
 .page-title {
 	font-size: 24px;
 	font-weight: bold;
-	margin: 10px 0;
+	margin: 20px 0 40px;
 }
 
 /* header & footer */
@@ -104,37 +104,125 @@ header .inner > div {
 
 /* browse.php */
 
-.browse .model-line {
-	list-style: none;
-	margin: 20px 0;
+.browse {
+	background: #f0f0f0;
 }
-.browse .model-cell {
-	display: inline-block;
-	border: 1px solid #ddd;
-	margin: 0 10px;
-	vertical-align: top;
-	box-shadow: 1px 2px 6px rgba(0,0,0,0.1);
+
+.browse .models-list {
+	margin: 0;
+	overflow: auto;
 }
-.browse .model-cell:first-child {
-	margin-left: 0;
+.browse .model-item {
+	width: 31%;
+	margin-right: 3.5%;
+	margin-bottom: 25px;
+	float: left;
 }
-.browse .model-cell:last-child {
+.browse .model-item:nth-child(3n) {
 	margin-right: 0;
 }
-.browse .model-image {
-	width: 205px;
-	height: 205px;
+.browse .model-card {
+	/*border: 1px solid #ddd;*/
+	box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+	padding: 10px;
+	position: relative;
+	border-radius: 3px;
+	background: #ffffff;
 }
-.browse .model-info {
-	padding: 10px 15px;
-	width: 175px;
+.browse .model-card .inner {
+	/* .inner acts as the parent element of .floating,
+	   which makes .floating's width (declared as 100%)
+	   equal to model-card's width minus its padding.
+	 */
+	position: relative;
 }
-.browse .model-title {
+.browse .preview-image {
+	display: block; /* Do not use inline-block */
+	width: 100%;
+	height: 200px;
+	border-radius: 2px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.browse .floating {
+	width: 100%;
+	height: 0;
+	padding: 0 15px;
+	box-sizing: border-box;
+	position: absolute;
+	background: rgba(255,255,255,0.93);
+	top: 200px;
+	overflow: hidden;
+	-webkit-transition: all .2s ease-in;
+}
+.browse .model-card:hover .floating {
+	height: 38px;
+	padding: 8px 15px;
+	top: 162px; /* 200px - 38px */
+}
+.browse .floating .item {
+	float: left;
+	color: #999;
+}
+.browse .floating .pricing-badge {
+	font-weight: bold;
+	font-style: italic;
+	color: #ffffff;
+	padding:0 6px;
+	margin: 0 10px 0 0;
+	border-radius: 3px;
+	text-shadow:0 -1px 0 rgba(0,0,0, 0.5);
+	font-size: 13px;
+	line-height: 20px;
+	box-shadow:
+		0 1px 0 0 rgba(255,255,255,0.1),
+		inset 1px 0 1px 0  rgba(255,255,255,0.1),
+		inset -1px 0 1px 0 rgba(255,255,255,0.1),
+		inset 0 -1px 0 rgba(255,255,255,0.1),
+		inset 0 1px 1px -1px rgba(0,0,0,0.6);
+}
+.browse .floating .pricing-badge.free {
+	border: 1px solid #829737;
+	border-top-color: #7c9036;
+	border-bottom-color: #879d3a;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9fbd36), to(#90b024));
+}
+.browse .floating .pricing-badge.premium {
+	border: 1px solid #1e63ad;
+	border-top-color: #1f5ea5;
+	border-bottom-color: #1d66b9;
+	background: -webkit-gradient(linear, left top, left bottom, from(#248bce), to(#1e7cb8));
+}
+.browse .floating .icon {
+	margin-right: 5px;
+}
+.browse .floating .likes .icon {
+	position: relative;
+	top: 1px;
+}
+.browse .floating .views,
+.browse .floating .likes {
+	line-height: 22px;
+	margin-left: 10px;
+}
+.browse .title {
+	margin-top: 10px;
 	font-weight: bold;
 }
-.browse .model-author {
-	color: #999;
-	padding-top: 5px;
+.browse .author {
+	margin: 10px;
+	overflow: auto;
+}
+.browse .author .avatar {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	float: left;
+}
+.browse .author .name {
+	line-height: 20px;
+	margin-left: 30px;
 }
 
 /* my-profile.php */
