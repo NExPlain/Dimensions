@@ -42,7 +42,7 @@ if ($op == "delete") {
     foreach ($queries as $query) {
         mysqli_query($dbc, $query);
     }
-    header("Location: my-profile.php");
+    header("Location: user.php");
 }
 
 if ($op == "request_models_by_page") {

@@ -20,7 +20,7 @@
  * 2.0 - browse.php
  *   2.1 - Models List
  *   2.2 - Pagination
- * 3.0 - my-profile.php
+ * 3.0 - user.php
  * 4.0 - upload.php
  * 5.0 - showcase.php
  *   5.1 - Main Area
@@ -252,6 +252,14 @@ header .inner > div {
 	line-height: 20px;
 	margin-left: 30px;
 }
+.browse .author .name a {
+	text-decoration: none !important;
+	color: #444;
+	transition: color .15s ease-in;
+}
+.browse .author .name a:hover {
+	color: #0088cc;
+}
 
 /* 2.2 Pagination */
 
@@ -311,80 +319,222 @@ header .inner > div {
 }
 
 /**
- * 3.0 my-profile.php
+ * 3.0 user.php
  * -----------------------------------------------------------------------------
  */
 
-.my-profile section {
-	width: 500px;
+.user {
+	background: #f0f0f0;
 }
-.my-profile .section-title {
-	font-size: 20px;
-	margin: 15px 0 0 0;
-	padding: 0;
-	border-bottom: 1px solid #ccc;
+.user .site-content {
+	margin-top: -50px;
 }
-.my-profile form {
+.user .user-profile {
+	text-align: center;
+	background-color: #fafafa;
+	margin: 0 0 30px;
+	padding: 60px 0 20px;
+	border-radius: 3px;
+}
+.user .avatar {
+	width: 110px;
+	height: 110px;
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	top: 55px;
+}
+.user .name {
+	font-size: 28px;
+}
+.user .bio {
+	font-size: 19px;
+	color: #555;
+	margin: 0 0 20px;
+}
+.user .details {
 	margin: 0;
 }
-.my-profile .form-horizontal .controls {
-	padding-top: 5px;
-	margin-bottom: 5px;
+.user .details li {
+	display: inline-block;
+	font-size: 16px;
+	color: #777;
+	margin-right: 20px;
 }
-.my-profile .form-horizontal .control-group .edit-link {
-	display: none;
-	margin-left: 20px;
+.user .details li:last-child {
+	margin-right: 0;
 }
-.my-profile .form-horizontal .control-group:hover .edit-link {
-	display: inline;
+.user .details .icon {
+	margin-right: 8px;
 }
-.my-profile .form-horizontal .nesting-form {
-	padding-top: 0;
-	margin-bottom: 10px;
+.user .user-main::after {
+	content: "";
+	display: table;
+	clear: both;
 }
-.my-profile .form-horizontal .nesting-form .btn {
-	margin-top: 5px;
-}
-.my-profile .form-horizontal .control-label {
-	text-align: left;
-}
-.my-profile .form-horizontal .control-group {
-	padding: 3px 0;
-	margin-bottom: 0;
-	border-bottom: 1px solid #ddd;
-}
-.my-profile .form-horizontal .clickable {
-	cursor: pointer;
-}
-.my-profile .inline-form label {
+.user .models {
+	width: 70%;
 	float: left;
-	line-height: 30px;
-	margin: 0 20px 0 0;
 }
-.my-profile .inline-form .form-line {
-	margin: 0 0 6px 0;
+.user .models-list {
+	margin: 0;
+	overflow: auto;
 }
-.my-profile .inline-form .inline-btn {
-	margin-left: 15px;
+.user .model-item {
+	width: 31%;
+	margin-right: 3.5%;
+	margin-bottom: 25px;
+	float: left;
 }
-.my-profile .edit-link .icon,
-.my-profile .del-link .icon {
+.user .model-item:nth-child(3n) {
+	margin-right: 0;
+}
+.user .model-card {
+	/*border: 1px solid #ddd;*/
+	box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+	padding: 10px;
+	position: relative;
+	border-radius: 3px;
+	background: #ffffff;
+}
+.user .model-card .inner {
+	/* .inner acts as the parent element of .floating which makes .floating's width
+	   (declared as 100%) equal to model-card's width minus its padding.
+	 */
+	position: relative;
+}
+.user .preview-image {
+	display: block; /* Do not use inline-block */
+	width: 100%;
+	height: 140px;
+	border-radius: 2px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.user .floating {
+	width: 100%;
+	height: 0;
+	padding: 0 10px;
+	box-sizing: border-box;
+	position: absolute;
+	background: rgba(255,255,255,0.93);
+	top: 140px;
+	overflow: hidden;
+	transition: all .2s ease-in;
+}
+.user .model-card:hover .floating {
+	height: 32px;
+	padding: 5px 10px;
+	top: 108px; /* 140 - 32 */
+}
+.user .floating .item {
+	float: left;
+	color: #999;
+}
+.user .floating .pricing-badge {
+	font-weight: bold;
+	font-style: italic;
+	color: #ffffff;
+	padding:0 6px;
+	margin: 0 10px 0 0;
+	border-radius: 3px;
+	text-shadow:0 -1px 0 rgba(0,0,0, 0.5);
+	font-size: 13px;
+	line-height: 20px;
+	box-shadow:
+		0 1px 0 0 rgba(255,255,255,0.1),
+		inset 1px 0 1px 0  rgba(255,255,255,0.1),
+		inset -1px 0 1px 0 rgba(255,255,255,0.1),
+		inset 0 -1px 0 rgba(255,255,255,0.1),
+		inset 0 1px 1px -1px rgba(0,0,0,0.6);
+}
+.user .floating .pricing-badge.free {
+	border: 1px solid #829737;
+	border-top-color: #7c9036;
+	border-bottom-color: #879d3a;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9fbd36), to(#90b024));
+}
+.user .floating .pricing-badge.premium {
+	border: 1px solid #1e63ad;
+	border-top-color: #1f5ea5;
+	border-bottom-color: #1d66b9;
+	background: -webkit-gradient(linear, left top, left bottom, from(#248bce), to(#1e7cb8));
+}
+.user .floating .icon {
 	margin-right: 5px;
 }
-.my-profile .model-item {
-	padding: 8px 0;
-	border-bottom: 1px solid #ddd;
+.user .floating .likes .icon {
+	position: relative;
+	top: 1px;
 }
-.my-profile .model-options {
+.user .floating .views {
+	line-height: 22px;
+	margin-left: 5px;
+}
+.user .title {
+	margin-top: 10px;
+	font-weight: bold;
+	position: relative;
+	width: 100%;
+	height: 20px;
+	overflow: hidden;
+}
+.user .title .edit-link {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: #ffffff;
+	padding: 0 0 0 5px;
+	transition: opacity .15s ease-in;
+	opacity: 0;
+}
+.user .edit-link .icon {
+	position: relative;
+	top: 2px;
+}
+.user .model-card:hover .edit-link {
+	opacity: 1;
+	text-decoration: none !important;
+}
+.user .sidebar {
+	width: 25%;
 	float: right;
-	margin-right: 10px;
-	display: none;
 }
-.my-profile .model-item:hover .model-options {
-	display: inline;
+.user .widget {
+	margin-bottom: 25px;
+	background: #fcfcfc;
+	padding: 20px;
+	border: 1px solid #d8d8d8;
+	border-radius: 3px;
+	border-bottom-width: 2px;
 }
-.my-profile .model-item .model-option {
-	margin-left: 20px;
+.user .widget-title {
+	font-size: 16px;
+	line-height: 20px;
+	margin: 0 0 20px;
+}
+.user .account .options {
+	margin: 15px 0 0;
+}
+.user .stats ul {
+	margin: 0;
+	color: #555;
+}
+.user .stats li {
+	margin-bottom: 8px;
+}
+.user .stats li:last-child {
+	margin-bottom: 0;
+}
+.user .stats .icon {
+	margin-right: 8px;
+	font-size: 15px;
+}
+.user .stats .downloads .icon {
+	position: relative;
+	left: 1px;
 }
 
 /**
@@ -545,6 +695,14 @@ header .inner > div {
 }
 .showcase .model-meta .author {
 	margin-right: 15px;
+}
+.showcase .model-meta .author a {
+	text-decoration: none !important;
+	color: rgb(153, 153, 153);
+	transition: color .15s ease-in;
+}
+.showcase .model-meta .author a:hover {
+	color: #0088cc;
 }
 .showcase .site-main::after {
 	content: "";

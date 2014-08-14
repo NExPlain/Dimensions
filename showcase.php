@@ -39,7 +39,7 @@ get_header($title . " - 查看模型"); ?>
                 <?php echo $model_controller->title ?>
             </h1>
             <div class="model-meta">
-                <span class="author">作者：<?php echo $model_controller->uploader_username ?></span>
+                <span class="author">作者：<a href="user.php?id=<?php echo $model_controller->uploader_id ?>"><?php echo $model_controller->uploader_username ?></a></span>
                 <span class="date"><?php echo $model_controller->last_update ?></span>
             </div>
         </div>
@@ -137,7 +137,7 @@ get_header($title . " - 查看模型"); ?>
         <div class="respond-area" id="respond">
             <h2 class="respond-title">发表评论</h2>
             <div class="respond-body">
-            <?php if ($user_controller->logged_in): ?>
+            <?php if ($user_controller->has_user): ?>
                 <img class="user-avatar" src="<?php echo $user_controller->avatar_url ?>">
                 <div class="respond-form-wrapper">
                     <form method="post" action="handle-respond.php" class="respond-form">

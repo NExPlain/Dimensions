@@ -56,7 +56,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
             </div>
             <nav class="site-navigation">
                 <ul>
-                    <?php if ($user_controller->logged_in): ?>
+                    <?php if ($user_controller->has_user): ?>
                         <li>欢迎，<?php echo $user_controller->username ?></li>
                         <li class="<?php echo @$browse_status?>"><a href="<?php if (isset($browse_url)) echo $browse_url; else echo 'browse.php'?>">浏览</a></li>
                         <li class="<?php echo @$profile_status?>"><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'my-profile.php'?>">个人档案</a></li>

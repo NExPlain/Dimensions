@@ -8,23 +8,28 @@ class UserController {
 
     private $dbc;
 
-    public $logged_in;
-    public $username;
-    public $email;
-    public $id;
+    public $has_user;
 
-    public $hashed_password;
+    public $id;
+    public $email;
+    public $username;
+    public $description;
     public $balance;
     public $join_date;
-    public $upload_count;
     public $avatar_url;
+    public $hashed_password;
+
+    public $upload_count;
+    public $favs_received;
+    public $likes_received;
+    public $views_received;
+    public $downloads_received;
 
     public function __construct()
     {
         $this->dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         mysqli_query($this->dbc, "SET NAMES UTF8");
-        $this->logged_in = false;
-        $this->id = 0;
+        $this->has_user = false;
     }
 
     public function __destruct()
@@ -33,32 +38,71 @@ class UserController {
     }
 
     /**
-     * Identify current logged-in user.
+     * Identify current logged-in user's id.
+     *
+     * @return int id or 0 (no user)
+     */
+    public function current_user_id()
+    {
+        if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])) {
+            if (sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {
+                $query = "SELECT id FROM dimensions_users WHERE email = '" . $_COOKIE['email'] . "'";
+                $result = mysqli_query($this->dbc, $query);
+                $row = mysqli_fetch_array($result);
+                return $row['id'];
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Fetch current logged-in user's information
      */
     public function init()
     {
-        if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])) {
-            $query = "SELECT * FROM dimensions_users WHERE email = '" . $_COOKIE['email'] . "'";
-            $result = mysqli_query($this->dbc, $query);
-            $row = mysqli_fetch_array($result);
+        if (($id = $this->current_user_id()) > 0) {
+            $this->load($id);
+        }
+    }
 
-            if (sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {
-                $this->logged_in = true;
-                $this->username = $_COOKIE['username'];
-                $this->email = $_COOKIE['email'];
-                $this->id = $row['id'];
-                $this->balance = $row['balance'];
-                $this->join_date = $row['joindate'];
-                $this->hashed_password = $row['userpswd'];
-                $this->avatar_url = AVATAR_PATH . "/" . ($row['avatar'] == NULL ? DEFAULT_AVATAR : $row['avatar']);
-                $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->id . "'";
-                $result = mysqli_query($this->dbc, $query);
-                $this->upload_count = mysqli_num_rows($result);
+    public function load($id)
+    {
+        $query = "SELECT * FROM dimensions_users WHERE id = '$id'";
+        $result = mysqli_query($this->dbc, $query);
+        if ($row = mysqli_fetch_array($result)) {
+            // basic information
+            $this->has_user = true;
+            $this->id = $id;
+            $this->email = $row['email'];
+            $this->username = $row['username'];
+            $this->description = $row['description'];
+            $this->balance = $row['balance'];
+            $this->join_date = explode(" ", $row['joindate'])[0];
+            $this->avatar_url = AVATAR_PATH . "/" . ($row['avatar'] == NULL ? DEFAULT_AVATAR : $row['avatar']);
+            $this->hashed_password = $row['userpswd'];
+
+            // statistics
+            $this->views_received = 0;
+            $this->downloads_received = 0;
+            $query = "SELECT * FROM dimensions_models WHERE uploader_id = '$id'";
+            $result = mysqli_query($this->dbc, $query);
+            $this->upload_count = mysqli_num_rows($result);
+            while ($row = mysqli_fetch_array($result)) {
+                $this->views_received += intval($row['views']);
+                $this->downloads_received += intval($row['downloads']);
             }
+            $query = "SELECT * FROM dimensions_models INNER JOIN dimensions_likes ON dimensions_models.id = dimensions_likes.model_id WHERE dimensions_models.uploader_id = '$id'";
+            $result = mysqli_query($this->dbc, $query);
+            $this->likes_received = mysqli_num_rows($result);
+            $query = "SELECT * FROM dimensions_models INNER JOIN dimensions_favs ON dimensions_models.id = dimensions_favs.model_id WHERE dimensions_models.uploader_id = '$id'";
+            $result = mysqli_query($this->dbc, $query);
+            $this->favs_received = mysqli_num_rows($result);
         }
     }
 
     /**
+     * Change current user's password
+     *
      * @param $new_password
      * @param $old_password
      * @param $msg
@@ -88,28 +132,41 @@ class UserController {
     /**
      * List all models that current user has uploaded.
      *
-     * @see my-profile.php
+     * @see user.php
      */
-    public function list_models_uploaded()
+    public function list_models_uploaded($self = false)
     {
-        echo '<div id="models-list">';
+        echo '<ul class="models-list">';
         $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->id . "'";
         $result = mysqli_query($this->dbc, $query);
         while ($row = mysqli_fetch_array($result)) {
+            $cover_image_url = UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["image_0"];
+            $badge = $row['price'] == '0' ? '<div class="item pricing-badge free">Free</div>' : '<div class="item pricing-badge premium">Premium</div>';
+            $edit_button = "";
+            if ($self) {
+                $edit_button = '<a class="edit-link" title="在编辑器中编辑此模型" href="editor/index.php?id=' . $row["id"] . '"><span class="icon glyphicon glyphicon-edit"></span> 编辑</a>';
+            }
             echo <<<HTML
-            <div class="model-item">
-                <a href="showcase.php?id={$row["id"]}">{$row["title"]}</a>
-                <span class="model-options">
-                    <a class="model-option edit-link" href="editor/index.php?id={$row["id"]}"><i class="icon icon-pencil"></i>编辑</a>
-                    <a class="model-option del-link" href="model-operations.php?op=delete&model_id={$row["id"]}"><i class="icon icon-trash"></i>删除</a>
-                </span>
-            </div>
+            <li class="model-item">
+                <div class="model-card">
+                    <div class="inner">
+                        <a class="preview-image" href="showcase.php?id={$row['id']}" style="background-image:url($cover_image_url)"></a>
+                        <div class="floating">
+                            $badge
+                            <div class="item views"><span class="icon glyphicon glyphicon-eye-open"></span>{$row['views']}</div>
+                        </div>
+                        <div class="title">{$row['title']}$edit_button</div>
+                    </div>
+                </div>
+            </li>
 HTML;
         }
-        echo "</div>";
+        echo "</ul>";
     }
 
     /**
+     * Write database.
+     *
      * @param $email
      * @param $username
      * @param $password1
@@ -150,6 +207,8 @@ HTML;
     }
 
     /**
+     * Write database, cookie & redirect
+     *
      * @param $email
      * @param $password
      * @param $msg

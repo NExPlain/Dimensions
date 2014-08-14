@@ -114,7 +114,7 @@ class ModelController {
                 </div>
                 <div class="author">
                     <img class="avatar" src="$this->uploader_avatar_url">
-                    <div class="name">$this->uploader_username</div>
+                    <div class="name"><a href="user.php?id=$this->uploader_id">$this->uploader_username</a></div>
                 </div>
             </li>
 HTML;
