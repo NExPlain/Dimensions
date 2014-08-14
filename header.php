@@ -30,7 +30,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
 }
 
 ?><!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="zh-Hans-CN">
 <head>
     <meta charset="UTF-8">
     <title><?php echo $__page_title ?></title>
