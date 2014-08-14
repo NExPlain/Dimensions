@@ -1,17 +1,44 @@
-/* universal */
+/**
+ * Dimensions Theme
+ *
+ * Author: Renfei Song and contributors
+ * Author URI: http://www.renfei.org/
+ *
+ * Notes
+ * ~~~~~
+ *
+ * 1. Resetting styles are exclusively included in reset.css.
+ * 2. Repeatable patterns are exclusively included in components.css.
+ * 3. This file has the highest priority among all css files.
+ *
+ */
+
+/**
+ * Table of Contents:
+ *
+ * 1.0 - Universal & Structural
+ * 2.0 - browse.php
+ *   2.1 - Models List
+ *   2.2 - Pagination
+ * 3.0 - my-profile.php
+ * 4.0 - upload.php
+ * 5.0 - showcase.php
+ *   5.1 - Main Area
+ *   5.2 - Preview & Purchase
+ *   5.3 - Comments & Reply
+ *   5.4 - Sidebar
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * 1.0 Universal & Structural
+ * -----------------------------------------------------------------------------
+ */
 
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 }
-
-.page-title {
-	font-size: 24px;
-	font-weight: bold;
-	margin: 20px 0 40px;
-}
-
-/* header & footer */
 
 header {
 	min-width: 920px;
@@ -79,6 +106,11 @@ header .inner > div {
 	margin: 0 auto;
 	padding: 15px 0;
 }
+.page-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 20px 0 40px;
+}
 .site-footer {
 	border-top: 1px solid #ddd;
 	background: #f0f0f0;
@@ -94,19 +126,16 @@ header .inner > div {
 	line-height: 1.5em;
 }
 
-/* index.php */
-
-.index canvas {
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-
-/* browse.php */
+/**
+ * 2.0 browse.php
+ * -----------------------------------------------------------------------------
+ */
 
 .browse {
 	background: #f0f0f0;
 }
+
+/* 2.1 Models List */
 
 .browse .models-list {
 	margin: 0;
@@ -130,9 +159,8 @@ header .inner > div {
 	background: #ffffff;
 }
 .browse .model-card .inner {
-	/* .inner acts as the parent element of .floating,
-	   which makes .floating's width (declared as 100%)
-	   equal to model-card's width minus its padding.
+	/* .inner acts as the parent element of .floating which makes .floating's width
+	   (declared as 100%) equal to model-card's width minus its padding.
 	 */
 	position: relative;
 }
@@ -225,7 +253,13 @@ header .inner > div {
 	margin-left: 30px;
 }
 
-/* my-profile.php */
+/* 2.2 Pagination */
+
+
+/**
+ * 3.0 my-profile.php
+ * -----------------------------------------------------------------------------
+ */
 
 .my-profile section {
 	width: 500px;
@@ -299,7 +333,11 @@ header .inner > div {
 	margin-left: 20px;
 }
 
-/* upload.php */
+/**
+ * 4.0 upload.php
+ * -----------------------------------------------------------------------------
+ */
+
 .upload .site-content {
 	padding-top: 0;
 }
@@ -421,7 +459,13 @@ header .inner > div {
 .upload .upload-form .selectize-control {
 	width: 414px;
 }
-/* showcase.php */
+
+/**
+ * 5.0 showcase.php
+ * -----------------------------------------------------------------------------
+ */
+
+/* 5.1 Main Area */
 
 .showcase .model-header {
 	margin: 10px 0 20px;
@@ -536,7 +580,9 @@ header .inner > div {
 	margin: 0 0 10px;
 	line-height: 1;
 }
-/* Preview & Purchase */
+
+/* 5.2 Preview & Purchase */
+
 .showcase .model-preview #canvas {
 	text-align: center;
 	/* Cannot set the width/height for non-preview #canvas
@@ -624,7 +670,9 @@ header .inner > div {
 	color: rgb(153, 153, 153);
 	margin: 10px 0;
 }
-/* Comments */
+
+/* 5.3 Comments */
+
 .showcase .comment-title,
 .showcase .respond-title {
 	font-size: 17px;
@@ -737,7 +785,9 @@ header .inner > div {
 .showcase .respond-form .submit-button {
 	float: right;
 }
-/* Sidebar */
+
+/* 5.4 Sidebar */
+
 .showcase .secondary {
 	width: 220px;
 	float: right;
@@ -782,6 +832,4 @@ header .inner > div {
 }
 .showcase .secondary .related a {
 	display: inline-block;
-}
-.showcase .secondary .related img {
 }
