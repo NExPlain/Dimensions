@@ -136,7 +136,7 @@ HTML;
             if ($ix == $current_page)
                 echo '<span class="page current">' . $ix . '</span>';
             else
-                echo '<a class="page" href="browse.php?page=' . $ix . '">' . $ix . '</a>';
+                echo '<a class="page" data-target="' . $ix . '" href="browse.php?page=' . $ix . '">' . $ix . '</a>';
         }
         echo '</ul>';
     }

@@ -255,6 +255,25 @@ header .inner > div {
 
 /* 2.2 Pagination */
 
+.browse .site-content {
+	position: relative; /* Support loading indicator */
+}
+.browse .all-models {
+	transition: opacity .2s ease-in;
+}
+.browse .all-models.loading {
+	opacity: 0.3;
+}
+.browse .all-models.loading .model-card:hover .floating {
+	height: 0;
+	padding: 0 15px;
+	top: 200px; /* 200px - 38px */
+}
+.browse .loading-indicator {
+	position: absolute;
+	width: 64px;
+	height: 64px;
+}
 .browse .pages {
 	text-align: center;
 	margin: 20px 0;
@@ -290,7 +309,6 @@ header .inner > div {
 	border-color: #ddd;
 	color: rgb(51, 51, 51);
 }
-
 
 /**
  * 3.0 my-profile.php
