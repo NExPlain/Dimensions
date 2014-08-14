@@ -16,10 +16,10 @@
     </footer>
 </div><!-- #wrapper -->
 
-<?php if (is_page('index')): ?>
-<script src="lib/webgl/Three.js"></script>
-<script src="lib/webgl/index-animation.js"></script>
-<?php endif; ?>
+<?php //if (is_page('index')): ?>
+<!--<script src="lib/webgl/Three.js"></script>-->
+<!--<script src="lib/webgl/index-animation.js"></script>-->
+<?php //endif; ?>
 
 </body>
 </html>
