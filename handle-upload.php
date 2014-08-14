@@ -34,7 +34,7 @@ $file_stamp = $uploader_id . "/" . $to_upload;
 
 /* Make destination directory */
 
-$dir = "upload" . FILE_SLASH . $uploader_id . FILE_SLASH . $to_upload;
+$dir = UPLOAD_PATH . FILE_SLASH . $uploader_id . FILE_SLASH . $to_upload;
 
 if (!is_dir($dir)) {
     if (!mkdir($dir, 0777, true)) {

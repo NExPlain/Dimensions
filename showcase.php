@@ -51,7 +51,7 @@ get_header($title . " - 查看模型"); ?>
                     <div id="canvas">
                         <?php
                         if ($model_controller->is_free() == false) {
-                            echo '<img src="'.$model_controller->cover_image_url.'" class="preview-image">';
+                            echo '<img src="' . $model_controller->cover_image_url . '" class="preview-image">';
                         }
                         ?>
                     </div>
@@ -72,11 +72,11 @@ get_header($title . " - 查看模型"); ?>
                         foreach ($model_controller->image_urls as $image_url) {
                             if (!empty($image_url)) {
                                 if ($image_url == $model_controller->cover_image_url) {
-                                    echo '<div class="preview-thumbnail active" data-image-src="'.$image_url.'">';
+                                    echo '<div class="preview-thumbnail active" data-image-src="' . $image_url . '">';
                                 } else {
-                                    echo '<div class="preview-thumbnail" data-image-src="'.$image_url.'">';
+                                    echo '<div class="preview-thumbnail" data-image-src="' . $image_url . '">';
                                 }
-                                echo '<img src="lib/img/blank.gif" style="background-image: url('.$image_url.')" class="preview-thumbnail-image">';
+                                echo '<img src="lib/img/blank.gif" style="background-image: url(' . $image_url . ')" class="preview-thumbnail-image">';
                                 echo '</div>';
                             }
                         }

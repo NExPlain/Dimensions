@@ -43,7 +43,7 @@ class CommentController {
                 "comment_content" => $row['content'],
                 "comment_date" => $row['comment_date'],
                 "comment_id" => $row['comment_id'],
-                "comment_author_avatar_url" => "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar'])
+                "comment_author_avatar_url" => AVATAR_PATH . "/" . ($row['avatar'] == NULL ? DEFAULT_AVATAR : $row['avatar'])
             );
             $this->comments[] = $comment;
         }

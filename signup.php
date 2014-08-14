@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<?php if (!empty($msg)) echo "<div class='alert alert-".$msg_type."'>" . $msg . "</div>"; ?>
+<?php if (!empty($msg)) echo "<div class='alert alert-" . $msg_type . "'>" . $msg . "</div>"; ?>
 
 <?php if (!$success): ?>
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">

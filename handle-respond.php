@@ -19,5 +19,5 @@ if (isset($_POST['respond'])) {
     mysqli_query($dbc, $query);
     $comment_id = mysqli_insert_id($dbc);
 
-    header("Location: showcase.php?id=".$model_id."#comment-".$comment_id);
+    header("Location: showcase.php?id=" . $model_id . "#comment-" . $comment_id);
 }

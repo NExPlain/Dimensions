@@ -38,7 +38,7 @@ class UserController {
     public function init()
     {
         if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])) {
-            $query = "SELECT * FROM dimensions_users WHERE email = '".$_COOKIE['email']."'";
+            $query = "SELECT * FROM dimensions_users WHERE email = '" . $_COOKIE['email'] . "'";
             $result = mysqli_query($this->dbc, $query);
             $row = mysqli_fetch_array($result);
 
@@ -50,8 +50,8 @@ class UserController {
                 $this->balance = $row['balance'];
                 $this->join_date = $row['joindate'];
                 $this->hashed_password = $row['userpswd'];
-                $this->avatar_url = "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar']);
-                $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->id."'";
+                $this->avatar_url = AVATAR_PATH . "/" . ($row['avatar'] == NULL ? DEFAULT_AVATAR : $row['avatar']);
+                $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->id . "'";
                 $result = mysqli_query($this->dbc, $query);
                 $this->upload_count = mysqli_num_rows($result);
             }
@@ -92,8 +92,8 @@ class UserController {
      */
     public function list_models_uploaded()
     {
-        echo "<div id=\"models-list\">";
-        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->id."'";
+        echo '<div id="models-list">';
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->id . "'";
         $result = mysqli_query($this->dbc, $query);
         while ($row = mysqli_fetch_array($result)) {
             echo <<<HTML
@@ -191,7 +191,7 @@ HTML;
      */
     public function current_user_like($model_id)
     {
-        $query = "SELECT * FROM dimensions_likes WHERE model_id = '$model_id' AND user_id = '".$this->id."'";
+        $query = "SELECT * FROM dimensions_likes WHERE model_id = '$model_id' AND user_id = '" . $this->id . "'";
         $result = mysqli_query($this->dbc, $query);
         return mysqli_num_rows($result) != 0;
     }
@@ -205,7 +205,7 @@ HTML;
      */
     public function current_user_fav($model_id)
     {
-        $query = "SELECT * FROM dimensions_favs WHERE model_id = '$model_id' AND user_id = '".$this->id."'";
+        $query = "SELECT * FROM dimensions_favs WHERE model_id = '$model_id' AND user_id = '" . $this->id . "'";
         $result = mysqli_query($this->dbc, $query);
         return mysqli_num_rows($result) != 0;
     }

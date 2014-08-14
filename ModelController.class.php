@@ -50,22 +50,22 @@ class ModelController {
         if ($row = mysqli_fetch_array($result)) {
             $this->id = $id;
             $this->scale = $row["scale"] != "" ? $row["scale"] : 1.0;
-            $this->model_location = "upload/".$row["file_stamp"]."/".$row["model_name"];
+            $this->model_location = UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["model_name"];
             $this->title = $row["title"];
             $this->is_private = $row['is_private'];
             $this->last_update = $row["last_update"];
             $this->description = $row["description"];
             $this->uploader_username = $row["username"];
             $this->uploader_id = $row["uploader_id"];
-            $this->uploader_avatar_url = "avatars/" . ($row['avatar'] == NULL ? "default.jpg" : $row['avatar']);
+            $this->uploader_avatar_url = AVATAR_PATH . "/" . ($row['avatar'] == NULL ? DEFAULT_AVATAR : $row['avatar']);
             $this->views = $row["views"] + 1;
             $this->downloads = $row["downloads"];
-            $this->cover_image_url = "upload/" . $row["file_stamp"] . "/" . $row["image_0"];
+            $this->cover_image_url = UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["image_0"];
 
             $this->price = intval($row['price']);
             for ($ix = 0; $ix <= 5; ++$ix) {
                 if (!empty($row['image_' . $ix])) {
-                    $this->image_urls[] = "upload/" . $row["file_stamp"] . "/" . $row['image_' . $ix];
+                    $this->image_urls[] = UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row['image_' . $ix];
                 }
             }
 
@@ -76,7 +76,7 @@ class ModelController {
             $this->likes = $row['likes'];
 
             // Update times of view
-            mysqli_query($this->dbc, "UPDATE dimensions_models SET views = '".$this->views."' WHERE id = '".$this->id."'");
+            mysqli_query($this->dbc, "UPDATE dimensions_models SET views = '" . $this->views . "' WHERE id = '" . $this->id . "'");
 
             return true;
         } else {
@@ -92,7 +92,7 @@ class ModelController {
     public function list_all_models($page = 1)
     {
         $start = MODELS_PER_PAGE * ($page - 1);
-        $query = "SELECT id FROM dimensions_models WHERE is_private = 0 ORDER BY id DESC LIMIT ".$start.", ".MODELS_PER_PAGE;
+        $query = "SELECT id FROM dimensions_models WHERE is_private = 0 ORDER BY id DESC LIMIT " . $start . ", " . MODELS_PER_PAGE;
         $result = mysqli_query($this->dbc, $query);
         echo '<ul class="models-list">';
         while ($row = mysqli_fetch_array($result)) {
@@ -150,7 +150,7 @@ HTML;
      */
     public function has_related_models()
     {
-        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->uploader_id."' AND id != '".$this->id."'";
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->uploader_id . "' AND id != '" . $this->id . "'";
         $result = mysqli_query($this->dbc, $query);
         return mysqli_num_rows($result) != 0;
     }
@@ -162,14 +162,15 @@ HTML;
      */
     public function list_related_models()
     {
-        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '".$this->uploader_id."' AND id != '".$this->id."'";
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->uploader_id . "' AND id != '" . $this->id . "'";
         $result = mysqli_query($this->dbc, $query);
+        $upload_path = UPLOAD_PATH;
         echo "<ul>";
         while ($row = mysqli_fetch_array($result)) {
             echo <<<HTML
             <li>
                 <a href="showcase.php?id={$row['id']}" title="{$row['title']}">
-                    <img alt="{$row['title']}" src="upload/{$row['file_stamp']}/{$row['image_0']}">
+                    <img alt="{$row['title']}" src="{$upload_path}/{$row['file_stamp']}/{$row['image_0']}">
                 </a>
             </li>
 HTML;

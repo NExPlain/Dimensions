@@ -13,7 +13,7 @@ if (isset($_POST['changepw'])) {
     $user_controller->change_password($_POST['newpw'], $_POST['oldpw'], $msg, $msg_type);
 }
 function enqueue_item($title, $content, $class = "") {
-    echo "<div class=\"control-group ".$class."\"><label class=\"control-label\">".$title."</label><div class=\"controls\">".$content."</div></div>";
+    echo "<div class=\"control-group " . $class . "\"><label class=\"control-label\">" . $title . "</label><div class=\"controls\">" . $content . "</div></div>";
 }
 
 ?>
@@ -30,7 +30,7 @@ function enqueue_item($title, $content, $class = "") {
         <?php enqueue_item("用户名", $user_controller->username) ?>
         <?php enqueue_item("Email", $user_controller->email) ?>
         <?php enqueue_item("密码", "<a class=\"clickable\" onclick=\"changepw();\">修改密码</a>", "changepw"); ?>
-        <?php enqueue_item("账户余额", $user_controller->balance." 点") ?>
+        <?php enqueue_item("账户余额", $user_controller->balance . " 点") ?>
         <?php enqueue_item("加入时间", $user_controller->join_date) ?>
         <?php enqueue_item("上传数量", $user_controller->upload_count) ?>
     </div>
