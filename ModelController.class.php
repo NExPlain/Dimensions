@@ -89,9 +89,10 @@ class ModelController {
      *
      * @see browse.php
      */
-    public function list_all_models()
+    public function list_all_models($page = 1)
     {
-        $query = "SELECT id FROM dimensions_models";
+        $start = MODELS_PER_PAGE * ($page - 1);
+        $query = "SELECT id FROM dimensions_models WHERE is_private = 0 ORDER BY id DESC LIMIT ".$start.", ".MODELS_PER_PAGE;
         $result = mysqli_query($this->dbc, $query);
         echo '<ul class="models-list">';
         while ($row = mysqli_fetch_array($result)) {
@@ -117,6 +118,25 @@ class ModelController {
                 </div>
             </li>
 HTML;
+        }
+        echo '</ul>';
+    }
+
+    public function pagination($current_page = 1)
+    {
+        $query = "SELECT id FROM dimensions_models WHERE is_private = 0";
+        $result = mysqli_query($this->dbc, $query);
+        $models_count = mysqli_num_rows($result);
+        $pages_count = ceil($models_count / MODELS_PER_PAGE);
+        if ($pages_count < 2) {
+            return;
+        }
+        echo '<ul class="pages">';
+        for ($ix = 1; $ix <= $pages_count; ++$ix) {
+            if ($ix == $current_page)
+                echo '<span class="page current">' . $ix . '</span>';
+            else
+                echo '<a class="page" href="browse.php?page=' . $ix . '">' . $ix . '</a>';
         }
         echo '</ul>';
     }

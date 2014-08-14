@@ -182,7 +182,7 @@ header .inner > div {
 	background: rgba(255,255,255,0.93);
 	top: 200px;
 	overflow: hidden;
-	-webkit-transition: all .2s ease-in;
+	transition: all .2s ease-in;
 }
 .browse .model-card:hover .floating {
 	height: 38px;
@@ -254,6 +254,42 @@ header .inner > div {
 }
 
 /* 2.2 Pagination */
+
+.browse .pages {
+	text-align: center;
+	margin: 20px 0;
+}
+.browse .page {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background: #ffffff;
+	border: 1px solid #ddd;
+	border-radius: 50%;
+	line-height: 40px;
+	text-align: center;
+	margin-right: 10px;
+	cursor: pointer;
+	text-decoration: none !important;
+	font-size: 14px;
+	transition: all .1s ease-in;
+}
+.browse .page:last-child {
+	margin-right: 0;
+}
+.browse .page:hover {
+	background: #444;
+	border-color: #333;
+	color: #ddd;
+}
+.browse .page.current {
+	cursor: default;
+}
+.browse .page.current:hover {
+	background: #ffffff;
+	border-color: #ddd;
+	color: rgb(51, 51, 51);
+}
 
 
 /**

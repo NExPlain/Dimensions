@@ -11,3 +11,5 @@ define('DB_PASS', 'buyaoyongroot');
 define('DB_HOST', 'localhost');
 //define('FILE_SLASH', '\\'); // For Windows
 define('FILE_SLASH', '/');  // For Mac/Linux/Unix
+
+define('MODELS_PER_PAGE', 9);
