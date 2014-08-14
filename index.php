@@ -21,8 +21,8 @@ require_once "functions.php";
 
         <link href="lib/core/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script src="lib/core/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <link href="style-new.css" rel="stylesheet" media="screen">
-        <link href="index.css" rel="stylesheet" media="screen">
+        <link href="lib/core/style-new.css" rel="stylesheet" media="screen">
+        <link href="lib/core/index.css" rel="stylesheet" media="screen">
     </head>
 
 <body>

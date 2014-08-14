@@ -1,6 +1,6 @@
 @font-face {
     font-family: LanTingHei;
-    src: url("lib/font/Lantinghei.ttc");
+    src: url("../font/Lantinghei.ttc");
 }
 
 .site-header {
@@ -12,7 +12,7 @@
 
 .section-one {
     height: 720px;
-    background-image: url("lib/img/index2.jpg");
+    background-image: url("../img/index2.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
