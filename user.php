@@ -44,7 +44,7 @@ $self = $user_controller->has_user && $user_controller->id == $id;
 
 <div class="user-main">
     <div class="models">
-    <?php $target_user->list_models_uploaded($self) ?>
+        <?php $target_user->list_models_uploaded($self) ?>
     </div>
     <div class="sidebar">
         <?php if ($self): ?>

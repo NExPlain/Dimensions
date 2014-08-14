@@ -36,6 +36,18 @@ require_once "functions.php";
             </div>
             <div class="site-search"></div>
             <div class="site-navigation">
+                <!-- 建议
+
+                1. 不要如此明显的模仿 Sketchfab 好不好...
+                2. style-new 是干嘛的？我觉得没啥用，你看看能否删掉
+                3. 貌似你没用 Bootstrap 3 的新特性（除了 icon），因此不要再引入 Bootstrap 3 的库了（让用户加载这么多没用的文件没必要）
+                4. 其实这个项目根本没有必要用 Bootstrap（除了 icon），Bootstrap 2 的存在仅仅是历史问题（我第一次开发这个是在半年多前）。
+                   你做首页和其他页面最好不要依赖 Bootstrap（除了 icon），因为未来我打算把 Bootstrap（除了 icon）清理掉。
+                5. 要使用 Bootstrap 3 的 icon 的话，我已经在之前引入了。
+                6. 如果你要保留顶栏的话就用 header.php 模版，然后按照你的想法把 header.php 改掉，实现全站统一。否则就不要出现顶栏。
+                7. 新 css 和临时 css 一律放到 lib/core 里面，不要再丢到外面了。
+
+                -->
                 <ul>
                     <li><a href='login.php'>探索<span class="glyphicon glyphicon-chevron-down"></span></a></li>
                     <li><a href='login.php'>社区<span class="glyphicon glyphicon-chevron-down"></span></a></li>
@@ -43,7 +55,7 @@ require_once "functions.php";
             </div>
             <div class="site-navigation right">
                 <ul>
-                    <?php if ($user_controller->logged_in): ?>
+                    <?php if (@$user_controller->logged_in): ?>
                         <li>欢迎，<?php echo $user_controller->username ?></li>
                         <li class="<?php echo @$browse_status?>"><a href="<?php if (isset($browse_url)) echo $browse_url; else echo 'browse.php'?>">浏览</a></li>
                         <li class="<?php echo @$profile_status?>"><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'my-profile.php'?>">个人档案</a></li>
