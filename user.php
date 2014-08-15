@@ -33,7 +33,6 @@ $self = $user_controller->has_user && $user_controller->id == $id;
 
 <img class="avatar" src="<?php echo $target_user->avatar_url ?>">
 <div class="user-profile">
-
     <h1 class="name"><?php echo $target_user->username ?></h1>
     <p class="bio"><?php echo $target_user->description ?></p>
     <ul class="details">

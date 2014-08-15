@@ -17,6 +17,9 @@
  * Table of Contents:
  *
  * 1.0 - Universal & Structural
+ *   1.1 - Generic
+ *   1.2 - Header
+ *   1.3 - Footer
  * 2.0 - browse.php
  *   2.1 - Models List
  *   2.2 - Pagination
@@ -35,10 +38,19 @@
  * -----------------------------------------------------------------------------
  */
 
+/* 1.1 Generic */
+
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 }
+
+.browse,
+.user {
+	background-color: #f0f0f0;
+}
+
+/* 1.2 Header */
 
 header {
 	min-width: 920px;
@@ -111,11 +123,15 @@ header .inner > div {
 	font-weight: bold;
 	margin: 20px 0 40px;
 }
+
+/* 1.3 Footer */
+
 .site-footer {
 	border-top: 1px solid #ddd;
-	background: #f0f0f0;
+	background: #ffffff;
 	min-width: 920px;
 	width: 100%;
+	margin-top: 40px;
 }
 .site-footer .inner {
 	width: 920px;
@@ -130,10 +146,6 @@ header .inner > div {
  * 2.0 browse.php
  * -----------------------------------------------------------------------------
  */
-
-.browse {
-	background: #f0f0f0;
-}
 
 /* 2.1 Models List */
 
@@ -323,9 +335,6 @@ header .inner > div {
  * -----------------------------------------------------------------------------
  */
 
-.user {
-	background: #f0f0f0;
-}
 .user .site-content {
 	margin-top: -50px;
 }

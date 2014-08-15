@@ -11,15 +11,9 @@
     </div><!-- #centrum -->
     <footer id="colophon" class="site-footer">
         <div class="inner">
-            &copy; 2014 BUAA-dimensions
+            &copy; 2014 Dimensions
         </div>
     </footer>
 </div><!-- #wrapper -->
-
-<?php //if (is_page('index')): ?>
-<!--<script src="lib/webgl/Three.js"></script>-->
-<!--<script src="lib/webgl/index-animation.js"></script>-->
-<?php //endif; ?>
-
 </body>
 </html>
