@@ -50,7 +50,7 @@ get_header("浏览所有模型"); ?>
                             $(".page-navigation").html(pagination_data);
                             endLoading();
                             activateAJAXPagination(); // re-attach event to the *new* elements
-                        }, 2000);
+                        }, 0);
 
                     });
             }

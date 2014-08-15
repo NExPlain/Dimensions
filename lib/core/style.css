@@ -790,7 +790,7 @@ header .inner > div {
 	clear: both;
 }
 .showcase .model-cover-image {
-	max-width: 100px;
+	max-width: 80px;
 	max-height: 72px;
 	float: left;
 	margin-right: 15px;
@@ -800,6 +800,9 @@ header .inner > div {
 	color: #8aba56;
 	margin: 0 0 10px;
 	line-height: 1;
+}
+.showcase .model-description .description {
+	margin-left: 90px;
 }
 
 /* 5.2 Preview & Purchase */

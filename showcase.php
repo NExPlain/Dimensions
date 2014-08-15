@@ -86,8 +86,10 @@ get_header($title . " - 查看模型"); ?>
             <?php elseif (!empty($model_controller->description)): ?>
                 <div class='model-description'>
                     <img src="<?php echo $model_controller->cover_image_url ?>" class="model-cover-image">
-                    <h3 class="widget-title">模型介绍</h3>
-                    <?php echo $model_controller->description; ?>
+                    <div class="description">
+                        <h3 class="widget-title">模型介绍</h3>
+                        <?php echo $model_controller->description; ?>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>
