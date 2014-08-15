@@ -791,10 +791,11 @@ header .inner > div {
 	clear: both;
 }
 .showcase .model-cover-image {
-	max-width: 80px;
+	max-width: 100px;
 	max-height: 72px;
 	float: left;
 	margin-right: 15px;
+	display: table-cell;
 }
 .showcase .model-description .widget-title {
 	font-size: 16px;
@@ -804,6 +805,7 @@ header .inner > div {
 }
 .showcase .model-description .description {
 	margin-left: 100px;
+	display: table-cell;
 }
 
 /* 5.2 Preview & Purchase */
@@ -1050,11 +1052,17 @@ header .inner > div {
 .showcase .secondary .related li {
 	display: inline-block;
 	margin-bottom: 15px;
-	width: 85px;
 }
 .showcase .secondary .related li:nth-child(2n) {
 	margin-left: 15px;
 }
 .showcase .secondary .related a {
 	display: inline-block;
+}
+.showcase .secondary .related-image {
+	width: 95px;
+	height: 70px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
 }

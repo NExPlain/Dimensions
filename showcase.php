@@ -26,11 +26,32 @@ if ($invalid_id)
 else
     $title = $model_controller->title;
 
+/********************************************************************************************/
+
 /* TODO: Write generic animated algorithm and save the property to a database column.
  */
-$animated = "false";
-if ($model_controller->id == 5)
-    $animated = "true";
+
+$__animated = "false";
+
+if ($model_controller->id == 5) {
+    $__animated = "true";
+}
+
+/* TODO: Write generic algorithms to set the x,y,z bias.
+ */
+
+$__x = $__y = $__z = 0;
+
+switch ($model_controller->id) {
+    case 6:
+        $__y = -125;
+        break;
+    case 3:
+        $__y = -50;
+        break;
+}
+
+/********************************************************************************************/
 
 get_header($title . " - 查看模型"); ?>
 
@@ -224,7 +245,8 @@ get_header($title . " - 查看模型"); ?>
             var controls, hemisphereLight, pointLight, sky;
             var size_width = 650 - 20;
             var size_height = 450 - 20;
-            var animated = <?php echo $animated; ?>;
+            var scale = <?=$model_controller->scale?>;
+            var animated = <?=$__animated?>;
             var morphs = null;               // animated
             var clock = new THREE.Clock();   // animated
 
@@ -284,19 +306,21 @@ get_header($title . " - 查看模型"); ?>
                         if (animated) {
                             webgl_manager.loadAnimatedModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
                         } else {
-                            webgl_manager.loadModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
+                            webgl_manager.loadModel(geometry, materials, <?=$__x?>, <?=$__y?>, <?=$__z?>, scale);
                         }
                     });
                 },
 
-                loadModel: function(geometry, materials, x, y, z, scale) {
+                loadModel: function(geometry, materials, x, y, z, s) {
                     var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
                     mesh.position.set(x, y, z);
-                    mesh.scale.set(scale, scale, scale);
+                    mesh.scale.set(s, s, s);
                     scene.add(mesh);
                 },
 
-                loadAnimatedModel: function(geometry, materials, x, y, z, scale) {
+                /* TODO: This loadAnimatedModel method is not generic therefore needs an update.
+                 */
+                loadAnimatedModel: function(geometry, materials, x, y, z, s) {
                     webgl_manager.morphColorsToFaceColors(geometry);
                     geometry.computeMorphNormals();
                     var material = new THREE.MeshPhongMaterial({color: 0xffffff, specular: 0xffffff, shininess: 20, morphTargets: true, morphNormals: true, vertexColors: THREE.FaceColors, shading: THREE.FlatShading});
@@ -368,11 +392,11 @@ get_header($title . " - 查看模型"); ?>
 
                 // Utilities
 
-                morphColorsToFaceColors: function( geometry ) {
-                    if ( geometry.morphColors && geometry.morphColors.length ) {
-                        var colorMap = geometry.morphColors[ 0 ];
-                        for ( var i = 0; i < colorMap.colors.length; i ++ ) {
-                            geometry.faces[ i ].color = colorMap.colors[ i ];
+                morphColorsToFaceColors: function(geometry) {
+                    if (geometry.morphColors && geometry.morphColors.length) {
+                        var colorMap = geometry.morphColors[0];
+                        for (var i = 0; i < colorMap.colors.length; i++) {
+                            geometry.faces[i].color = colorMap.colors[i];
                         }
                     }
                 }

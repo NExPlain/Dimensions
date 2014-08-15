@@ -174,7 +174,7 @@ HTML;
             echo <<<HTML
             <li>
                 <a href="showcase.php?id={$row['id']}" title="{$row['title']}">
-                    <img alt="{$row['title']}" src="{$upload_path}/{$row['file_stamp']}/{$row['image_0']}">
+                    <div class="related-image" style="background-image:url({$upload_path}/{$row['file_stamp']}/{$row['image_0']})"></div>
                 </a>
             </li>
 HTML;

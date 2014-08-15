@@ -27,7 +27,9 @@ get_header("浏览所有模型"); ?>
 </div>
 
 <script>
+
     activateAJAXPagination();
+
     function activateAJAXPagination() {
         $(".pages .page").click(function(e) {
             if ($(this).hasClass("current") == false) {
