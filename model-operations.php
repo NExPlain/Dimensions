@@ -6,7 +6,7 @@
  * @author Renfei Song
  */
 
-require_once "define.php";
+require_once "functions.php";
 require_once "ModelController.class.php";
 
 $op = $_GET['op'];

@@ -6,7 +6,7 @@
  * @author Renfei Song
  */
 
-require_once "define.php";
+require_once "functions.php";
 
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 mysqli_query($dbc, "SET NAMES UTF8");

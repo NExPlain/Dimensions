@@ -17,3 +17,4 @@ define('MODELS_PER_PAGE', 6);
 define('DEFAULT_AVATAR', 'default.jpg');
 define('UPLOAD_PATH', 'upload');
 define('AVATAR_PATH', 'avatars');
+define('MESSAGE_EXPIRES', 5);

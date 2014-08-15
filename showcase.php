@@ -55,6 +55,10 @@ switch ($model_controller->id) {
 
 get_header($title . " - 查看模型"); ?>
 
+<?php if (isset($_GET['msg_id']) && isset($_GET['token']) && $_GET['msg_id'] == 1 && time() - $_GET['token'] < MESSAGE_EXPIRES): ?>
+    <div class="alert alert-error">评论不能为空。</div>
+<?php endif; ?>
+
 <?php if ($invalid_id): ?>
     <h1 class="page-title">查看模型</h1>
     <div class="alert alert-warning"><strong>错误：</strong>你无权查看该模型或该模型不存在。</div>
