@@ -59,9 +59,9 @@ header {
 	background: #ffffff;
 }
 header .inner {
-	max-width: 920px;
+	width: 920px;
 	margin: 0 auto;
-	padding: 20px 30px 15px;
+	padding: 20px 0 15px;
 }
 header .inner::after {
 	content: "";
@@ -112,6 +112,10 @@ header .inner > div {
 	color: #333 !important;
 	background: none;
 	cursor: default;
+}
+.site-main {
+	min-width: 920px;
+	width: 100%;
 }
 .site-content {
 	width: 920px;

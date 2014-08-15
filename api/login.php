@@ -14,8 +14,8 @@ $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 mysqli_query($dbc, "SET NAMES UTF8");
 $query = "SELECT * FROM dimensions_users WHERE email = '$email' AND userpswd = SHA('$password')";
 $result = mysqli_query($dbc, $query);
-if (mysqli_num_rows($result) == 0) {
-    echo "false";
+if ($row = mysqli_fetch_array($result)) {
+    echo $row['id'];
 } else {
-    echo mysqli_insert_id($dbc);
+    echo "false";
 }
