@@ -11,17 +11,36 @@ require_once "define.php";
 $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 mysqli_query($dbc, "SET NAMES UTF8");
 
+function report_error($result, $message, $position) {
+    echo json_encode(array(
+        "result" => $result,
+        "message" => $message,
+        "position" => $position
+    ));
+    exit;
+}
+
+function debug() {
+    echo '<h1>$_POST</h1>';
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
+    echo '<h1>$_FILES</h1>';
+    echo '<pre>';
+    print_r($_FILES);
+    echo '</pre>';
+    exit;
+}
+
+//debug();
+
 /* Get & validate uploader_id */
 
 $uploader_id = @$_POST['uploader_id'];
 $query = "SELECT * FROM dimensions_users WHERE id = '$uploader_id'";
 $result = mysqli_query($dbc, $query);
 if (mysqli_num_rows($result) == 0) {
-    echo json_encode(array(
-        "result" => "false",
-        "message" => "Invalid uploader_id."
-    ));
-    exit;
+    report_error("false", "Invalid uploader_id", __LINE__);
 }
 
 /* Get file_stamp */
@@ -36,40 +55,40 @@ $file_stamp = $uploader_id . "/" . $to_upload;
 
 $dir = UPLOAD_PATH . FILE_SLASH . $uploader_id . FILE_SLASH . $to_upload;
 
-if (!is_dir($dir)) {
-    if (!mkdir($dir, 0777, true)) {
-        echo json_encode(array(
-            "result" => "false",
-            "message" => "Cannot execute mkdir command, please check your privileges."
-        ));
-        exit;
-    }
+if (is_dir($dir) == false && mkdir($dir, 0777, true) == false) {
+    report_error("false", "Cannot execute mkdir command, please check your privileges.", __LINE__);
 }
 
 /* Move files in */
 
 if ($_FILES["model_file"]["error"] != UPLOAD_ERR_OK || $_FILES["cover_image"]["error"] != UPLOAD_ERR_OK) {
-    echo json_encode(array(
-        "result" => "false",
-        "message" => "model_file or cover_image not found."
-    ));
-    exit;
+    report_error("false", "model_file or cover_image not found.", __LINE__);
 }
 
-move_uploaded_file($_FILES["model_file"]["tmp_name"], $dir . FILE_SLASH . $_FILES["model_file"]["name"]);
+$status = move_uploaded_file($_FILES["model_file"]["tmp_name"], $dir . FILE_SLASH . $_FILES["model_file"]["name"]);
 $model_name = $_FILES["model_file"]["name"];
-move_uploaded_file($_FILES["cover_image"]["tmp_name"], $dir . FILE_SLASH . $_FILES["cover_image"]["name"]);
+$status = $status && move_uploaded_file($_FILES["cover_image"]["tmp_name"], $dir . FILE_SLASH . $_FILES["cover_image"]["name"]);
 $images[0] = $_FILES["cover_image"]["name"];
+
+if ($status == false) {
+    report_error("false", "Cannot move uploaded file(s).", __LINE__);
+}
 
 for ($i = 0; $i < count($_FILES["textures"]["tmp_name"]); ++$i) {
     if ($_FILES["textures"]["error"][$i] == UPLOAD_ERR_OK) {
-        move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["textures"]["name"][$i]);
+        $status = move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["textures"]["name"][$i]);
+        if ($status == false) {
+            report_error("false", "Cannot move uploaded file(s).", __LINE__);
+        }
     }
 }
 
 for ($i = 0; $i < 5; ++$i) {
-    if ($_FILES["images"]["error"][$i] == UPLOAD_ERR_OK) {
-        move_uploaded_file($_FILES["images"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["images"]["name"][$i]);
+    if (isset($_FILES["images"]["error"][$i]) && $_FILES["images"]["error"][$i] == UPLOAD_ERR_OK) {
+        $status = move_uploaded_file($_FILES["images"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["images"]["name"][$i]);
+        if ($status == false) {
+            report_error("false", "Cannot move uploaded file(s).", __LINE__);
+        }
         $images[$i + 1] = $_FILES["images"]["name"][$i];
     } else {
         $images[$i + 1] = "";
@@ -79,11 +98,7 @@ for ($i = 0; $i < 5; ++$i) {
 /* Get other fields */
 
 if (empty($_POST['title'])) {
-    echo json_encode(array(
-        "result" => "false",
-        "message" => "title not found."
-    ));
-    exit;
+    report_error("false", "title not found.", __LINE__);
 }
 
 $title = $_POST['title'];

@@ -34,7 +34,7 @@ $self = $user_controller->has_user && $user_controller->id == $id;
 <img class="avatar" src="<?php echo $target_user->avatar_url ?>">
 <div class="user-profile">
     <h1 class="name"><?php echo $target_user->username ?></h1>
-    <p class="bio"><?php echo $target_user->description ?></p>
+    <p class="bio"><?php echo $target_user->bio ?></p>
     <ul class="details">
         <li class="join-date"><span class="icon glyphicon glyphicon-calendar"></span><?php echo $target_user->join_date ?> 加入</li>
         <li class="upload-count"><span class="icon glyphicon glyphicon-cloud-upload"></span><?php echo $target_user->upload_count ?> 上传</li>

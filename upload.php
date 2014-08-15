@@ -41,7 +41,7 @@ get_header("上传模型"); ?>
             <input type="text" class="file-confirm model_file disabled" disabled>
         </div>
         <div class="form-field">
-            <label class="field-label" for="textures">贴图和其他</label>
+            <label class="field-label" for="textures">贴图和其他<span class="optional">（可选）</span></label>
             <input type="file" class="file-selector" name="textures[]" id="textures" multiple>
             <input type="text" class="file-confirm textures disabled" disabled>
             <p class="field-note">您可以一次选择多个文件。</p>

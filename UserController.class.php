@@ -13,7 +13,7 @@ class UserController {
     public $id;
     public $email;
     public $username;
-    public $description;
+    public $bio;
     public $balance;
     public $join_date;
     public $avatar_url;
@@ -75,7 +75,7 @@ class UserController {
             $this->id = $id;
             $this->email = $row['email'];
             $this->username = $row['username'];
-            $this->description = $row['description'];
+            $this->bio = $row['bio'];
             $this->balance = $row['balance'];
             $this->join_date = explode(" ", $row['joindate'])[0];
             $this->avatar_url = AVATAR_PATH . "/" . ($row['avatar'] == NULL ? DEFAULT_AVATAR : $row['avatar']);
