@@ -10,6 +10,17 @@
     box-shadow: 0 1px 5px rgba(85,85,85,0.15);
 }
 
+.dropdown-menu li {
+    display: block;
+    font-size: 15px;
+    margin-left: 0;
+}
+
+.dropdown-menu .glyphicon  {
+    font-size: 17px;
+    margin-right: 8px;
+}
+
 .section-one {
     height: 720px;
     background-image: url("../img/index2.jpg");
@@ -45,25 +56,6 @@
     font-family: "Gill Sans", "Helvitica", "Arial", LanTingHei, "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
 }
 
-.intro-content {
-    width: 1000px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 30px;
-    color: #ffffff;
-}
-
-.intro-content li {
-    display: inline-block;
-    list-style: none;
-    margin-left: 50px;
-}
-
-.intro-content .glyphicon {
-    margin-right: 10px;
-}
-
 .feature-list {
     margin-left: auto;
     margin-right: auto;
@@ -78,7 +70,6 @@
     padding-right: 20px;
     height: 200px;
     width: 33%;
-    #background-color: red;
     text-align: center;
 }
 
