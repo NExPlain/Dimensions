@@ -23,6 +23,8 @@ require_once "functions.php";
         <script src="lib/core/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
         <link href="lib/core/style-new.css" rel="stylesheet" media="screen">
         <link href="lib/core/index.css" rel="stylesheet" media="screen">
+
+        <script src="lib/webgl/Three.js"></script>
     </head>
 
 <body>
@@ -74,8 +76,7 @@ require_once "functions.php";
     <div id="centrum" class="site-main">
         <div class="site-content">
             <div class="section-one">
-                <div class="intro-video">
-                    我是视频
+                <div class="intro-video" id="intro-video">
                 </div>
                 <div class="intro-title">
                     <p>创建并分享动态3D模型</p>
@@ -124,6 +125,8 @@ require_once "functions.php";
         </div>
     </footer>
 </div><!-- #wrapper -->
+
+<script src="lib/webgl/index-animation.js"></script>
 
 </body>
 </html>
