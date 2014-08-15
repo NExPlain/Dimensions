@@ -12,7 +12,7 @@ require_once "CommentController.class.php";
 $invalid_id = true;
 if (isset($_GET["id"])) {
     $model_controller = new ModelController();
-    if ($model_controller->load($_GET['id'])) {
+    if ($model_controller->load($_GET['id'], true)) {
         if (!$model_controller->is_private
             || $model_controller->uploader_id == $user_controller->id) {
             $invalid_id = false;

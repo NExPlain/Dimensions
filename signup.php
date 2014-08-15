@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
             <legend>注册账号</legend>
             <label for="email">Email</label>
             <input type="text" id="email" name="email" value="<?php if (!empty($email)) echo $email; ?>"><br>
-            <label for="username">昵称</label>
+            <label for="username">姓名</label>
             <input type="text" id="username" name="username" value="<?php if (!empty($username)) echo $username; ?>"><br>
             <label for="password1">密码</label>
             <input type="password" id="password1" name="password1"><br>

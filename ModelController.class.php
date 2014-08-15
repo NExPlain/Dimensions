@@ -40,10 +40,11 @@ class ModelController {
      * Load details of specified model and increase times of view by one.
      *
      * @param $id
+     * @param $update_tov
      *
      * @return bool Success or not (failures are mostly caused by invalid model IDs).
      */
-    public function load($id)
+    public function load($id, $update_tov = false)
     {
         $query = "SELECT * FROM dimensions_models INNER JOIN dimensions_users ON dimensions_users.id = dimensions_models.uploader_id WHERE dimensions_models.id = '$id'";
         $result = mysqli_query($this->dbc, $query);
@@ -76,7 +77,9 @@ class ModelController {
             $this->likes = $row['likes'];
 
             // Update times of view
-            mysqli_query($this->dbc, "UPDATE dimensions_models SET views = '" . $this->views . "' WHERE id = '" . $this->id . "'");
+            if ($update_tov) {
+                mysqli_query($this->dbc, "UPDATE dimensions_models SET views = '" . $this->views . "' WHERE id = '" . $this->id . "'");
+            }
 
             return true;
         } else {

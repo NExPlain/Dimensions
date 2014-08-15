@@ -59,7 +59,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
                     <?php if ($user_controller->has_user): ?>
                         <li>欢迎，<?php echo $user_controller->username ?></li>
                         <li class="<?php echo @$browse_status?>"><a href="<?php if (isset($browse_url)) echo $browse_url; else echo 'browse.php'?>">浏览</a></li>
-                        <li class="<?php echo @$profile_status?>"><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'my-profile.php'?>">个人档案</a></li>
+                        <li class="<?php echo @$profile_status?>"><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'user.php'?>">个人档案</a></li>
                         <li class="<?php echo @$upload_status?>"><a href="<?php if (isset($upload_url)) echo $upload_url; else echo 'upload.php'?>">上传模型</a></li>
                         <li class="create"><a href="editor/create.php">新建</a></li>
                         <li><a href='logout.php'>登出</a></li>

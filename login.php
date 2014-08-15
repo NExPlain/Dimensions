@@ -29,7 +29,7 @@ get_header("登录"); ?>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 	<fieldset>
 		<legend>登录</legend>
-		<label for="email">用户名</label>
+		<label for="email">邮箱</label>
 		<input type="text" id="email" name="email" value="<?php if (!empty($email)) echo $email; ?>"><br>
 		<label for="password">密码</label>
 		<input type="password" id="password" name="password"><br>
