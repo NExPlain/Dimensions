@@ -137,7 +137,7 @@ class UserController {
     public function list_models_uploaded($self = false)
     {
         echo '<ul class="models-list">';
-        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->id . "'";
+        $query = "SELECT * FROM dimensions_models WHERE uploader_id = '" . $this->id . "' ORDER BY id DESC";
         $result = mysqli_query($this->dbc, $query);
         while ($row = mysqli_fetch_array($result)) {
             $cover_image_url = UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["image_0"];
@@ -219,7 +219,7 @@ HTML;
     public function login($email, $password, &$msg, &$msg_type)
     {
         if (empty($email) || empty($password)) {
-            $msg = '必须填写合法的用户名、密码才能登陆。';
+            $msg = '必须填写合法的邮箱地址、密码才能登陆。';
             $msg_type = "error";
             return false;
         }
@@ -227,7 +227,7 @@ HTML;
         $query = "SELECT * FROM dimensions_users WHERE email = '$email' AND userpswd = SHA('$password')";
         $result = mysqli_query($this->dbc, $query);
         if (mysqli_num_rows($result) == 0) {
-            $msg = '用户名或密码错误。';
+            $msg = '邮箱地址或密码错误。';
             $msg_type = "error";
             return false;
         }

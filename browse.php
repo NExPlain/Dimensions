@@ -45,12 +45,13 @@ get_header("浏览所有模型"); ?>
                             pagination_data = data;
                         })
                     ).then(function() {
+                        var wait = 0.5 + Math.floor(Math.random() * 1.5);
                         setTimeout(function() {
                             $(".all-models").html(model_data);
                             $(".page-navigation").html(pagination_data);
                             endLoading();
                             activateAJAXPagination(); // re-attach event to the *new* elements
-                        }, 0);
+                        }, wait * 1000);
 
                     });
             }

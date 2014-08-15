@@ -13,7 +13,7 @@ define('DB_HOST', 'localhost');
 //define('FILE_SLASH', '\\'); // For Windows
 define('FILE_SLASH', '/');  // For Mac/Linux/Unix
 
-define('MODELS_PER_PAGE', 9);
+define('MODELS_PER_PAGE', 6);
 define('DEFAULT_AVATAR', 'default.jpg');
 define('UPLOAD_PATH', 'upload');
 define('AVATAR_PATH', 'avatars');

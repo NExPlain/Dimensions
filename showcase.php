@@ -26,6 +26,12 @@ if ($invalid_id)
 else
     $title = $model_controller->title;
 
+/* TODO: Write generic animated algorithm and save the property to a database column.
+ */
+$animated = "false";
+if ($model_controller->id == 5)
+    $animated = "true";
+
 get_header($title . " - 查看模型"); ?>
 
 <?php if ($invalid_id): ?>
@@ -218,6 +224,9 @@ get_header($title . " - 查看模型"); ?>
             var controls, hemisphereLight, pointLight, sky;
             var size_width = 650 - 20;
             var size_height = 450 - 20;
+            var animated = <?php echo $animated; ?>;
+            var morphs = null;               // animated
+            var clock = new THREE.Clock();   // animated
 
             var webgl_manager = {
 
@@ -272,7 +281,11 @@ get_header($title . " - 查看模型"); ?>
                     // Load Model
                     var jsonLoader = new THREE.JSONLoader();
                     jsonLoader.load("<?php echo $model_controller->model_location; ?>", function(geometry, materials) {
-                        webgl_manager.loadModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
+                        if (animated) {
+                            webgl_manager.loadAnimatedModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
+                        } else {
+                            webgl_manager.loadModel(geometry, materials, 0, 0, 0, <?php echo $model_controller->scale ?>);
+                        }
                     });
                 },
 
@@ -283,10 +296,36 @@ get_header($title . " - 查看模型"); ?>
                     scene.add(mesh);
                 },
 
+                loadAnimatedModel: function(geometry, materials, x, y, z, scale) {
+                    webgl_manager.morphColorsToFaceColors(geometry);
+                    geometry.computeMorphNormals();
+                    var material = new THREE.MeshPhongMaterial({color: 0xffffff, specular: 0xffffff, shininess: 20, morphTargets: true, morphNormals: true, vertexColors: THREE.FaceColors, shading: THREE.FlatShading});
+                    var meshAnim = new THREE.MorphAnimMesh(geometry, material);
+                    meshAnim.duration = 1000;
+                    meshAnim.rotation.y = -1;
+                    scene.add(meshAnim);
+                    morphs = [];
+                    morphs.push(meshAnim);
+                },
+
                 run: function() {
-                    controls.update();
-                    renderer.render(scene, camera);
+                    webgl_manager.render();
                     requestAnimationFrame(webgl_manager.run);
+                },
+
+                render: function() {
+                    var delta = clock.getDelta();
+                    controls.update();
+
+                    // animated
+                    if (morphs != null) {
+                        for (var i = 0; i < morphs.length; ++i) {
+                            morph = morphs[i];
+                            morph.updateAnimation(1000 * delta);
+                        }
+                    }
+
+                    renderer.render(scene, camera);
                 },
 
                 setSky: function(topColor, bottomColor) {
@@ -325,6 +364,17 @@ get_header($title . " - 查看模型"); ?>
 
                 onLeaveFullscreen: function() {
                     webgl_manager.resize(size_width, size_height);
+                },
+
+                // Utilities
+
+                morphColorsToFaceColors: function( geometry ) {
+                    if ( geometry.morphColors && geometry.morphColors.length ) {
+                        var colorMap = geometry.morphColors[ 0 ];
+                        for ( var i = 0; i < colorMap.colors.length; i ++ ) {
+                            geometry.faces[ i ].color = colorMap.colors[ i ];
+                        }
+                    }
                 }
             };
 

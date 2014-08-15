@@ -823,7 +823,7 @@ header .inner > div {
 	margin-right: -0.25em;
 }
 .showcase .preview-image {
-	max-width: 630px;
+	max-width: 620px;
 	max-height: 430px;
 	box-shadow: 0px 0px 10px rgba(0,0,0,0.35);
 	border-radius: 3px;

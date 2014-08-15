@@ -59,7 +59,7 @@ class ModelController {
             $this->uploader_username = $row["username"];
             $this->uploader_id = $row["uploader_id"];
             $this->uploader_avatar_url = AVATAR_PATH . "/" . ($row['avatar'] == NULL ? DEFAULT_AVATAR : $row['avatar']);
-            $this->views = $row["views"] + 1;
+            $this->views = $row["views"];
             $this->downloads = $row["downloads"];
             $this->cover_image_url = UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["image_0"];
 
@@ -78,6 +78,7 @@ class ModelController {
 
             // Update times of view
             if ($update_tov) {
+                $this->views++;
                 mysqli_query($this->dbc, "UPDATE dimensions_models SET views = '" . $this->views . "' WHERE id = '" . $this->id . "'");
             }
 
