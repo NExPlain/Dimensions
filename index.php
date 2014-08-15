@@ -51,19 +51,23 @@ require_once "functions.php";
 
                 -->
                 <ul>
-                    <li><a href='login.php'>探索<span class="glyphicon glyphicon-chevron-down"></span></a></li>
-                    <li><a href='login.php'>社区<span class="glyphicon glyphicon-chevron-down"></span></a></li>
+                    <li><a href='x-x-x-x-x.php'>浏览</a></li>
                 </ul>
             </div>
             <div class="site-navigation right">
                 <ul>
                     <?php if (@$user_controller->logged_in): ?>
-                        <li>欢迎，<?php echo $user_controller->username ?></li>
-                        <li class="<?php echo @$browse_status?>"><a href="<?php if (isset($browse_url)) echo $browse_url; else echo 'browse.php'?>">浏览</a></li>
-                        <li class="<?php echo @$profile_status?>"><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'my-profile.php'?>">个人档案</a></li>
-                        <li class="<?php echo @$upload_status?>"><a href="<?php if (isset($upload_url)) echo $upload_url; else echo 'upload.php'?>">上传模型</a></li>
                         <li class="create"><a href="editor/create.php">新建</a></li>
-                        <li><a href='logout.php'>登出</a></li>
+                        <li class="<?php echo @$upload_status?>"><a href="<?php if (isset($upload_url)) echo $upload_url; else echo 'upload.php'?>">上传模型</a></li>
+                        <li class="dropdown">
+                            欢迎，
+                            <a data-toggle="dropdown" href="#"><?php echo $user_controller->username ?><span class="glyphicon glyphicon-chevron-down"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'my-profile.php'?>"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                                <li><a href="x-x-x-x-x.php"><span class="glyphicon glyphicon-cog"></span>设定</a></li>
+                                <li><a href="logout.php"><span class="glyphicon glyphicon-off"></span>登出</a></li>
+                            </ul>
+                        </li>
                     <?php else: ?>
                         <li><a href='login.php'>登录</a></li>
                         <li><a href='signup.php' class="inverted-button">注册</a></li>
@@ -81,13 +85,6 @@ require_once "functions.php";
                 <div class="intro-title">
                     <p>创建并分享动态3D模型</p>
                 </div>
-                <!--            <div class="intro-content">-->
-                <!--                <ul>-->
-                <!--                    <li><span class="glyphicon glyphicon-ok"></span>无需插件</li>-->
-                <!--                    <li><span class="glyphicon glyphicon-ok"></span>27种格式</li>-->
-                <!--                    <li><span class="glyphicon glyphicon-ok"></span>完全免费</li>-->
-                <!--                </ul>-->
-                <!--            </div>-->
             </div>
 
             <div class="section-two">
