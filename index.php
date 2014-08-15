@@ -90,8 +90,32 @@ require_once "functions.php";
             </div>
 
             <div class="section-two">
+                <div class="feature-list">
+                    <div class="feature">
+                        <div class="feature-title">Upload in seconds</div>
+                        <div class="feature-content">
+                            Sketchfab lets you upload your models without limit, either via your web browser or directly from your 3D editor.
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">Upload in seconds</div>
+                        <div class="feature-content">
+                            Sketchfab lets you upload your models without limit, either via your web browser or directly from your 3D editor.
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-title">Upload in seconds</div>
+                        <div class="feature-content">
+                            Sketchfab lets you upload your models without limit, either via your web browser or directly from your 3D editor.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-three">
 
             </div>
+
         </div><!-- .site-content -->
     </div><!-- #centrum -->
     <footer id="colophon" class="site-footer">
