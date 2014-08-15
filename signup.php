@@ -33,8 +33,8 @@ if (isset($_POST['submit'])) {
             <input type="password" id="password1" name="password1"><br>
             <label for="password2">确认密码</label>
             <input type="password" id="password2" name="password2"><br>
-            <input type="submit" class="btn btn-primary" value="注册" name="submit">
-            <a href="browse.php" class="btn">返回</a>
+            <input type="submit" class="button button-green" value="注册" name="submit">
+            <a href="browse.php" class="button button-white">返回</a>
         </fieldset>
     </form>
 <?php endif; ?>

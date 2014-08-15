@@ -10,7 +10,7 @@ require_once "ModelController.class.php";
 
 $model_controller = new ModelController();
 $page = 1;
-if (isset($_GET['page'])) {
+if (isset($_GET['page']) && $_GET['page'] > 0) {
     $page = $_GET['page'];
 }
 

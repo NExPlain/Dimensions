@@ -22,8 +22,8 @@ if (isset($_POST['submit'])) {
  */
 get_header("登录"); ?>
 
-<?php 
-	if (!empty($msg)) echo "<div class='alert alert-".$msg_type."'>" . $msg . "</div>";
+<?php
+	if (!empty($msg)) echo "<div class='alert alert-" . $msg_type . "'>" . $msg . "</div>";
 ?>
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -33,8 +33,8 @@ get_header("登录"); ?>
 		<input type="text" id="email" name="email" value="<?php if (!empty($email)) echo $email; ?>"><br>
 		<label for="password">密码</label>
 		<input type="password" id="password" name="password"><br>
-		<input type="submit" class="btn btn-primary" value="登录" name="submit">
-		<a href="browse.php" class="btn">返回</a>
+		<input type="submit" class="button button-green" value="登录" name="submit">
+		<a href="browse.php" class="button button-white">返回</a>
 	</fieldset>
 </form>
 
