@@ -621,6 +621,7 @@ header .inner > div {
 	height: 31px;
 	cursor: pointer;
 	line-height: inherit;
+	outline: none;
 }
 .upload .upload-form .file-selector::-webkit-file-upload-button {
 	visibility: hidden;
@@ -802,7 +803,7 @@ header .inner > div {
 	line-height: 1;
 }
 .showcase .model-description .description {
-	margin-left: 90px;
+	margin-left: 100px;
 }
 
 /* 5.2 Preview & Purchase */

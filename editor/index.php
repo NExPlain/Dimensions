@@ -14,7 +14,7 @@ require_once "../define.php";
 		$result = mysqli_query($dbc, $query);
 		if ($row = mysqli_fetch_array($result)) {
 			if ($row['username'] == $_COOKIE['username']) {
-				$fileUri = "/dimensions/upload/".$row["file_stamp"]."/".$row["model_name"];
+				$fileUri = "/upload/".$row["file_stamp"]."/".$row["model_name"];
 			} else {
 				// Authorization failure.
 				exitAbnormally();

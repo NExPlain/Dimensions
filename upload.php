@@ -64,8 +64,6 @@ get_header("上传模型"); ?>
             <label class="field-label" for="tags">添加一些标签<span class="optional">（可选）</span></label>
             <select name="tags[]" id="tags" multiple placeholder="添加一些标签...">
                 <option value="">添加一些标签...</option>
-                <option value="1">Kinect</option>
-                <option value="2">动物</option>
             </select>
         </div>
         <div class="form-field">
