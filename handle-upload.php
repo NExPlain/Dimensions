@@ -20,6 +20,14 @@ function report_error($result, $message, $position) {
     exit;
 }
 
+function get_unique_name($file_name) {
+    return sha1_file($_FILES[$file_name]["tmp_name"]) . "." . pathinfo($_FILES[$file_name]["name"], PATHINFO_EXTENSION);
+}
+
+function get_unique_name_fs($file_name, $i) {
+    return sha1_file($_FILES[$file_name]["tmp_name"][$i]) . "." . pathinfo($_FILES[$file_name]["name"][$i], PATHINFO_EXTENSION);
+}
+
 function debug() {
     echo '<h1>$_POST</h1>';
     echo '<pre>';
@@ -32,8 +40,6 @@ function debug() {
     exit;
 }
 
-//debug();
-
 /* Get & validate uploader_id */
 
 $uploader_id = @$_POST['uploader_id'];
@@ -45,10 +51,14 @@ if (mysqli_num_rows($result) == 0) {
 
 /* Get file_stamp */
 
-$query = "SELECT id FROM dimensions_models ORDER BY id DESC LIMIT 0, 1";
-$result = mysqli_query($dbc, $query);
+//$query = "SELECT id FROM dimensions_models ORDER BY id DESC LIMIT 0, 1";
+//$result = mysqli_query($dbc, $query);
+//$row = mysqli_fetch_array($result);
+//$to_upload = $row['id'] + 1;
+$result = mysqli_query($dbc, "SHOW TABLE STATUS LIKE 'dimensions_models'");
 $row = mysqli_fetch_array($result);
-$to_upload = $row['id'] + 1;
+$to_upload = $row['Auto_increment'];
+
 $file_stamp = $uploader_id . "/" . $to_upload;
 
 /* Make destination directory */
@@ -56,40 +66,77 @@ $file_stamp = $uploader_id . "/" . $to_upload;
 $dir = UPLOAD_PATH . FILE_SLASH . $uploader_id . FILE_SLASH . $to_upload;
 
 if (is_dir($dir) == false && mkdir($dir, 0777, true) == false) {
-    report_error("false", "Cannot execute mkdir command, please check your privileges.", __LINE__);
+    report_error("false", "Cannot execute mkdir command, please check your privileges. Target: " . $dir, __LINE__);
 }
 
-/* Move files in */
+/* Processing files */
 
-if ($_FILES["model_file"]["error"] != UPLOAD_ERR_OK || $_FILES["cover_image"]["error"] != UPLOAD_ERR_OK) {
-    report_error("false", "model_file or cover_image not found.", __LINE__);
+// Check and save the uploaded model file.
+
+if ($_FILES["model_file"]["error"] != UPLOAD_ERR_OK) {
+    report_error("false", "model_file not found.", __LINE__);
 }
 
-$status = move_uploaded_file($_FILES["model_file"]["tmp_name"], $dir . FILE_SLASH . $_FILES["model_file"]["name"]);
-$model_name = $_FILES["model_file"]["name"];
-$status = $status && move_uploaded_file($_FILES["cover_image"]["tmp_name"], $dir . FILE_SLASH . $_FILES["cover_image"]["name"]);
-$images[0] = $_FILES["cover_image"]["name"];
+$model_name = get_unique_name("model_file");
+$status = move_uploaded_file($_FILES["model_file"]["tmp_name"], $dir . FILE_SLASH . get_unique_name("model_file"));
 
 if ($status == false) {
     report_error("false", "Cannot move uploaded file(s).", __LINE__);
 }
 
+// Analyse the uploaded model file, get $format and $model_name
+
+$extension = pathinfo($_FILES["model_file"]["name"], PATHINFO_EXTENSION);
+
+if ($extension == "js") {
+    $format = "json";
+} else if (in_array($extension, array("fbx", "dae", "obj", "3ds"))) {
+    $format = "json";
+    $before_path = $dir . "/" . $model_name;
+    $after_path = $dir . "/" . $model_name . ".js";
+    $command = escapeshellcmd('python lib/converters/convert_to_threejs.py ' . $before_path . ' ' . $after_path);
+    $output = shell_exec($command);
+    $model_name = $model_name . ".js";
+    if (strpos($output, "Error") !== false || strpos($output, "error") !== false) {
+        //report_error("false", $output, __LINE__); - need test.
+    }
+} else {
+    report_error("false", "Model file not supported. Sorry.", __LINE__);
+}
+
+// cover image
+
+if ($_FILES["cover_image"]["error"] != UPLOAD_ERR_OK) {
+    report_error("false", "cover_image not found.", __LINE__);
+}
+
+$images[0] = get_unique_name("cover_image");
+$status = move_uploaded_file($_FILES["cover_image"]["tmp_name"], $dir . FILE_SLASH . get_unique_name("cover_image"));
+
+if ($status == false) {
+    report_error("false", "Cannot move uploaded file(s).", __LINE__);
+}
+
+// textures
+
 for ($i = 0; $i < count($_FILES["textures"]["tmp_name"]); ++$i) {
     if ($_FILES["textures"]["error"][$i] == UPLOAD_ERR_OK) {
-        $status = move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["textures"]["name"][$i]);
+        $status = move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $dir . FILE_SLASH . get_unique_name_fs("textures", $i));
         if ($status == false) {
             report_error("false", "Cannot move uploaded file(s).", __LINE__);
         }
     }
 }
 
+// additional images
+
 for ($i = 0; $i < 5; ++$i) {
     if (isset($_FILES["images"]["error"][$i]) && $_FILES["images"]["error"][$i] == UPLOAD_ERR_OK) {
-        $status = move_uploaded_file($_FILES["images"]["tmp_name"][$i], $dir . FILE_SLASH . $_FILES["images"]["name"][$i]);
+        $images[$i + 1] = get_unique_name_fs("images", $i);
+        $status = move_uploaded_file($_FILES["images"]["tmp_name"][$i], $dir . FILE_SLASH . get_unique_name_fs("images", $i));
         if ($status == false) {
             report_error("false", "Cannot move uploaded file(s).", __LINE__);
         }
-        $images[$i + 1] = $_FILES["images"]["name"][$i];
     } else {
         $images[$i + 1] = "";
     }
@@ -112,8 +159,8 @@ array_unique($tags);
 
 // insert model
 
-$query = "INSERT INTO dimensions_models (title, uploader_id, model_name, file_stamp, scale, is_private, price, description, license_id, image_0, image_1, image_2, image_3, image_4, image_5) ".
-    "VALUES ('$title','$uploader_id','$model_name','$file_stamp','1.0',0,'$price','$description','$license_id','$images[0]','$images[1]','$images[2]','$images[3]','$images[4]','$images[5]')";
+$query = "INSERT INTO dimensions_models (title, uploader_id, model_name, file_stamp, scale, is_private, price, description, license_id, format, image_0, image_1, image_2, image_3, image_4, image_5) ".
+    "VALUES ('$title','$uploader_id','$model_name','$file_stamp','1.0',0,'$price','$description','$license_id','$format','$images[0]','$images[1]','$images[2]','$images[3]','$images[4]','$images[5]')";
 mysqli_query($dbc, $query);
 
 $uploaded_id = mysqli_insert_id($dbc);
