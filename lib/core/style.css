@@ -87,14 +87,22 @@ header .inner > div {
     box-shadow: 0 1px 5px rgba(85,85,85,0.15);
 }
 
+.dropdown-menu {
+    top: 40px;
+}
+
 .dropdown-menu li {
-    display: block;
-    font-size: 15px;
-    margin-left: 0;
+    display: block !important;
+    font-size: 16px !important;
+    margin-left: 0 !important;
+}
+
+.dropdown-menu li:hover {
+    background-color: #eeeeee !important;
 }
 
 .dropdown-menu .glyphicon  {
-    font-size: 17px;
+    font-size: 17px !important;
     margin-right: 8px;
 }
 

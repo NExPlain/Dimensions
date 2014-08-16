@@ -4,7 +4,7 @@
 }
 
 .section-one {
-    height: 670px;
+    height: 640px;
     background-image: url("../img/index2.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -46,6 +46,7 @@
 
 .feature {
     display: inline-block;
+    box-sizing: border-box;
     padding-left: 20px;
     padding-right: 20px;
     height: 200px;

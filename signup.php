@@ -26,13 +26,13 @@ if (isset($_POST['submit'])) {
         <fieldset>
             <legend>注册账号</legend>
             <label for="email">Email</label>
-            <input class="form-control" type="text" id="email" name="email" value="<?php if (!empty($email)) echo $email; ?>"><br>
+            <input type="text" id="email" name="email" value="<?php if (!empty($email)) echo $email; ?>"><br>
             <label for="username">姓名</label>
-            <input class="form-control" type="text" id="username" name="username" value="<?php if (!empty($username)) echo $username; ?>"><br>
+            <input type="text" id="username" name="username" value="<?php if (!empty($username)) echo $username; ?>"><br>
             <label for="password1">密码</label>
-            <input class="form-control" type="password" id="password1" name="password1"><br>
+            <input type="password" id="password1" name="password1"><br>
             <label for="password2">确认密码</label>
-            <input class="form-control" type="password" id="password2" name="password2"><br>
+            <input type="password" id="password2" name="password2"><br>
             <input type="submit" class="button button-green" value="注册" name="submit">
             <a href="browse.php" class="button button-white">返回</a>
         </fieldset>

@@ -35,12 +35,11 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
     <meta charset="UTF-8">
     <title><?php echo $__page_title ?></title>
     <script src="lib/core/jquery/jquery-1.10.2.min.js"></script>
-    <script src="lib/core/bootstrap/js/bootstrap.min.js"></script>
     <link href="lib/core/reset.css" rel="stylesheet" media="screen">
-<!--    <link href="lib/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">-->
+    <link href="lib/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="lib/core/bootstrap/js/bootstrap.min.js"></script>
+    <link href="lib/core/bootstrap/v3-icons/bootstrap-fonts.css" rel="stylesheet" media="screen">
     <link href="lib/core/components.css" rel="stylesheet" media="screen">
-    <link href="lib/core/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="lib/core/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
     <link href="lib/core/style.css" rel="stylesheet" media="screen">
     <script src="lib/webgl/Three.js"></script>
 </head>
@@ -66,7 +65,6 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
                 <li class="create"><a href="editor/create.php">新建</a></li>
                 <li class="<?php echo @$upload_status?>"><a href="<?php if (isset($upload_url)) echo $upload_url; else echo 'upload.php'?>">上传模型</a></li>
                 <li class="dropdown">
-                    欢迎，
                     <a data-toggle="dropdown" href="#"><?php echo $user_controller->username ?><span class="glyphicon glyphicon-chevron-down"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'my-profile.php'?>"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
