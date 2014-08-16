@@ -51,22 +51,18 @@ if (mysqli_num_rows($result) == 0) {
 
 /* Get file_stamp */
 
-//$query = "SELECT id FROM dimensions_models ORDER BY id DESC LIMIT 0, 1";
-//$result = mysqli_query($dbc, $query);
-//$row = mysqli_fetch_array($result);
-//$to_upload = $row['id'] + 1;
 $result = mysqli_query($dbc, "SHOW TABLE STATUS LIKE 'dimensions_models'");
 $row = mysqli_fetch_array($result);
-$to_upload = $row['Auto_increment'];
+$next_id = $row['Auto_increment'];
 
-$file_stamp = $uploader_id . "/" . $to_upload;
+$file_stamp = $uploader_id . "/" . $next_id;
 
 /* Make destination directory */
 
-$dir = UPLOAD_PATH . FILE_SLASH . $uploader_id . FILE_SLASH . $to_upload;
+$upload_dir = UPLOAD_PATH . FILE_SLASH . $uploader_id . FILE_SLASH . $next_id;
 
-if (is_dir($dir) == false && mkdir($dir, 0777, true) == false) {
-    report_error("false", "Cannot execute mkdir command, please check your privileges. Target: " . $dir, __LINE__);
+if (is_dir($upload_dir) == false && mkdir($upload_dir, 0777, true) == false) {
+    report_error("false", "Cannot execute mkdir command, please check your privileges. Target: " . $upload_dir, __LINE__);
 }
 
 /* Processing files */
@@ -78,7 +74,7 @@ if ($_FILES["model_file"]["error"] != UPLOAD_ERR_OK) {
 }
 
 $model_name = get_unique_name("model_file");
-$status = move_uploaded_file($_FILES["model_file"]["tmp_name"], $dir . FILE_SLASH . get_unique_name("model_file"));
+$status = move_uploaded_file($_FILES["model_file"]["tmp_name"], $upload_dir . FILE_SLASH . get_unique_name("model_file"));
 
 if ($status == false) {
     report_error("false", "Cannot move uploaded file(s).", __LINE__);
@@ -92,11 +88,11 @@ if ($extension == "js") {
     $format = "json";
 } else if (in_array($extension, array("stl", "obj"))) {
     $format = "json";
-    $before_path = $dir . "/" . $model_name;
-    $after_path = $dir . "/" . $model_name . ".js";
-    $command = escapeshellcmd('python lib/converters/convert_obj_three.py -i ' . $before_path . ' -o ' . $after_path);
+    $before_path = $upload_dir . FILE_SLASH . $model_name;
+    $after_path = $upload_dir . FILE_SLASH . $model_name . ".js";
+    $model_name .= ".js";
+    $command = escapeshellcmd("python lib" . FILE_SLASH. "converters" . FILE_SLASH . "convert_obj_three.py -i " . $before_path . " -o " . $after_path);
     $output = shell_exec($command);
-    $model_name = $model_name . ".js";
     if (!is_file($after_path)) {
         report_error("false", $output, __LINE__);
     }
@@ -111,7 +107,7 @@ if ($_FILES["cover_image"]["error"] != UPLOAD_ERR_OK) {
 }
 
 $images[0] = get_unique_name("cover_image");
-$status = move_uploaded_file($_FILES["cover_image"]["tmp_name"], $dir . FILE_SLASH . get_unique_name("cover_image"));
+$status = move_uploaded_file($_FILES["cover_image"]["tmp_name"], $upload_dir . FILE_SLASH . get_unique_name("cover_image"));
 
 if ($status == false) {
     report_error("false", "Cannot move uploaded file(s).", __LINE__);
@@ -121,7 +117,7 @@ if ($status == false) {
 
 for ($i = 0; $i < count($_FILES["textures"]["tmp_name"]); ++$i) {
     if ($_FILES["textures"]["error"][$i] == UPLOAD_ERR_OK) {
-        $status = move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $dir . FILE_SLASH . get_unique_name_fs("textures", $i));
+        $status = move_uploaded_file($_FILES["textures"]["tmp_name"][$i], $upload_dir . FILE_SLASH . get_unique_name_fs("textures", $i));
         if ($status == false) {
             report_error("false", "Cannot move uploaded file(s).", __LINE__);
         }
@@ -133,7 +129,7 @@ for ($i = 0; $i < count($_FILES["textures"]["tmp_name"]); ++$i) {
 for ($i = 0; $i < 5; ++$i) {
     if (isset($_FILES["images"]["error"][$i]) && $_FILES["images"]["error"][$i] == UPLOAD_ERR_OK) {
         $images[$i + 1] = get_unique_name_fs("images", $i);
-        $status = move_uploaded_file($_FILES["images"]["tmp_name"][$i], $dir . FILE_SLASH . get_unique_name_fs("images", $i));
+        $status = move_uploaded_file($_FILES["images"]["tmp_name"][$i], $upload_dir . FILE_SLASH . get_unique_name_fs("images", $i));
         if ($status == false) {
             report_error("false", "Cannot move uploaded file(s).", __LINE__);
         }
@@ -180,10 +176,10 @@ foreach ($tags as $tag) {
 }
 
 /**
- * If it is a API call then echo the destination URL.
+ * If it is an API call then echo the destination URL.
  * Otherwise redirect to it.
  *
- * @see api/upload.php
+ * See: api/upload.php
  */
 if (isset($_GET['api']) && $_GET['api'] == "true") {
     echo json_encode(array(
