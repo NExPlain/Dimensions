@@ -1,35 +1,17 @@
-@font-face {
-    font-family: LanTingHei;
-    src: url("../font/Lantinghei.ttc");
-}
-
-.site-header {
-    position: fixed;
-    background-color: #ffffff;
-    opacity: 0.95;
-    box-shadow: 0 1px 5px rgba(85,85,85,0.15);
-}
-
-.dropdown-menu li {
-    display: block;
-    font-size: 15px;
-    margin-left: 0;
-}
-
-.dropdown-menu .glyphicon  {
-    font-size: 17px;
-    margin-right: 8px;
+.site-content {
+    padding: 0 !important;
+    width: 100% !important;
 }
 
 .section-one {
-    height: 720px;
+    height: 670px;
     background-image: url("../img/index2.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     background-position: center;
-    padding-top: 90px;
+    padding-top: 40px;
 }
 
 .section-two {
@@ -64,8 +46,6 @@
 
 .feature {
     display: inline-block;
-    #margin-left: 1%;
-    #margin-right: 1%;
     padding-left: 20px;
     padding-right: 20px;
     height: 200px;
@@ -81,12 +61,4 @@
 .feature-content {
     font-size: 18px;
     color: #555555;
-}
-
-.left {
-    float: left;
-}
-
-.right {
-    float: right;
 }

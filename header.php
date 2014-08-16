@@ -29,7 +29,9 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
         break;
 }
 
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html lang="zh-Hans-CN">
 <head>
     <meta charset="UTF-8">
@@ -38,39 +40,50 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
     <script src="lib/core/bootstrap/js/bootstrap.min.js"></script>
     <link href="lib/core/reset.css" rel="stylesheet" media="screen">
     <link href="lib/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="lib/core/bootstrap/v3-icons/bootstrap-fonts.css" rel="stylesheet" media="screen">
     <link href="lib/core/components.css" rel="stylesheet" media="screen">
+    <link href="lib/core/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="lib/core/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
     <link href="lib/core/style.css" rel="stylesheet" media="screen">
+    <script src="lib/webgl/Three.js"></script>
 </head>
 
 <body>
-<div id="wrapper" class="<?php echo basename($_SERVER['SCRIPT_NAME'], ".php"); ?>">
-    <header id="masthead" class="site-header">
-        <div class="inner">
-            <div class="site-title">
-                <img class="site-logo" src="lib/img/logo.png">
-                <a href="index.php">Dimensions</a>
-            </div>
-            <div class="site-search">
 
-            </div>
-            <nav class="site-navigation">
-                <ul>
-                    <?php if ($user_controller->has_user): ?>
-                        <li>欢迎，<?php echo $user_controller->username ?></li>
-                        <li class="<?php echo @$browse_status?>"><a href="<?php if (isset($browse_url)) echo $browse_url; else echo 'browse.php'?>">浏览</a></li>
-                        <li class="<?php echo @$profile_status?>"><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'user.php'?>">个人档案</a></li>
-                        <li class="<?php echo @$upload_status?>"><a href="<?php if (isset($upload_url)) echo $upload_url; else echo 'upload.php'?>">上传模型</a></li>
-                        <li class="create"><a href="editor/create.php">新建</a></li>
-                        <li><a href='logout.php'>登出</a></li>
-                    <?php else: ?>
-                        <li><a href='login.php'>登录</a></li>
-                        <li><a href='signup.php'>注册</a></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<div id="wrapper" class=<?php echo basename($_SERVER['SCRIPT_NAME'], ".php"); ?>">
+                <header id="masthead" class="site-header">
+<div class="inner">
+    <div class="site-title">
+        <a href="index.php"><img class="site-logo" src="lib/img/logo.png"></a>
+        <a href="index.php" class="site-title-text">Dimensions</a>
+    </div>
+    <div class="site-search"></div>
+    <div class="site-navigation">
+        <ul>
+            <li><a href='browse.php'>浏览</a></li>
+        </ul>
+    </div>
+    <div class="site-navigation right">
+        <ul>
+            <?php if (@$user_controller->logged_in): ?>
+                <li class="create"><a href="editor/create.php">新建</a></li>
+                <li class="<?php echo @$upload_status?>"><a href="<?php if (isset($upload_url)) echo $upload_url; else echo 'upload.php'?>">上传模型</a></li>
+                <li class="dropdown">
+                    欢迎，
+                    <a data-toggle="dropdown" href="#"><?php echo $user_controller->username ?><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php if (isset($profile_url)) echo $profile_url; else echo 'my-profile.php'?>"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                        <li><a href="prefortobemodified.php"><span class="glyphicon glyphicon-cog"></span>设定</a></li>
+                        <li><a href="logout.php"><span class="glyphicon glyphicon-off"></span>登出</a></li>
+                    </ul>
+                </li>
+            <?php else: ?>
+                <li><a href='login.php'>登录</a></li>
+                <li><a href='signup.php' class="inverted-button">注册</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+</div>
+</header>
 
-    <div id="centrum" class="site-main">
-        <div class="site-content">
+<div id="centrum" class="site-main">
+    <div class="site-content">
