@@ -30,9 +30,9 @@ get_header("登录"); ?>
 	<fieldset>
 		<legend>登录</legend>
 		<label for="email">邮箱</label>
-		<input type="text" id="email" name="email" value="<?php if (!empty($email)) echo $email; ?>"><br>
+		<input class="form-control" type="text" id="email" name="email" value="<?php if (!empty($email)) echo $email; ?>"><br>
 		<label for="password">密码</label>
-		<input type="password" id="password" name="password"><br>
+		<input class="form-control" type="password" id="password" name="password"><br>
 		<input type="submit" class="button button-green" value="登录" name="submit">
 		<a href="browse.php" class="button button-white">返回</a>
 	</fieldset>

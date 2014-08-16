@@ -29,9 +29,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
         break;
 }
 
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="zh-Hans-CN">
 <head>
     <meta charset="UTF-8">
@@ -39,7 +37,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
     <script src="lib/core/jquery/jquery-1.10.2.min.js"></script>
     <script src="lib/core/bootstrap/js/bootstrap.min.js"></script>
     <link href="lib/core/reset.css" rel="stylesheet" media="screen">
-    <link href="lib/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<!--    <link href="lib/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">-->
     <link href="lib/core/components.css" rel="stylesheet" media="screen">
     <link href="lib/core/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <script src="lib/core/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
@@ -49,7 +47,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
 
 <body>
 
-<div id="wrapper" class=<?php echo basename($_SERVER['SCRIPT_NAME'], ".php"); ?>">
+<div id="wrapper" class="<?php echo basename($_SERVER['SCRIPT_NAME'], ".php"); ?>">
                 <header id="masthead" class="site-header">
 <div class="inner">
     <div class="site-title">
@@ -64,7 +62,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
     </div>
     <div class="site-navigation right">
         <ul>
-            <?php if (@$user_controller->logged_in): ?>
+            <?php if ($user_controller->has_user): ?>
                 <li class="create"><a href="editor/create.php">新建</a></li>
                 <li class="<?php echo @$upload_status?>"><a href="<?php if (isset($upload_url)) echo $upload_url; else echo 'upload.php'?>">上传模型</a></li>
                 <li class="dropdown">
