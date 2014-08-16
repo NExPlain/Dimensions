@@ -42,10 +42,10 @@ $user_controller->init();
             <div class="site-search"></div>
             <div class="site-navigation">
                 <ul>
-                    <li class="browse"><a href="browse.php" title="浏览所有模型">浏览</a></li>
+                    <li><a href="browse.php" title="浏览所有模型">浏览</a></li>
                     <?php if ($user_controller->has_user): ?>
-                        <li class="create"><a href="editor/create.php">新建</a></li>
-                        <li class="upload"><a href="upload.php">上传</a></li>
+                        <li><a href="editor/create.php">新建</a></li>
+                        <li><a href="upload.php">上传</a></li>
                         <li class="dropdown">
                             <a data-toggle="dropdown" data-target="#" href="user.php"><?php echo $user_controller->username ?><span class="glyphicon glyphicon-chevron-down"></span></a>
                             <ul class="dropdown-menu">
