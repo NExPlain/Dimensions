@@ -22,19 +22,19 @@ get_header("Dimensions"); ?>
             <div class="item">
                 <div class="feature-title">Upload in seconds</div>
                 <div class="feature-content">
-                    Sketchfab lets you upload your models without limit, either via your web browser or directly from your 3D editor.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
             </div>
             <div class="item">
                 <div class="feature-title">Upload in seconds</div>
                 <div class="feature-content">
-                    Sketchfab lets you upload your models without limit, either via your web browser or directly from your 3D editor.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
             </div>
             <div class="item">
                 <div class="feature-title">Upload in seconds</div>
                 <div class="feature-content">
-                    Sketchfab lets you upload your models without limit, either via your web browser or directly from your 3D editor.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </div>
             </div>
         </div>
