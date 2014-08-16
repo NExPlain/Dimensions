@@ -41,7 +41,7 @@ switch(basename($_SERVER['SCRIPT_NAME'])) {
     <link href="lib/core/bootstrap/v3-icons/bootstrap-fonts.css" rel="stylesheet" media="screen">
     <link href="lib/core/components.css" rel="stylesheet" media="screen">
     <link href="lib/core/style.css" rel="stylesheet" media="screen">
-    <script src="lib/webgl/Three.js"></script>
+    <script src="lib/webgl/Three-r68.min.js"></script>
 </head>
 
 <body>

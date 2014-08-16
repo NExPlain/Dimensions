@@ -90,15 +90,15 @@ $extension = pathinfo($_FILES["model_file"]["name"], PATHINFO_EXTENSION);
 
 if ($extension == "js") {
     $format = "json";
-} else if (in_array($extension, array("fbx", "dae", "obj", "3ds"))) {
+} else if (in_array($extension, array("stl", "obj"))) {
     $format = "json";
     $before_path = $dir . "/" . $model_name;
     $after_path = $dir . "/" . $model_name . ".js";
-    $command = escapeshellcmd('python lib/converters/convert_to_threejs.py ' . $before_path . ' ' . $after_path);
+    $command = escapeshellcmd('python lib/converters/convert_obj_three.py -i ' . $before_path . ' -o ' . $after_path);
     $output = shell_exec($command);
     $model_name = $model_name . ".js";
-    if (strpos($output, "Error") !== false || strpos($output, "error") !== false) {
-        //report_error("false", $output, __LINE__); - need test.
+    if (!is_file($after_path)) {
+        report_error("false", $output, __LINE__);
     }
 } else {
     report_error("false", "Model file not supported. Sorry.", __LINE__);

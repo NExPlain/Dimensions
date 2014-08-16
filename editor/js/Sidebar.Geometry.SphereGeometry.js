@@ -9,7 +9,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	var radiusRow = new UI.Panel();
 	var radius = new UI.Number( geometry.radius ).onChange( update );
 
-	radiusRow.add( new UI.Text( '半径' ).setWidth( '90px' ) );
+	radiusRow.add( new UI.Text( 'Radius' ).setWidth( '90px' ) );
 	radiusRow.add( radius );
 
 	container.add( radiusRow );
@@ -19,7 +19,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	var widthSegmentsRow = new UI.Panel();
 	var widthSegments = new UI.Integer( geometry.widthSegments ).setRange( 1, Infinity ).onChange( update );
 
-	widthSegmentsRow.add( new UI.Text( '宽度线段数' ).setWidth( '90px' ) );
+	widthSegmentsRow.add( new UI.Text( 'Width segments' ).setWidth( '90px' ) );
 	widthSegmentsRow.add( widthSegments );
 
 	container.add( widthSegmentsRow );
@@ -29,7 +29,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	var heightSegmentsRow = new UI.Panel();
 	var heightSegments = new UI.Integer( geometry.heightSegments ).setRange( 1, Infinity ).onChange( update );
 
-	heightSegmentsRow.add( new UI.Text( '高度线段数' ).setWidth( '90px' ) );
+	heightSegmentsRow.add( new UI.Text( 'Height segments' ).setWidth( '90px' ) );
 	heightSegmentsRow.add( heightSegments );
 
 	container.add( heightSegmentsRow );

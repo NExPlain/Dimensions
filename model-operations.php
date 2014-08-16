@@ -35,6 +35,7 @@ if ($op == "add_like") {
 }
 
 if ($op == "delete") {
+    // Cascading deletion
     $queries[0] = "DELETE FROM dimensions_models WHERE id = '$model_id'";
     $queries[1] = "DELETE FROM dimensions_comments WHERE model_id = '$model_id'";
     $queries[2] = "DELETE FROM dimensions_favs WHERE model_id = '$model_id'";

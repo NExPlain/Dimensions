@@ -220,8 +220,8 @@ get_header($title . " - 查看模型"); ?>
 
     <?php if ($model_controller->is_free() == true): ?>
 
-        <script src="lib/webgl/Three.js"></script>
-        <script src="lib/webgl/OrbitControls.js"></script>
+        <script src="lib/webgl/Three-r68.min.js"></script>
+        <script src="lib/webgl/controls/OrbitControls.js"></script>
         <script src="lib/webgl/loaders/SceneLoader.js"></script>
         <script type="x-shader/x-vertex" id="vertexShader">
             varying vec3 vWorldPosition;

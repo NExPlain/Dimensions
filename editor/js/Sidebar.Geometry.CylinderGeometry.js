@@ -9,7 +9,7 @@ Sidebar.Geometry.CylinderGeometry = function ( signals, object ) {
 	var radiusTopRow = new UI.Panel();
 	var radiusTop = new UI.Number( geometry.radiusTop ).onChange( update );
 
-	radiusTopRow.add( new UI.Text( '顶部半径' ).setWidth( '90px' ) );
+	radiusTopRow.add( new UI.Text( 'Radius top' ).setWidth( '90px' ) );
 	radiusTopRow.add( radiusTop );
 
 	container.add( radiusTopRow );
@@ -19,7 +19,7 @@ Sidebar.Geometry.CylinderGeometry = function ( signals, object ) {
 	var radiusBottomRow = new UI.Panel();
 	var radiusBottom = new UI.Number( geometry.radiusBottom ).onChange( update );
 
-	radiusBottomRow.add( new UI.Text( '底部半径' ).setWidth( '90px' ) );
+	radiusBottomRow.add( new UI.Text( 'Radius bottom' ).setWidth( '90px' ) );
 	radiusBottomRow.add( radiusBottom );
 
 	container.add( radiusBottomRow );
@@ -29,7 +29,7 @@ Sidebar.Geometry.CylinderGeometry = function ( signals, object ) {
 	var heightRow = new UI.Panel();
 	var height = new UI.Number( geometry.height ).onChange( update );
 
-	heightRow.add( new UI.Text( '高度' ).setWidth( '90px' ) );
+	heightRow.add( new UI.Text( 'Height' ).setWidth( '90px' ) );
 	heightRow.add( height );
 
 	container.add( heightRow );
@@ -39,7 +39,7 @@ Sidebar.Geometry.CylinderGeometry = function ( signals, object ) {
 	var radialSegmentsRow = new UI.Panel();
 	var radialSegments = new UI.Integer( geometry.radialSegments ).setRange( 1, Infinity ).onChange( update );
 
-	radialSegmentsRow.add( new UI.Text( '径向线段数' ).setWidth( '90px' ) );
+	radialSegmentsRow.add( new UI.Text( 'Radial segments' ).setWidth( '90px' ) );
 	radialSegmentsRow.add( radialSegments );
 
 	container.add( radialSegmentsRow );
@@ -49,7 +49,7 @@ Sidebar.Geometry.CylinderGeometry = function ( signals, object ) {
 	var heightSegmentsRow = new UI.Panel();
 	var heightSegments = new UI.Integer( geometry.heightSegments ).setRange( 1, Infinity ).onChange( update );
 
-	heightSegmentsRow.add( new UI.Text( '垂直线段数' ).setWidth( '90px' ) );
+	heightSegmentsRow.add( new UI.Text( 'Height segments' ).setWidth( '90px' ) );
 	heightSegmentsRow.add( heightSegments );
 
 	container.add( heightSegmentsRow );
@@ -59,7 +59,7 @@ Sidebar.Geometry.CylinderGeometry = function ( signals, object ) {
 	var openEndedRow = new UI.Panel();
 	var openEnded = new UI.Checkbox( geometry.openEnded ).onChange( update );
 
-	openEndedRow.add( new UI.Text( '开口的' ).setWidth( '90px' ) );
+	openEndedRow.add( new UI.Text( 'Open ended' ).setWidth( '90px' ) );
 	openEndedRow.add( openEnded );
 
 	container.add( openEndedRow );

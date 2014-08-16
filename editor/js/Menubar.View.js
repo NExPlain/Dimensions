@@ -4,7 +4,7 @@ Menubar.View = function ( editor ) {
 	container.setClass( 'menu' );
 
 	var title = new UI.Panel();
-	title.setTextContent( '视图' );
+	title.setTextContent( 'View' );
 	title.setMargin( '0px' );
 	title.setPadding( '8px' );
 	container.add( title );
@@ -19,7 +19,7 @@ Menubar.View = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '浅色' );
+	option.setTextContent( 'Light theme' );
 	option.onClick( function () {
 
 		editor.setTheme( 'css/light.css' );
@@ -32,7 +32,7 @@ Menubar.View = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '深色' );
+	option.setTextContent( 'Dark theme' );
 	option.onClick( function () {
 
 		editor.setTheme( 'css/dark.css' );

@@ -36,7 +36,7 @@ Sidebar.Object3D = function ( editor ) {
 
 	} );
 
-	objectNameRow.add( new UI.Text( '名称' ).setWidth( '90px' ) );
+	objectNameRow.add( new UI.Text( 'Name' ).setWidth( '90px' ) );
 	objectNameRow.add( objectName );
 
 	container.add( objectNameRow );
@@ -46,7 +46,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectParentRow = new UI.Panel();
 	var objectParent = new UI.Select().setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( update );
 
-	objectParentRow.add( new UI.Text( '父级元素' ).setWidth( '90px' ) );
+	objectParentRow.add( new UI.Text( 'Parent' ).setWidth( '90px' ) );
 	objectParentRow.add( objectParent );
 
 	container.add( objectParentRow );
@@ -58,7 +58,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectPositionY = new UI.Number().setWidth( '50px' ).onChange( update );
 	var objectPositionZ = new UI.Number().setWidth( '50px' ).onChange( update );
 
-	objectPositionRow.add( new UI.Text( '位置' ).setWidth( '90px' ) );
+	objectPositionRow.add( new UI.Text( 'Position' ).setWidth( '90px' ) );
 	objectPositionRow.add( objectPositionX, objectPositionY, objectPositionZ );
 
 	container.add( objectPositionRow );
@@ -70,7 +70,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectRotationY = new UI.Number().setWidth( '50px' ).onChange( update );
 	var objectRotationZ = new UI.Number().setWidth( '50px' ).onChange( update );
 
-	objectRotationRow.add( new UI.Text( '旋转' ).setWidth( '90px' ) );
+	objectRotationRow.add( new UI.Text( 'Rotation' ).setWidth( '90px' ) );
 	objectRotationRow.add( objectRotationX, objectRotationY, objectRotationZ );
 
 	container.add( objectRotationRow );
@@ -83,7 +83,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectScaleY = new UI.Number( 1 ).setWidth( '50px' ).onChange( updateScaleY );
 	var objectScaleZ = new UI.Number( 1 ).setWidth( '50px' ).onChange( updateScaleZ );
 
-	objectScaleRow.add( new UI.Text( '缩放' ).setWidth( '90px' ) );
+	objectScaleRow.add( new UI.Text( 'Scale' ).setWidth( '90px' ) );
 	objectScaleRow.add( objectScaleLock );
 	objectScaleRow.add( objectScaleX, objectScaleY, objectScaleZ );
 
@@ -104,7 +104,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectNearRow = new UI.Panel();
 	var objectNear = new UI.Number().onChange( update );
 
-	objectNearRow.add( new UI.Text( '近平面' ).setWidth( '90px' ) );
+	objectNearRow.add( new UI.Text( 'Near' ).setWidth( '90px' ) );
 	objectNearRow.add( objectNear );
 
 	container.add( objectNearRow );
@@ -114,7 +114,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectFarRow = new UI.Panel();
 	var objectFar = new UI.Number().onChange( update );
 
-	objectFarRow.add( new UI.Text( '远平面' ).setWidth( '90px' ) );
+	objectFarRow.add( new UI.Text( 'Far' ).setWidth( '90px' ) );
 	objectFarRow.add( objectFar );
 
 	container.add( objectFarRow );
@@ -124,7 +124,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectIntensityRow = new UI.Panel();
 	var objectIntensity = new UI.Number().setRange( 0, Infinity ).onChange( update );
 
-	objectIntensityRow.add( new UI.Text( '强度' ).setWidth( '90px' ) );
+	objectIntensityRow.add( new UI.Text( 'Intensity' ).setWidth( '90px' ) );
 	objectIntensityRow.add( objectIntensity );
 
 	container.add( objectIntensityRow );
@@ -134,7 +134,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectColorRow = new UI.Panel();
 	var objectColor = new UI.Color().onChange( update );
 
-	objectColorRow.add( new UI.Text( '颜色' ).setWidth( '90px' ) );
+	objectColorRow.add( new UI.Text( 'Color' ).setWidth( '90px' ) );
 	objectColorRow.add( objectColor );
 
 	container.add( objectColorRow );
@@ -154,7 +154,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectDistanceRow = new UI.Panel();
 	var objectDistance = new UI.Number().setRange( 0, Infinity ).onChange( update );
 
-	objectDistanceRow.add( new UI.Text( '距离' ).setWidth( '90px' ) );
+	objectDistanceRow.add( new UI.Text( 'Distance' ).setWidth( '90px' ) );
 	objectDistanceRow.add( objectDistance );
 
 	container.add( objectDistanceRow );
@@ -164,7 +164,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectAngleRow = new UI.Panel();
 	var objectAngle = new UI.Number().setPrecision( 3 ).setRange( 0, Math.PI / 2 ).onChange( update );
 
-	objectAngleRow.add( new UI.Text( '角度' ).setWidth( '90px' ) );
+	objectAngleRow.add( new UI.Text( 'Angle' ).setWidth( '90px' ) );
 	objectAngleRow.add( objectAngle );
 
 	container.add( objectAngleRow );
@@ -174,7 +174,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectExponentRow = new UI.Panel();
 	var objectExponent = new UI.Number().setRange( 0, Infinity ).onChange( update );
 
-	objectExponentRow.add( new UI.Text( '指数' ).setWidth( '90px' ) );
+	objectExponentRow.add( new UI.Text( 'Exponent' ).setWidth( '90px' ) );
 	objectExponentRow.add( objectExponent );
 
 	container.add( objectExponentRow );
@@ -184,7 +184,7 @@ Sidebar.Object3D = function ( editor ) {
 	var objectVisibleRow = new UI.Panel();
 	var objectVisible = new UI.Checkbox().onChange( update );
 
-	objectVisibleRow.add( new UI.Text( '可见性' ).setWidth( '90px' ) );
+	objectVisibleRow.add( new UI.Text( 'Visible' ).setWidth( '90px' ) );
 	objectVisibleRow.add( objectVisible );
 
 	container.add( objectVisibleRow );
@@ -210,7 +210,7 @@ Sidebar.Object3D = function ( editor ) {
 
 	} );
 
-	objectUserDataRow.add( new UI.Text( '用户数据' ).setWidth( '90px' ) );
+	objectUserDataRow.add( new UI.Text( 'User data' ).setWidth( '90px' ) );
 	objectUserDataRow.add( objectUserData );
 
 	container.add( objectUserDataRow );

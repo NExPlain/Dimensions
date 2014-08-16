@@ -4,7 +4,7 @@ Menubar.Edit = function ( editor ) {
 	container.setClass( 'menu' );
 
 	var title = new UI.Panel();
-	title.setTextContent( '编辑' );
+	title.setTextContent( 'Edit' );
 	title.setMargin( '0px' );
 	title.setPadding( '8px' );
 	container.add( title );
@@ -19,7 +19,7 @@ Menubar.Edit = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '复制' );
+	option.setTextContent( 'Clone' );
 	option.onClick( function () {
 
 		var object = editor.selected;
@@ -38,7 +38,7 @@ Menubar.Edit = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '删除' );
+	option.setTextContent( 'Delete' );
 	option.onClick( function () {
 
 		editor.removeObject( editor.selected );
@@ -53,7 +53,7 @@ Menubar.Edit = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '转换' );
+	option.setTextContent( 'Convert' );
 	option.onClick( function () {
 
 		var object = editor.selected;
@@ -79,7 +79,7 @@ Menubar.Edit = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '重置' );
+	option.setTextContent( 'Flatten' );
 	option.onClick( function () {
 
 		var object = editor.selected;

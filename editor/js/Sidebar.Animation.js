@@ -8,12 +8,12 @@ Sidebar.Animation = function ( editor ) {
 	var container = new UI.Panel();
 	container.setDisplay( 'none' );
 
-	container.add( new UI.Text( '动画' ) );
+	container.add( new UI.Text( 'Animation' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	var AnimationsRow = new UI.Panel();
 	var Animations = new UI.Select().setOptions( options ).setWidth( '130px' ).setColor( '#444' ).setFontSize( '12px' );
-	AnimationsRow.add( new UI.Text( '动画效果' ).setWidth( '90px' ) );
+	AnimationsRow.add( new UI.Text( 'animations' ).setWidth( '90px' ) );
 	AnimationsRow.add( Animations );
 	container.add( AnimationsRow );
 	container.add( new UI.Break() );

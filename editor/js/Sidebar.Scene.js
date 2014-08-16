@@ -4,7 +4,7 @@ Sidebar.Scene = function ( editor ) {
 
 	var container = new UI.Panel();
 
-	container.add( new UI.Text( '场景' ) );
+	container.add( new UI.Text( 'SCENE' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	var outliner = new UI.FancySelect().setId( 'outliner' );
@@ -31,9 +31,9 @@ Sidebar.Scene = function ( editor ) {
 	var fogTypeRow = new UI.Panel();
 	var fogType = new UI.Select().setOptions( {
 
-		'None': '无',
-		'Fog': '线性',
-		'FogExp2': '指数'
+		'None': 'None',
+		'Fog': 'Linear',
+		'FogExp2': 'Exponential'
 
 	} ).setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' )
 	fogType.onChange( function () {
@@ -45,7 +45,7 @@ Sidebar.Scene = function ( editor ) {
 
 	} );
 
-	fogTypeRow.add( new UI.Text( '雾' ).setWidth( '90px' ) );
+	fogTypeRow.add( new UI.Text( 'Fog' ).setWidth( '90px' ) );
 	fogTypeRow.add( fogType );
 
 	container.add( fogTypeRow );
@@ -62,7 +62,7 @@ Sidebar.Scene = function ( editor ) {
 
 	} );
 
-	fogColorRow.add( new UI.Text( '烟雾颜色' ).setWidth( '90px' ) );
+	fogColorRow.add( new UI.Text( 'Fog color' ).setWidth( '90px' ) );
 	fogColorRow.add( fogColor );
 
 	container.add( fogColorRow );
@@ -74,7 +74,7 @@ Sidebar.Scene = function ( editor ) {
 
 	var fogNear = new UI.Number( 1 ).setWidth( '60px' ).setRange( 0, Infinity ).onChange( updateFogParameters );
 
-	fogNearRow.add( new UI.Text( '烟雾近平面' ).setWidth( '90px' ) );
+	fogNearRow.add( new UI.Text( 'Fog near' ).setWidth( '90px' ) );
 	fogNearRow.add( fogNear );
 
 	container.add( fogNearRow );
@@ -86,7 +86,7 @@ Sidebar.Scene = function ( editor ) {
 
 	var fogFar = new UI.Number( 5000 ).setWidth( '60px' ).setRange( 0, Infinity ).onChange( updateFogParameters );
 
-	fogFarRow.add( new UI.Text( '烟雾远平面' ).setWidth( '90px' ) );
+	fogFarRow.add( new UI.Text( 'Fog far' ).setWidth( '90px' ) );
 	fogFarRow.add( fogFar );
 
 	container.add( fogFarRow );
@@ -98,7 +98,7 @@ Sidebar.Scene = function ( editor ) {
 
 	var fogDensity = new UI.Number( 0.00025 ).setWidth( '60px' ).setRange( 0, 0.1 ).setPrecision( 5 ).onChange( updateFogParameters );
 
-	fogDensityRow.add( new UI.Text( '烟雾密度' ).setWidth( '90px' ) );
+	fogDensityRow.add( new UI.Text( 'Fog density' ).setWidth( '90px' ) );
 	fogDensityRow.add( fogDensity );
 
 	container.add( fogDensityRow );

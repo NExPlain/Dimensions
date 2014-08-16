@@ -24,7 +24,7 @@ Sidebar.Material = function ( editor ) {
 	container.setDisplay( 'none' );
 	container.dom.classList.add( 'Material' );
 
-	container.add( new UI.Text().setValue( '材质' ) );
+	container.add( new UI.Text().setValue( 'MATERIAL' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	// uuid
@@ -53,7 +53,7 @@ Sidebar.Material = function ( editor ) {
 
 	} );
 
-	materialNameRow.add( new UI.Text( '名称' ).setWidth( '90px' ) );
+	materialNameRow.add( new UI.Text( 'Name' ).setWidth( '90px' ) );
 	materialNameRow.add( materialName );
 
 	container.add( materialNameRow );
@@ -75,7 +75,7 @@ Sidebar.Material = function ( editor ) {
 
 	} ).setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( update );
 
-	materialClassRow.add( new UI.Text( '种类' ).setWidth( '90px' ) );
+	materialClassRow.add( new UI.Text( 'Type' ).setWidth( '90px' ) );
 	materialClassRow.add( materialClass );
 
 	container.add( materialClassRow );
@@ -85,7 +85,7 @@ Sidebar.Material = function ( editor ) {
 	var materialColorRow = new UI.Panel();
 	var materialColor = new UI.Color().onChange( update );
 
-	materialColorRow.add( new UI.Text( '颜色' ).setWidth( '90px' ) );
+	materialColorRow.add( new UI.Text( 'Color' ).setWidth( '90px' ) );
 	materialColorRow.add( materialColor );
 
 	container.add( materialColorRow );
@@ -95,7 +95,7 @@ Sidebar.Material = function ( editor ) {
 	var materialAmbientRow = new UI.Panel();
 	var materialAmbient = new UI.Color().onChange( update );
 
-	materialAmbientRow.add( new UI.Text( '环境' ).setWidth( '90px' ) );
+	materialAmbientRow.add( new UI.Text( 'Ambient' ).setWidth( '90px' ) );
 	materialAmbientRow.add( materialAmbient );
 
 	container.add( materialAmbientRow );
@@ -105,7 +105,7 @@ Sidebar.Material = function ( editor ) {
 	var materialEmissiveRow = new UI.Panel();
 	var materialEmissive = new UI.Color().onChange( update );
 
-	materialEmissiveRow.add( new UI.Text( '自发光' ).setWidth( '90px' ) );
+	materialEmissiveRow.add( new UI.Text( 'Emissive' ).setWidth( '90px' ) );
 	materialEmissiveRow.add( materialEmissive );
 
 	container.add( materialEmissiveRow );
@@ -115,7 +115,7 @@ Sidebar.Material = function ( editor ) {
 	var materialSpecularRow = new UI.Panel();
 	var materialSpecular = new UI.Color().onChange( update );
 
-	materialSpecularRow.add( new UI.Text( '镜面' ).setWidth( '90px' ) );
+	materialSpecularRow.add( new UI.Text( 'Specular' ).setWidth( '90px' ) );
 	materialSpecularRow.add( materialSpecular );
 
 	container.add( materialSpecularRow );
@@ -125,7 +125,7 @@ Sidebar.Material = function ( editor ) {
 	var materialShininessRow = new UI.Panel();
 	var materialShininess = new UI.Number( 30 ).onChange( update );
 
-	materialShininessRow.add( new UI.Text( '发亮' ).setWidth( '90px' ) );
+	materialShininessRow.add( new UI.Text( 'Shininess' ).setWidth( '90px' ) );
 	materialShininessRow.add( materialShininess );
 
 	container.add( materialShininessRow );
@@ -141,7 +141,7 @@ Sidebar.Material = function ( editor ) {
 
 	} ).onChange( update );
 
-	materialVertexColorsRow.add( new UI.Text( '顶点颜色' ).setWidth( '90px' ) );
+	materialVertexColorsRow.add( new UI.Text( 'Vertex Colors' ).setWidth( '90px' ) );
 	materialVertexColorsRow.add( materialVertexColors );
 
 	container.add( materialVertexColorsRow );
@@ -153,7 +153,7 @@ Sidebar.Material = function ( editor ) {
 	var materialMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
-	materialMapRow.add( new UI.Text( '贴图' ).setWidth( '90px' ) );
+	materialMapRow.add( new UI.Text( 'Map' ).setWidth( '90px' ) );
 	materialMapRow.add( materialMapEnabled );
 	materialMapRow.add( materialMap );
 
@@ -166,7 +166,7 @@ Sidebar.Material = function ( editor ) {
 	var materialLightMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialLightMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
-	materialLightMapRow.add( new UI.Text( '光线映射贴图' ).setWidth( '90px' ) );
+	materialLightMapRow.add( new UI.Text( 'Light Map' ).setWidth( '90px' ) );
 	materialLightMapRow.add( materialLightMapEnabled );
 	materialLightMapRow.add( materialLightMap );
 
@@ -180,7 +180,7 @@ Sidebar.Material = function ( editor ) {
 	var materialBumpMap = new UI.Texture().setColor( '#444' ).onChange( update );
 	var materialBumpScale = new UI.Number( 1 ).setWidth( '30px' ).onChange( update );
 
-	materialBumpMapRow.add( new UI.Text( '凹凸贴图' ).setWidth( '90px' ) );
+	materialBumpMapRow.add( new UI.Text( 'Bump Map' ).setWidth( '90px' ) );
 	materialBumpMapRow.add( materialBumpMapEnabled );
 	materialBumpMapRow.add( materialBumpMap );
 	materialBumpMapRow.add( materialBumpScale );
@@ -194,7 +194,7 @@ Sidebar.Material = function ( editor ) {
 	var materialNormalMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialNormalMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
-	materialNormalMapRow.add( new UI.Text( '法线贴图' ).setWidth( '90px' ) );
+	materialNormalMapRow.add( new UI.Text( 'Normal Map' ).setWidth( '90px' ) );
 	materialNormalMapRow.add( materialNormalMapEnabled );
 	materialNormalMapRow.add( materialNormalMap );
 
@@ -207,7 +207,7 @@ Sidebar.Material = function ( editor ) {
 	var materialSpecularMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialSpecularMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
-	materialSpecularMapRow.add( new UI.Text( '镜面贴图' ).setWidth( '90px' ) );
+	materialSpecularMapRow.add( new UI.Text( 'Specular Map' ).setWidth( '90px' ) );
 	materialSpecularMapRow.add( materialSpecularMapEnabled );
 	materialSpecularMapRow.add( materialSpecularMap );
 
@@ -221,7 +221,7 @@ Sidebar.Material = function ( editor ) {
 	var materialEnvMap = new UI.CubeTexture().setColor( '#444' ).onChange( update );
 	var materialReflectivity = new UI.Number( 1 ).setWidth( '30px' ).onChange( update );
 
-	materialEnvMapRow.add( new UI.Text( '环境贴图' ).setWidth( '90px' ) );
+	materialEnvMapRow.add( new UI.Text( 'Env Map' ).setWidth( '90px' ) );
 	materialEnvMapRow.add( materialEnvMapEnabled );
 	materialEnvMapRow.add( materialEnvMap );
 	materialEnvMapRow.add( materialReflectivity );
@@ -234,16 +234,16 @@ Sidebar.Material = function ( editor ) {
 	var materialBlendingRow = new UI.Panel();
 	var materialBlending = new UI.Select().setOptions( {
 
-		0: '无',
-		1: '法向',
-		2: '添加',
-		3: '减去',
-		4: '相乘',
-		5: '自定义'
+		0: 'No',
+		1: 'Normal',
+		2: 'Additive',
+		3: 'Subtractive',
+		4: 'Multiply',
+		5: 'Custom'
 
 	} ).setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( update );
 
-	materialBlendingRow.add( new UI.Text( '混合模式' ).setWidth( '90px' ) );
+	materialBlendingRow.add( new UI.Text( 'Blending' ).setWidth( '90px' ) );
 	materialBlendingRow.add( materialBlending );
 
 	container.add( materialBlendingRow );
@@ -254,13 +254,13 @@ Sidebar.Material = function ( editor ) {
 	var materialSideRow = new UI.Panel();
 	var materialSide = new UI.Select().setOptions( {
 
-		0: '正侧',
-		1: '背侧',
-		2: '双侧'
+		0: 'Front',
+		1: 'Back',
+		2: 'Double'
 
 	} ).setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( update );
 
-	materialSideRow.add( new UI.Text( '位置' ).setWidth( '90px' ) );
+	materialSideRow.add( new UI.Text( 'Side' ).setWidth( '90px' ) );
 	materialSideRow.add( materialSide );
 
 	container.add( materialSideRow );
@@ -271,7 +271,7 @@ Sidebar.Material = function ( editor ) {
 	var materialOpacityRow = new UI.Panel();
 	var materialOpacity = new UI.Number().setWidth( '60px' ).setRange( 0, 1 ).onChange( update );
 
-	materialOpacityRow.add( new UI.Text( '不透明度' ).setWidth( '90px' ) );
+	materialOpacityRow.add( new UI.Text( 'Opacity' ).setWidth( '90px' ) );
 	materialOpacityRow.add( materialOpacity );
 
 	container.add( materialOpacityRow );
@@ -282,7 +282,7 @@ Sidebar.Material = function ( editor ) {
 	var materialTransparentRow = new UI.Panel();
 	var materialTransparent = new UI.Checkbox().setLeft( '100px' ).onChange( update );
 
-	materialTransparentRow.add( new UI.Text( '透明' ).setWidth( '90px' ) );
+	materialTransparentRow.add( new UI.Text( 'Transparent' ).setWidth( '90px' ) );
 	materialTransparentRow.add( materialTransparent );
 
 	container.add( materialTransparentRow );
@@ -294,7 +294,7 @@ Sidebar.Material = function ( editor ) {
 	var materialWireframe = new UI.Checkbox( false ).onChange( update );
 	var materialWireframeLinewidth = new UI.Number( 1 ).setWidth( '60px' ).setRange( 0, 100 ).onChange( update );
 
-	materialWireframeRow.add( new UI.Text( '线框' ).setWidth( '90px' ) );
+	materialWireframeRow.add( new UI.Text( 'Wireframe' ).setWidth( '90px' ) );
 	materialWireframeRow.add( materialWireframe );
 	materialWireframeRow.add( materialWireframeLinewidth );
 

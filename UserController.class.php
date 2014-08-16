@@ -144,7 +144,7 @@ class UserController {
             $badge = $row['price'] == '0' ? '<div class="item pricing-badge free">Free</div>' : '<div class="item pricing-badge premium">Premium</div>';
             $edit_button = "";
             if ($self) {
-                $edit_button = '<a class="edit-link" title="在编辑器中编辑此模型" href="editor/index.php?id=' . $row["id"] . '"><span class="icon glyphicon glyphicon-edit"></span> 编辑</a>';
+                $edit_button = '<a class="edit-link" title="在编辑器中编辑此模型" href="editor/edit.php?id=' . $row["id"] . '"><span class="icon glyphicon glyphicon-edit"></span> 编辑</a>';
             }
             echo <<<HTML
             <li class="model-item">

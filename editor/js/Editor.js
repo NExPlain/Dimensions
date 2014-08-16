@@ -117,7 +117,7 @@ Editor.prototype = {
 
 		if ( object.parent === undefined ) return; // avoid deleting the camera or scene
 
-		if ( confirm( '删除 ' + object.name + '?' ) === false ) return;
+		if ( confirm( 'Delete ' + object.name + '?' ) === false ) return;
 
 		var scope = this;
 

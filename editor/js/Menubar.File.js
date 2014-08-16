@@ -4,7 +4,7 @@ Menubar.File = function ( editor ) {
 	container.setClass( 'menu' );
 
 	var title = new UI.Panel();
-	title.setTextContent( '文件' );
+	title.setTextContent( 'File' );
 	title.setMargin( '0px' );
 	title.setPadding( '8px' );
 	container.add( title );
@@ -19,17 +19,21 @@ Menubar.File = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '新建' );
+	option.setTextContent( 'New' );
 	option.onClick( function () {
 
-		if (confirm('新建一个文档将会扔掉您所有尚未储存的修改，请确认此操作。')) {
+		if ( confirm( 'Are you sure?' ) ) {
+
 			editor.config.clear();
-			editor.storage.clear(function() {
+			editor.storage.clear( function () {
+
 				location.href = location.pathname;
-			});
+
+			} );
+
 		}
 
-	});
+	} );
 	options.add( option );
 
 	options.add( new UI.HorizontalRule() );
@@ -47,7 +51,7 @@ Menubar.File = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '导入' );
+	option.setTextContent( 'Import' );
 	option.onClick( function () {
 
 		input.click();
@@ -62,14 +66,14 @@ Menubar.File = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '导出 Geometry' );
+	option.setTextContent( 'Export Geometry' );
 	option.onClick( function () {
 
 		var object = editor.selected;
 
 		if ( object === null ) {
 
-			alert( '尚未选择任何一个 Object' );
+			alert( 'No object selected.' );
 			return;
 
 		}
@@ -100,12 +104,12 @@ Menubar.File = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '导出 Object' );
+	option.setTextContent( 'Export Object' );
 	option.onClick( function () {
 
 		if ( editor.selected === null ) {
 
-			alert( '尚未选择任何一个 Object' );
+			alert( 'No object selected' );
 			return;
 
 		}
@@ -119,7 +123,7 @@ Menubar.File = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '导出 Scene' );
+	option.setTextContent( 'Export Scene' );
 	option.onClick( function () {
 
 		exportScene( THREE.ObjectExporter );
@@ -131,7 +135,7 @@ Menubar.File = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '导出 OBJ' );
+	option.setTextContent( 'Export OBJ' );
 	option.onClick( function () {
 
 		exportGeometry( THREE.OBJExporter );

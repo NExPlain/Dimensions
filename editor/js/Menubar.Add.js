@@ -4,7 +4,7 @@ Menubar.Add = function ( editor ) {
 	container.setClass( 'menu' );
 
 	var title = new UI.Panel();
-	title.setTextContent( '添加' );
+	title.setTextContent( 'Add' );
 	title.setMargin( '0px' );
 	title.setPadding( '8px' );
 	container.add( title );
@@ -22,7 +22,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '平面' );
+	option.setTextContent( 'Plane' );
 	option.onClick( function () {
 
 		var width = 200;
@@ -48,7 +48,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '立方体' );
+	option.setTextContent( 'Cube' );
 	option.onClick( function () {
 
 		var width = 100;
@@ -73,7 +73,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '圆' );
+	option.setTextContent( 'Circle' );
 	option.onClick( function () {
 
 		var radius = 20;
@@ -93,7 +93,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '圆柱体' );
+	option.setTextContent( 'Cylinder' );
 	option.onClick( function () {
 
 		var radiusTop = 20;
@@ -117,7 +117,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '球体' );
+	option.setTextContent( 'Sphere' );
 	option.onClick( function () {
 
 		var radius = 75;
@@ -138,7 +138,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '二十面体' );
+	option.setTextContent( 'Icosahedron' );
 	option.onClick( function () {
 
 		var radius = 75;
@@ -158,7 +158,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '环面' );
+	option.setTextContent( 'Torus' );
 	option.onClick( function () {
 
 		var radius = 100;
@@ -181,7 +181,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '环面纽结' );
+	option.setTextContent( 'TorusKnot' );
 	option.onClick( function () {
 
 		var radius = 100;
@@ -210,7 +210,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( 'SpriteMaterial' );
+	option.setTextContent( 'Sprite' );
 	option.onClick( function () {
 
 		var sprite = new THREE.Sprite( new THREE.SpriteMaterial() );
@@ -230,7 +230,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '点光源(PointLight)' );
+	option.setTextContent( 'Point light' );
 	option.onClick( function () {
 
 		var color = 0xffffff;
@@ -250,7 +250,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '聚光源(SpotLight)' );
+	option.setTextContent( 'Spot light' );
 	option.onClick( function () {
 
 		var color = 0xffffff;
@@ -275,7 +275,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '定向光(DirectionalLight)' );
+	option.setTextContent( 'Directional light' );
 	option.onClick( function () {
 
 		var color = 0xffffff;
@@ -297,7 +297,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '球状光(HemisphereLight)' );
+	option.setTextContent( 'Hemisphere light' );
 	option.onClick( function () {
 
 		var skyColor = 0x00aaff;
@@ -319,7 +319,7 @@ Menubar.Add = function ( editor ) {
 
 	var option = new UI.Panel();
 	option.setClass( 'option' );
-	option.setTextContent( '环境光(AmbientLight)' );
+	option.setTextContent( 'Ambient light' );
 	option.onClick( function () {
 
 		var color = 0x222222;

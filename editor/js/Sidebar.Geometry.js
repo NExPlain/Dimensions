@@ -35,7 +35,7 @@ Sidebar.Geometry = function ( editor ) {
 
 	} );
 
-	geometryNameRow.add( new UI.Text( '名称' ).setWidth( '90px' ) );
+	geometryNameRow.add( new UI.Text( 'Name' ).setWidth( '90px' ) );
 	geometryNameRow.add( geometryName );
 
 	container.add( geometryNameRow );
@@ -45,7 +45,7 @@ Sidebar.Geometry = function ( editor ) {
 	var geometryTypeRow = new UI.Panel();
 	var geometryType = new UI.Text().setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' );
 
-	geometryTypeRow.add( new UI.Text( '种类' ).setWidth( '90px' ) );
+	geometryTypeRow.add( new UI.Text( 'Type' ).setWidth( '90px' ) );
 	geometryTypeRow.add( geometryType );
 
 	container.add( geometryTypeRow );
@@ -55,7 +55,7 @@ Sidebar.Geometry = function ( editor ) {
 	var geometryVerticesRow = new UI.Panel();
 	var geometryVertices = new UI.Text().setColor( '#444' ).setFontSize( '12px' );
 
-	geometryVerticesRow.add( new UI.Text( '顶点' ).setWidth( '90px' ) );
+	geometryVerticesRow.add( new UI.Text( 'Vertices' ).setWidth( '90px' ) );
 	geometryVerticesRow.add( geometryVertices );
 
 	container.add( geometryVerticesRow );
@@ -65,7 +65,7 @@ Sidebar.Geometry = function ( editor ) {
 	var geometryFacesRow = new UI.Panel();
 	var geometryFaces = new UI.Text().setColor( '#444' ).setFontSize( '12px' );
 
-	geometryFacesRow.add( new UI.Text( '表面' ).setWidth( '90px' ) );
+	geometryFacesRow.add( new UI.Text( 'Faces' ).setWidth( '90px' ) );
 	geometryFacesRow.add( geometryFaces );
 
 	container.add( geometryFacesRow );

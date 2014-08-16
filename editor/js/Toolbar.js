@@ -9,21 +9,21 @@ var Toolbar = function ( editor ) {
 
 	// translate / rotate / scale
 
-	var translate = new UI.Button( '转换' ).onClick( function () {
+	var translate = new UI.Button( 'translate' ).onClick( function () {
 
 		signals.transformModeChanged.dispatch( 'translate' );
 
 	} );
 	buttons.add( translate );
 
-	var rotate = new UI.Button( '旋转' ).onClick( function () {
+	var rotate = new UI.Button( 'rotate' ).onClick( function () {
 
 		signals.transformModeChanged.dispatch( 'rotate' );
 
 	} );
 	buttons.add( rotate );
 
-	var scale = new UI.Button( '缩放' ).onClick( function () {
+	var scale = new UI.Button( 'scale' ).onClick( function () {
 
 		signals.transformModeChanged.dispatch( 'scale' );
 
@@ -34,16 +34,16 @@ var Toolbar = function ( editor ) {
 
 	var grid = new UI.Number( 25 ).onChange( update );
 	grid.dom.style.width = '42px';
-	buttons.add( new UI.Text( '网格: ' ) );
+	buttons.add( new UI.Text( 'Grid: ' ) );
 	buttons.add( grid );
 
 	var snap = new UI.Checkbox( false ).onChange( update );
 	buttons.add( snap );
-	buttons.add( new UI.Text( '快照' ) );
+	buttons.add( new UI.Text( 'snap' ) );
 
 	var local = new UI.Checkbox( false ).onChange( update );
 	buttons.add( local );
-	buttons.add( new UI.Text( '本地' ) );
+	buttons.add( new UI.Text( 'local' ) );
 
 	function update() {
 

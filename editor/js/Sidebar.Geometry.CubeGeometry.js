@@ -9,7 +9,7 @@ Sidebar.Geometry.CubeGeometry = function ( signals, object ) {
 	var widthRow = new UI.Panel();
 	var width = new UI.Number( geometry.width ).onChange( update );
 
-	widthRow.add( new UI.Text( '宽度' ).setWidth( '90px' ) );
+	widthRow.add( new UI.Text( 'Width' ).setWidth( '90px' ) );
 	widthRow.add( width );
 
 	container.add( widthRow );
@@ -19,7 +19,7 @@ Sidebar.Geometry.CubeGeometry = function ( signals, object ) {
 	var heightRow = new UI.Panel();
 	var height = new UI.Number( geometry.height ).onChange( update );
 
-	heightRow.add( new UI.Text( '高度' ).setWidth( '90px' ) );
+	heightRow.add( new UI.Text( 'Height' ).setWidth( '90px' ) );
 	heightRow.add( height );
 
 	container.add( heightRow );
@@ -29,7 +29,7 @@ Sidebar.Geometry.CubeGeometry = function ( signals, object ) {
 	var depthRow = new UI.Panel();
 	var depth = new UI.Number( geometry.depth ).onChange( update );
 
-	depthRow.add( new UI.Text( '深度' ).setWidth( '90px' ) );
+	depthRow.add( new UI.Text( 'Depth' ).setWidth( '90px' ) );
 	depthRow.add( depth );
 
 	container.add( depthRow );
@@ -39,7 +39,7 @@ Sidebar.Geometry.CubeGeometry = function ( signals, object ) {
 	var widthSegmentsRow = new UI.Panel();
 	var widthSegments = new UI.Integer( geometry.widthSegments ).setRange( 1, Infinity ).onChange( update );
 
-	widthSegmentsRow.add( new UI.Text( '宽度方向线段数' ).setWidth( '90px' ) );
+	widthSegmentsRow.add( new UI.Text( 'Width segments' ).setWidth( '90px' ) );
 	widthSegmentsRow.add( widthSegments );
 
 	container.add( widthSegmentsRow );
@@ -49,7 +49,7 @@ Sidebar.Geometry.CubeGeometry = function ( signals, object ) {
 	var heightSegmentsRow = new UI.Panel();
 	var heightSegments = new UI.Integer( geometry.heightSegments ).setRange( 1, Infinity ).onChange( update );
 
-	heightSegmentsRow.add( new UI.Text( '高度方向线段数' ).setWidth( '90px' ) );
+	heightSegmentsRow.add( new UI.Text( 'Height segments' ).setWidth( '90px' ) );
 	heightSegmentsRow.add( heightSegments );
 
 	container.add( heightSegmentsRow );
@@ -59,7 +59,7 @@ Sidebar.Geometry.CubeGeometry = function ( signals, object ) {
 	var depthSegmentsRow = new UI.Panel();
 	var depthSegments = new UI.Integer( geometry.depthSegments ).setRange( 1, Infinity ).onChange( update );
 
-	depthSegmentsRow.add( new UI.Text( '深度方向线段数' ).setWidth( '90px' ) );
+	depthSegmentsRow.add( new UI.Text( 'Height segments' ).setWidth( '90px' ) );
 	depthSegmentsRow.add( depthSegments );
 
 	container.add( depthSegmentsRow );

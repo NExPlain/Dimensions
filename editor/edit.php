@@ -2,9 +2,9 @@
 /**
  * Initial page for model editor
  *
- * @author Renfei Song & Three.js
+ * @author Renfei Song & Three-r68.min.js
  */
-require_once "../define.php";
+require_once "../functions.php";
 	
 	if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])
 	&& sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {	
@@ -14,21 +14,18 @@ require_once "../define.php";
 		$result = mysqli_query($dbc, $query);
 		if ($row = mysqli_fetch_array($result)) {
 			if ($row['username'] == $_COOKIE['username']) {
-				$fileUri = "/upload/".$row["file_stamp"]."/".$row["model_name"];
+				$file_url = "/" . UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["model_name"];
 			} else {
-				// Authorization failure.
-				exitAbnormally();
+				exit_with_error();
 			}
 		} else {
-			// ID not valid.
-			exitAbnormally();
+			exit_with_error();
 		}
 	} else {
-		// Not logged in, or id not specified.
-		exitAbnormally();
+		exit_with_error();
 	}
 	
-	function exitAbnormally() {
+	function exit_with_error() {
 		require_once('../header.php');
 		?>
 			<div class="alert alert-error"><strong>错误：</strong>拒绝访问。</div>
@@ -37,7 +34,7 @@ require_once "../define.php";
 		exit;
 	}
 ?><!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 	<head>
 		<title>编辑模型</title>
 		<meta charset="utf-8">
@@ -46,38 +43,39 @@ require_once "../define.php";
 	<body>
 		<link href="css/types.css" rel="stylesheet">
 		<link id="theme" href="css/light.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
 
-		<script src="js/utils/three.min.js"></script>
-		<script src="js/utils/jquery-1.10.2.min.js"></script>
+		<script src="../lib/webgl/Three-r65.min.js"></script>
+		<script src="../lib/core/jquery/jquery-1.10.2.min.js"></script>
 		<script src="js/libs/system.min.js"></script>
 
-		<script src="js/utils/controls/EditorControls.js"></script>
-		<script src="js/utils/controls/TransformControls.js"></script>
-		<script src="js/utils/loaders/BabylonLoader.js"></script>
-		<script src="js/utils/loaders/ColladaLoader.js"></script>
-		<script src="js/utils/loaders/OBJLoader.js"></script>
-		<script src="js/utils/loaders/PLYLoader.js"></script>
-		<script src="js/utils/loaders/STLLoader.js"></script>
-		<script src="js/utils/loaders/UTF8Loader.js"></script>
-		<script src="js/utils/loaders/VRMLLoader.js"></script>
-		<script src="js/utils/loaders/VTKLoader.js"></script>
-		<script src="js/utils/loaders/ctm/lzma.js"></script>
-		<script src="js/utils/loaders/ctm/ctm.js"></script>
-		<script src="js/utils/loaders/ctm/CTMLoader.js"></script>
-		<script src="js/utils/exporters/SceneExporter.js"></script>
-		<script src="js/utils/exporters/OBJExporter.js"></script>
-		<script src="js/utils/renderers/SoftwareRenderer.js"></script>
-		<script src="js/utils/renderers/SVGRenderer.js"></script>
+		<script src="../lib/webgl/controls/EditorControls.js"></script>
+		<script src="../lib/webgl/controls/TransformControls.js"></script>
+		<script src="../lib/webgl/loaders/BabylonLoader.js"></script>
+		<script src="../lib/webgl/loaders/ColladaLoader.js"></script>
+		<script src="../lib/webgl/loaders/OBJLoader.js"></script>
+		<script src="../lib/webgl/loaders/PLYLoader.js"></script>
+		<script src="../lib/webgl/loaders/STLLoader.js"></script>
+		<script src="../lib/webgl/loaders/UTF8Loader.js"></script>
+		<script src="../lib/webgl/loaders/VRMLLoader.js"></script>
+		<script src="../lib/webgl/loaders/VTKLoader.js"></script>
+		<script src="../lib/webgl/loaders/ctm/lzma.js"></script>
+		<script src="../lib/webgl/loaders/ctm/ctm.js"></script>
+		<script src="../lib/webgl/loaders/ctm/CTMLoader.js"></script>
+		<script src="../lib/webgl/exporters/SceneExporter.js"></script>
+		<script src="../lib/webgl/exporters/OBJExporter.js"></script>
+		<script src="../lib/webgl/renderers/SoftwareRenderer.js"></script>
+		<script src="../lib/webgl/renderers/SVGRenderer.js"></script>
 
 		<!-- WIP -->
 
-		<script src="js/utils/BufferGeometryUtils.js"></script>
+		<script src="js/BufferGeometryUtils.js"></script>
 
-		<script src="js/utils/exporters/BufferGeometryExporter.js"></script>
-		<script src="js/utils/exporters/GeometryExporter.js"></script>
-		<script src="js/utils/exporters/MaterialExporter.js"></script>
-		<script src="js/utils/exporters/ObjectExporter.js"></script>
-		<script src="js/utils/renderers/WebGLRenderer3.js"></script>
+		<script src="../lib/webgl/exporters/BufferGeometryExporter.js"></script>
+		<script src="../lib/webgl/exporters/GeometryExporter.js"></script>
+		<script src="../lib/webgl/exporters/MaterialExporter.js"></script>
+		<script src="../lib/webgl/exporters/ObjectExporter.js"></script>
+		<script src="../lib/webgl/renderers/WebGLRenderer3.js"></script>
 
 		<script src="js/libs/signals.min.js"></script>
 		<script src="js/libs/ui.js"></script>
@@ -275,7 +273,7 @@ require_once "../define.php";
 			}
 			
 			clearLocal();
-			loadFile('<?php echo $fileUri; ?>');
+			loadFile('<?php echo $file_url; ?>');
 		</script>
 	</body>
 </html>

@@ -14,7 +14,7 @@ Sidebar.Renderer = function ( editor ) {
 
 	var container = new UI.Panel();
 
-	container.add( new UI.Text( '渲染器' ) );
+	container.add( new UI.Text( 'RENDERER' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	// class
@@ -32,7 +32,7 @@ Sidebar.Renderer = function ( editor ) {
 	var rendererTypeRow = new UI.Panel();
 	var rendererType = new UI.Select().setOptions( options ).setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( updateRenderer );
 
-	rendererTypeRow.add( new UI.Text( '种类' ).setWidth( '90px' ) );
+	rendererTypeRow.add( new UI.Text( 'Type' ).setWidth( '90px' ) );
 	rendererTypeRow.add( rendererType );
 
 	container.add( rendererTypeRow );
