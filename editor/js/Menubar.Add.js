@@ -1,7 +1,7 @@
 Menubar.Add = function ( editor ) {
 
 	var container = new UI.Panel();
-	container.setClass( 'menu add dropdown' );
+	container.setClass( 'menu add' );
 
 	var title = new UI.Panel();
 	title.setTextContent( 'Add' );

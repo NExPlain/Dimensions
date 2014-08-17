@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>创造模式</title>
+		<title>新建模型</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <script>window.globle_editor = null;</script>
 	</head>
 	<body>
         <script src="../lib/core/jquery/jquery-1.10.2.min.js"></script>
-        <script src="../lib/core/selectize/selectize.min.js"></script>
-        <link href="../lib/core/selectize/selectize.css" rel="stylesheet">
+        <script src="../lib/core/bootstrap/js/bootstrap.min.js"></script>
+
 		<link href="css/types.css" rel="stylesheet">
-		<link id="theme" href="css/light.css" rel="stylesheet">
+		<link href="css/light.css" rel="stylesheet" id="theme">
+        <link href="css/modal.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
 
 		<script src="../lib/webgl/Three-r65.min.js"></script>
 		<script src="js/libs/system.min.js"></script>
-
 		<script src="../lib/webgl/controls/EditorControls.js"></script>
 		<script src="../lib/webgl/controls/TransformControls.js"></script>
 		<script src="../lib/webgl/loaders/BabylonLoader.js"></script>
@@ -50,7 +49,6 @@
 		<script src="js/libs/ui.three.js"></script>
 
 		<script src="js/Storage.js"></script>
-
 		<script src="js/Editor.js"></script>
 		<script src="js/Config.js"></script>
 		<script src="js/Loader.js"></script>
@@ -240,7 +238,7 @@
 				}
 			}
 			
-			//clearLocal();
+			clearLocal();
 		</script>
         <script src="uifix.js"></script>
 	</body>

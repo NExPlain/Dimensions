@@ -148,6 +148,24 @@
 	padding: 10px 0;
 }
 
+/* scroll bar */
+
+::-webkit-scrollbar {
+	width: 7px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 0;
+	box-shadow: none;
+	border: 0;
+	background-color: rgba(255,255,255,0.2);
+}
+::-webkit-scrollbar-track {
+	border-radius: 0;
+	box-shadow: none;
+	border: 0;
+	background-color: #454545;
+}
+
 /* sidebar controls */
 
 #sidebar * {
@@ -289,7 +307,7 @@ input.Number {
 	display: none;
 }
 #sidebar .checkbox-label {
-	left: 0px;
+	left: 0;
 	display: block;
 	width: 40px;
 	height: 32px;
@@ -327,4 +345,160 @@ input.Number {
 	border: none !important;
 	background: none;
 	color: #a2a2a2;
+}
+
+/* toolbar */
+
+#viewport {
+	bottom: 50px;
+}
+#toolbar {
+	background: #454545;
+	height: 50px;
+}
+#toolbar .Panel {
+	color: rgb(162,162,162);
+	height: 34px;
+	padding: 8px 8px;
+}
+#toolbar .Button,
+.modal .close-button {
+	height: 34px;
+	line-height: 34px;
+	border-radius: 0;
+	border: 0;
+	padding: 0 14px;
+	margin-right: 10px;
+	cursor: pointer;
+	font-size: 14px;
+	color: #ffffff;
+}
+#toolbar .Button:nth-child(1) {
+	background-color: #4b8df8;
+}
+#toolbar .Button:nth-child(1):hover {
+	background-color: #2474f6;
+}
+#toolbar .Button:nth-child(2) {
+	background-color: #35aa47;
+}
+#toolbar .Button:nth-child(2):hover {
+	background-color: #2b8b3a;
+}
+#toolbar .Button:nth-child(3) {
+	background-color: #ffb848;
+}
+#toolbar .Button:nth-child(3):hover {
+	background-color: #ffa81f;
+}
+#toolbar .Checkbox {
+
+}
+
+/* Modal */
+
+.menu.add .options {
+	display: none !important;
+}
+.modal {
+	border-radius: 0;
+}
+.modal ::-webkit-scrollbar-thumb {
+	background-color: rgba(0,0,0,0.2);
+}
+.modal ::-webkit-scrollbar-track {
+	background-color: rgba(0,0,0,0.1);
+}
+.modal h3 {
+	font-size: 17px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: lighter;
+}
+.modal .close-button {
+	color: #333333;
+	background-color: #e5e5e5;
+}
+.modal .close-button:hover {
+	background-color: #d1d1d1;
+}
+.modal .category {
+	margin-top: 20px;
+}
+.modal .category:first-child {
+	margin-top: 0;
+}
+.modal .category .title {
+	font-weight: bold;
+	font-size: 14px;
+}
+.modal .option {
+	width: 64px;
+	height: 85px;
+	display: inline-block;
+	margin: 10px;
+	cursor: pointer;
+}
+.modal .option:nth-child(2),
+.modal .option:nth-child(8){
+	margin-left: 0;
+}
+.modal .option:nth-child(7) {
+	margin-right: 0;
+}
+.modal .image {
+	width: 64px;
+	height: 60px;
+	margin-bottom: 5px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+.modal .image:hover {
+	opacity: 0.70;
+}
+.modal .text {
+	text-align: center;
+}
+
+.modal .plane .image {
+	background-image: url('../images/plane.png');
+}
+.modal .circle .image {
+	background-image: url('../images/circle.png');
+}
+.modal .cylinder .image {
+	background-image: url('../images/cylinder.png');
+}
+.modal .icosahedron .image {
+	background-image: url('../images/icosahedron.png');
+}
+.modal .sphere .image {
+	background-image: url('../images/sphere.png');
+}
+.modal .torus .image {
+	background-image: url('../images/torus.png');
+}
+.modal .cube .image {
+	background-image: url('../images/cube.png');
+}
+.modal .torusknot .image {
+	background-image: url('../images/torus-knot.png');
+}
+.modal .ambient-light .image {
+	background-image: url('../images/ambient-light.png');
+}
+.modal .directional-light .image {
+	background-image: url('../images/directional-light.png');
+}
+.modal .hemisphere-light .image {
+	background-image: url('../images/hemisphere-light.png');
+}
+.modal .point-light .image {
+	background-image: url('../images/point-light.png');
+}
+.modal .spot-light .image {
+	background-image: url('../images/spot-light.png');
+}
+.modal .sprite .image {
+	background-image: url('../images/sprite.png');
 }
