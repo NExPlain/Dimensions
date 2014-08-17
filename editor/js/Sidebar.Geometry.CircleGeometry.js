@@ -7,6 +7,7 @@ Sidebar.Geometry.CircleGeometry = function ( signals, object ) {
 	// radius
 
 	var radiusRow = new UI.Panel();
+    radiusRow.setClass('Panel final-row');
 	var radius = new UI.Number( geometry.radius ).onChange( update );
 
 	radiusRow.add( new UI.Text( 'Radius' ).setWidth( '90px' ) );
@@ -17,6 +18,7 @@ Sidebar.Geometry.CircleGeometry = function ( signals, object ) {
 	// segments
 
 	var segmentsRow = new UI.Panel();
+    segmentsRow.setClass('Panel final-row');
 	var segments = new UI.Integer( geometry.segments ).onChange( update );
 
 	segmentsRow.add( new UI.Text( 'Segments' ).setWidth( '90px' ) );

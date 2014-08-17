@@ -1,3 +1,330 @@
-#menubar {
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('../../lib/core/fontawesome-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal
+}
+@font-face {
+	font-family: Simple-Line-Icons;
+	src: url(../../lib/core/Simple-Line-Icons.woff) format('woff');
+	font-weight: 400;
+	font-style: normal
+}
 
+/* menu bar */
+
+#menubar {
+	height: 42px;
+	background: rgb(31, 31, 31);
+}
+#sidebar {
+	top: 42px;
+}
+#menubar .menu {
+	width: 65px;
+}
+#menubar .menu.dropdown:hover,
+#menubar .menu.dropdown .options {
+	background: #fefefe;
+}
+#menubar .menu.button:hover {
+	background: #333333;
+}
+#menubar .Panel {
+	padding: 13px 10px;
+	margin: 0;
+	color: #999999;
+}
+#menubar .menu.dropdown .Panel::after {
+	font-family: FontAwesome;
+	content: '\f107';
+	margin-left: 5px;
+}
+#menubar .menu.toggle {
+	width: auto;
+	margin-right: 10px;
+}
+#menubar .menu.toggle .Panel {
+	padding: 0;
+	margin: 0 15px 0 13px;
+}
+#menubar .menu.toggle .Panel::after {
+	font-family: Simple-Line-Icons;
+	font-size: 16px;
+	line-height: 42px;
+	content: '\e066';
+}
+.sidebar-hidden #menubar .menu.toggle .Panel::after {
+	content: '\e065';
+}
+#menubar .menu:hover .Panel,
+#menubar .menu:hover .options {
+	color: #777777;
+}
+#menubar .options {
+	box-shadow: rgba(91, 91, 91, 0.2) 5px 5px 0px 0px;
+}
+#menubar .toggle {
+	float: right;
+}
+
+/* sidebar toggle button */
+
+#sidebar,
+#viewport,
+#toolbar {
+	transition: right .3s;
+}
+#viewport canvas {
+	transition: width .3s;
+}
+.sidebar-hidden #sidebar {
+	right: -300px !important;
+}
+.sidebar-hidden #viewport {
+	right: 0 !important;
+}
+.sidebar-hidden #toolbar {
+	right: 0 !important;
+}
+.sidebar-hidden canvas {
+	width: 100% !important;
+}
+
+/* side bar */
+
+#sidebar {
+	background: #454545;
+	color: #a2a2a2;
+}
+.sidebar-panels {
+	margin-top: 45px;
+}
+#navigation-bar {
+	background: #555555;
+	position: fixed;
+	width: 300px;
+	z-index: 1000;
+}
+#navigation-bar ul {
+	margin: 0;
+	padding: 0;
+}
+#navigation-bar li {
+	list-style: none;
+	display: inline-block;
+	line-height: 45px;
+	width: 25%;
+	text-align: center;
+	cursor: pointer;
+}
+#navigation-bar li.current {
+	cursor: default;
+}
+#navigation-bar li.basic {
+	width: 22%;
+}
+#navigation-bar li.mesh {
+	width: 21%;
+}
+#navigation-bar li.geometry {
+	width: 29.5%;
+}
+#navigation-bar li.material {
+	width: 27.5%;
+}
+#navigation-bar li:hover {
+	background: #505050;
+}
+#navigation-bar li.current {
+	background: #454545;
+}
+#sidebar .Panel.hidden {
+	display: none !important;
+}
+#sidebar .sidebar-panels > .Panel {
+	border-top: none;
+	border-bottom: 1px solid #404040;
+	padding: 10px 0;
+}
+
+/* sidebar controls */
+
+#sidebar * {
+	outline: none !important;
+}
+/* universal */
+#sidebar .Panel.Nothing {
+	text-align: center;
+	border-bottom: none;
+	margin-top: 15px;
+}
+#sidebar .Panel.final-row {
+	padding: 5px 15px;
+	margin: 0;
+}
+#sidebar .Panel.final-row:hover {
+	background: #505050;
+}
+#sidebar .final-row .Text {
+	color: #a2a2a2 !important;
+}
+#sidebar .sidebar-panels > .Panel > .Text {
+	padding: 10px 15px 0;
+	color: #7b7b7b;
+	font-size: 16px;
+	text-transform: capitalize !important;
+}
+/* fancy select control */
+#sidebar #outliner {
+	height: auto;
+	background: none;
+	border: none;
+}
+.FancySelect .option {
+	color: rgb(162,162,162);
+	padding: 5px 15px;
+}
+.FancySelect .option.active {
+	background-color: #555555;
+}
+/* input, textarea, values */
+.Select,
+.Input,
+.TextArea,
+.Number,
+.final-row .Text + .Text,
+.FancySelect .option {
+	font-size: 13px !important;
+	font-family: 'Lucida Grande', sans-serif;
+}
+.select-wrapper {
+	display: inline-block;
+}
+.Select {
+	border: 0 !important;
+	padding: 0 5px 0 5px !important;
+	height: auto !important;
+	width: 162px !important;
+	box-sizing: border-box;
+	line-height: 32px;
+	overflow: hidden;
+	border-radius: 0;
+	-webkit-appearance: none;
+}
+.select-wrapper::after {
+	font-family: FontAwesome;
+	content: '\f107';
+	display: inline-block;
+	font-weight: normal;
+	position: relative;
+	color: #aaa;
+	left: -20px;
+	top: 1px;
+}
+.Input {
+	padding: 0 5px !important;
+	line-height: 30px !important;
+	margin: 0 !important;
+}
+.TextArea {
+	padding: 7px 5px !important;
+}
+.Input,
+.TextArea {
+	border: 1px solid transparent !important;
+}
+.Input:active,
+.TextArea:active {
+	border-color: #aaa !important;
+}
+input.Number {
+	padding: 2px 0;
+	margin: 2px 0;
+}
+/* refresh button */
+.Button.refresh {
+	color: #ffffff;
+	background-color: #4b8df8;
+	border: 0;
+	width: 36px;
+	height: 32px;
+	font-size: 16px;
+	cursor: pointer;
+}
+.Button.refresh:hover {
+	background-color: #2474f6;
+}
+/* checkbox */
+#sidebar .checkbox-wrapper {
+	width: 80px;
+	height: 32px;
+	background: black; /* Under the hook. */
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+}
+#sidebar .checkbox-label::before,
+#sidebar .checkbox-label::after {
+	font-size: 13px;
+	color: #ffffff;
+	position: absolute;
+	font-weight: bold;
+	line-height: 32px;
+	height: 32px;
+	width: 40px;
+	text-align: center;
+}
+#sidebar .checkbox-label::before {
+	content: 'ON';
+	left: -40px;
+	background: #45b6af;
+}
+#sidebar .checkbox-label::after {
+	content: 'OFF';
+	right: -40px;
+	background: #f3565d;
+}
+#sidebar .Checkbox {
+	display: none;
+}
+#sidebar .checkbox-label {
+	left: 0px;
+	display: block;
+	width: 40px;
+	height: 32px;
+	transition: all .4s ease;
+	cursor: pointer;
+	position: absolute;
+	background: #ffffff;
+}
+#sidebar .Checkbox:checked + .checkbox-label {
+	left: 40px;
+}
+#sidebar br.after-checkbox + *,
+#sidebar .final-row > .Text + .checkbox-wrapper + .after-checkbox + span + .Number {
+	/* OK, OK, I fucked this up. */
+	margin-left: 90px;
+}
+/* color */
+#sidebar .Color {
+	width: 64px !important;
+	height: 36px !important;
+	position: relative;
+	left: -3px;
+}
+/* image chooser */
+#sidebar canvas {
+	width: 32px;
+	height: 32px;
+	margin-top: 10px;
+	background-color: #555555;
+}
+#sidebar canvas + input {
+	height: 32px;
+	width: 130px !important;
+	margin-top: 10px;
+	border: none !important;
+	background: none;
+	color: #a2a2a2;
 }

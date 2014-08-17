@@ -1,12 +1,10 @@
 Menubar.View = function ( editor ) {
 
 	var container = new UI.Panel();
-	container.setClass( 'menu' );
+	container.setClass( 'menu view dropdown' );
 
 	var title = new UI.Panel();
 	title.setTextContent( 'View' );
-	title.setMargin( '0px' );
-	title.setPadding( '8px' );
 	container.add( title );
 
 	//

@@ -3,14 +3,16 @@ Sidebar.Geometry = function ( editor ) {
 	var signals = editor.signals;
 
 	var container = new UI.Panel();
+    container.dom.classList.add( 'Geometry' );
 	container.setDisplay( 'none' );
 
-	container.add( new UI.Text().setValue( 'GEOMETRY' ) );
+	container.add( new UI.Text().setValue( 'Geometry' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	// uuid
 
 	var geometryUUIDRow = new UI.Panel();
+    geometryUUIDRow.setClass('Panel final-row');
 	var geometryUUID = new UI.Input().setWidth( '115px' ).setColor( '#444' ).setFontSize( '12px' ).setDisabled( true );
 	var geometryUUIDRenew = new UI.Button( '⟳' ).setMarginLeft( '7px' ).onClick( function () {
 
@@ -19,6 +21,8 @@ Sidebar.Geometry = function ( editor ) {
 		editor.selected.geometry.uuid = geometryUUID.getValue();
 
 	} );
+
+    geometryUUIDRenew.setClass('Button refresh');
 
 	geometryUUIDRow.add( new UI.Text( 'UUID' ).setWidth( '90px' ) );
 	geometryUUIDRow.add( geometryUUID );
@@ -29,6 +33,7 @@ Sidebar.Geometry = function ( editor ) {
 	// name
 
 	var geometryNameRow = new UI.Panel();
+    geometryNameRow.setClass('Panel final-row');
 	var geometryName = new UI.Input().setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( function () {
 
 		editor.setGeometryName( editor.selected.geometry, geometryName.getValue() );
@@ -43,6 +48,7 @@ Sidebar.Geometry = function ( editor ) {
 	// class
 
 	var geometryTypeRow = new UI.Panel();
+    geometryTypeRow.setClass('Panel final-row');
 	var geometryType = new UI.Text().setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' );
 
 	geometryTypeRow.add( new UI.Text( 'Type' ).setWidth( '90px' ) );
@@ -53,6 +59,7 @@ Sidebar.Geometry = function ( editor ) {
 	// vertices
 
 	var geometryVerticesRow = new UI.Panel();
+    geometryVerticesRow.setClass('Panel final-row');
 	var geometryVertices = new UI.Text().setColor( '#444' ).setFontSize( '12px' );
 
 	geometryVerticesRow.add( new UI.Text( 'Vertices' ).setWidth( '90px' ) );
@@ -63,6 +70,7 @@ Sidebar.Geometry = function ( editor ) {
 	// faces
 
 	var geometryFacesRow = new UI.Panel();
+    geometryFacesRow.setClass('Panel final-row');
 	var geometryFaces = new UI.Text().setColor( '#444' ).setFontSize( '12px' );
 
 	geometryFacesRow.add( new UI.Text( 'Faces' ).setWidth( '90px' ) );

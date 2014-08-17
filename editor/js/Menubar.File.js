@@ -1,12 +1,10 @@
 Menubar.File = function ( editor ) {
 
 	var container = new UI.Panel();
-	container.setClass( 'menu' );
+	container.setClass( 'menu file dropdown' );
 
 	var title = new UI.Panel();
 	title.setTextContent( 'File' );
-	title.setMargin( '0px' );
-	title.setPadding( '8px' );
 	container.add( title );
 
 	//

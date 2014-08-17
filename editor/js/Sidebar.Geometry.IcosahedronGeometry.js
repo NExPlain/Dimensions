@@ -7,6 +7,7 @@ Sidebar.Geometry.IcosahedronGeometry = function ( signals, object ) {
 	// radius
 
 	var radiusRow = new UI.Panel();
+    radiusRow.setClass('Panel final-row');
 	var radius = new UI.Number( geometry.radius ).onChange( update );
 
 	radiusRow.add( new UI.Text( 'Radius' ).setWidth( '90px' ) );
@@ -17,6 +18,7 @@ Sidebar.Geometry.IcosahedronGeometry = function ( signals, object ) {
 	// detail
 
 	var detailRow = new UI.Panel();
+    detailRow.setClass('Panel final-row');
 	var detail = new UI.Integer( geometry.detail ).setRange( 0, Infinity ).onChange( update );
 
 	detailRow.add( new UI.Text( 'Detail' ).setWidth( '90px' ) );

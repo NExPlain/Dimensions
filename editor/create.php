@@ -1,33 +1,20 @@
-<?php   
-
-	require_once('../define.php');
-
-	if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])
-	&& sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {} else {
-		// Not logged in.
-		require_once('../header.php');
-		?>
-			<div class="alert alert-error"><strong>错误：</strong>拒绝访问。</div>
-		<?php
-		require_once('../footer.php');
-		exit;
-	}
-	
-	$fileUri = "bugfix";
-
-?><!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>创造模式</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <script>window.globle_editor = null;</script>
 	</head>
 	<body>
+        <script src="../lib/core/jquery/jquery-1.10.2.min.js"></script>
+        <script src="../lib/core/selectize/selectize.min.js"></script>
+        <link href="../lib/core/selectize/selectize.css" rel="stylesheet">
 		<link href="css/types.css" rel="stylesheet">
 		<link id="theme" href="css/light.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
 
 		<script src="../lib/webgl/Three-r65.min.js"></script>
-		<script src="../lib/core/jquery/jquery-1.10.2.min.js"></script>
 		<script src="js/libs/system.min.js"></script>
 
 		<script src="../lib/webgl/controls/EditorControls.js"></script>
@@ -253,8 +240,8 @@
 				}
 			}
 			
-			clearLocal();
-			// loadFile('<?php echo $fileUri; ?>');
+			//clearLocal();
 		</script>
+        <script src="uifix.js"></script>
 	</body>
 </html>

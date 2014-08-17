@@ -6,12 +6,14 @@ Sidebar.Animation = function ( editor ) {
 	var possibleAnimations = {};
 
 	var container = new UI.Panel();
+    container.dom.classList.add( 'Animation' );
 	container.setDisplay( 'none' );
 
 	container.add( new UI.Text( 'Animation' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	var AnimationsRow = new UI.Panel();
+    AnimationsRow.setClass('Panel final-row');
 	var Animations = new UI.Select().setOptions( options ).setWidth( '130px' ).setColor( '#444' ).setFontSize( '12px' );
 	AnimationsRow.add( new UI.Text( 'animations' ).setWidth( '90px' ) );
 	AnimationsRow.add( Animations );
@@ -19,6 +21,7 @@ Sidebar.Animation = function ( editor ) {
 	container.add( new UI.Break() );
 
 	var PlayRow = new UI.Panel();
+    PlayRow.setClass('Panel final-row');
 	var playButton = new UI.Button().setLabel("Play").onClick(play);
 	PlayRow.add( playButton );
 	container.add( PlayRow );

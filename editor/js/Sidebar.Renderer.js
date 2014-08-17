@@ -13,8 +13,9 @@ Sidebar.Renderer = function ( editor ) {
 	};
 
 	var container = new UI.Panel();
+    container.dom.classList.add( 'Renderer' );
 
-	container.add( new UI.Text( 'RENDERER' ) );
+	container.add( new UI.Text( 'Renderer' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	// class
@@ -30,6 +31,7 @@ Sidebar.Renderer = function ( editor ) {
 	}
 
 	var rendererTypeRow = new UI.Panel();
+    rendererTypeRow.setClass('Panel final-row');
 	var rendererType = new UI.Select().setOptions( options ).setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( updateRenderer );
 
 	rendererTypeRow.add( new UI.Text( 'Type' ).setWidth( '90px' ) );

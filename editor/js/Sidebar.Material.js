@@ -24,12 +24,13 @@ Sidebar.Material = function ( editor ) {
 	container.setDisplay( 'none' );
 	container.dom.classList.add( 'Material' );
 
-	container.add( new UI.Text().setValue( 'MATERIAL' ) );
+	container.add( new UI.Text().setValue( 'Material' ) );
 	container.add( new UI.Break(), new UI.Break() );
 
 	// uuid
 
 	var materialUUIDRow = new UI.Panel();
+    materialUUIDRow.setClass('Panel final-row');
 	var materialUUID = new UI.Input().setWidth( '115px' ).setColor( '#444' ).setFontSize( '12px' ).setDisabled( true );
 	var materialUUIDRenew = new UI.Button( '⟳' ).setMarginLeft( '7px' ).onClick( function () {
 
@@ -37,6 +38,8 @@ Sidebar.Material = function ( editor ) {
 		update();
 
 	} );
+
+    materialUUIDRenew.setClass('Button refresh');
 
 	materialUUIDRow.add( new UI.Text( 'UUID' ).setWidth( '90px' ) );
 	materialUUIDRow.add( materialUUID );
@@ -47,6 +50,7 @@ Sidebar.Material = function ( editor ) {
 	// name
 
 	var materialNameRow = new UI.Panel();
+    materialNameRow.setClass('Panel final-row');
 	var materialName = new UI.Input().setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( function () {
 
 		editor.setMaterialName( editor.selected.material, materialName.getValue() );
@@ -61,6 +65,7 @@ Sidebar.Material = function ( editor ) {
 	// class
 
 	var materialClassRow = new UI.Panel();
+    materialClassRow.setClass('Panel final-row');
 	var materialClass = new UI.Select().setOptions( {
 
 		'LineBasicMaterial': 'LineBasicMaterial',
@@ -75,6 +80,8 @@ Sidebar.Material = function ( editor ) {
 
 	} ).setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( update );
 
+    materialClass.setClass('Select material-type');
+
 	materialClassRow.add( new UI.Text( 'Type' ).setWidth( '90px' ) );
 	materialClassRow.add( materialClass );
 
@@ -83,6 +90,7 @@ Sidebar.Material = function ( editor ) {
 	// color
 
 	var materialColorRow = new UI.Panel();
+    materialColorRow.setClass('Panel final-row');
 	var materialColor = new UI.Color().onChange( update );
 
 	materialColorRow.add( new UI.Text( 'Color' ).setWidth( '90px' ) );
@@ -93,6 +101,7 @@ Sidebar.Material = function ( editor ) {
 	// ambient
 
 	var materialAmbientRow = new UI.Panel();
+    materialAmbientRow.setClass('Panel final-row');
 	var materialAmbient = new UI.Color().onChange( update );
 
 	materialAmbientRow.add( new UI.Text( 'Ambient' ).setWidth( '90px' ) );
@@ -103,6 +112,7 @@ Sidebar.Material = function ( editor ) {
 	// emissive
 
 	var materialEmissiveRow = new UI.Panel();
+    materialEmissiveRow.setClass('Panel final-row');
 	var materialEmissive = new UI.Color().onChange( update );
 
 	materialEmissiveRow.add( new UI.Text( 'Emissive' ).setWidth( '90px' ) );
@@ -113,6 +123,7 @@ Sidebar.Material = function ( editor ) {
 	// specular
 
 	var materialSpecularRow = new UI.Panel();
+    materialSpecularRow.setClass('Panel final-row');
 	var materialSpecular = new UI.Color().onChange( update );
 
 	materialSpecularRow.add( new UI.Text( 'Specular' ).setWidth( '90px' ) );
@@ -123,6 +134,7 @@ Sidebar.Material = function ( editor ) {
 	// shininess
 
 	var materialShininessRow = new UI.Panel();
+    materialShininessRow.setClass('Panel final-row');
 	var materialShininess = new UI.Number( 30 ).onChange( update );
 
 	materialShininessRow.add( new UI.Text( 'Shininess' ).setWidth( '90px' ) );
@@ -133,6 +145,7 @@ Sidebar.Material = function ( editor ) {
 	// vertex colors
 
 	var materialVertexColorsRow = new UI.Panel();
+    materialVertexColorsRow.setClass('Panel final-row');
 	var materialVertexColors = new UI.Select().setOptions( {
 
 		0: 'No',
@@ -150,6 +163,7 @@ Sidebar.Material = function ( editor ) {
 	// map
 
 	var materialMapRow = new UI.Panel();
+    materialMapRow.setClass('Panel final-row');
 	var materialMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
@@ -163,6 +177,7 @@ Sidebar.Material = function ( editor ) {
 	// light map
 
 	var materialLightMapRow = new UI.Panel();
+    materialLightMapRow.setClass('Panel final-row');
 	var materialLightMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialLightMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
@@ -176,6 +191,7 @@ Sidebar.Material = function ( editor ) {
 	// bump map
 
 	var materialBumpMapRow = new UI.Panel();
+    materialBumpMapRow.setClass('Panel final-row');
 	var materialBumpMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialBumpMap = new UI.Texture().setColor( '#444' ).onChange( update );
 	var materialBumpScale = new UI.Number( 1 ).setWidth( '30px' ).onChange( update );
@@ -191,6 +207,7 @@ Sidebar.Material = function ( editor ) {
 	// normal map
 
 	var materialNormalMapRow = new UI.Panel();
+    materialNormalMapRow.setClass('Panel final-row');
 	var materialNormalMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialNormalMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
@@ -204,6 +221,7 @@ Sidebar.Material = function ( editor ) {
 	// specular map
 
 	var materialSpecularMapRow = new UI.Panel();
+    materialSpecularMapRow.setClass('Panel final-row');
 	var materialSpecularMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialSpecularMap = new UI.Texture().setColor( '#444' ).onChange( update );
 
@@ -217,6 +235,7 @@ Sidebar.Material = function ( editor ) {
 	// env map
 
 	var materialEnvMapRow = new UI.Panel();
+    materialEnvMapRow.setClass('Panel final-row');
 	var materialEnvMapEnabled = new UI.Checkbox( false ).onChange( update );
 	var materialEnvMap = new UI.CubeTexture().setColor( '#444' ).onChange( update );
 	var materialReflectivity = new UI.Number( 1 ).setWidth( '30px' ).onChange( update );
@@ -232,6 +251,7 @@ Sidebar.Material = function ( editor ) {
 	// blending
 
 	var materialBlendingRow = new UI.Panel();
+    materialBlendingRow.setClass('Panel final-row');
 	var materialBlending = new UI.Select().setOptions( {
 
 		0: 'No',
@@ -252,6 +272,7 @@ Sidebar.Material = function ( editor ) {
 	// side
 
 	var materialSideRow = new UI.Panel();
+    materialSideRow.setClass('Panel final-row');
 	var materialSide = new UI.Select().setOptions( {
 
 		0: 'Front',
@@ -269,6 +290,7 @@ Sidebar.Material = function ( editor ) {
 	// opacity
 
 	var materialOpacityRow = new UI.Panel();
+    materialOpacityRow.setClass('Panel final-row');
 	var materialOpacity = new UI.Number().setWidth( '60px' ).setRange( 0, 1 ).onChange( update );
 
 	materialOpacityRow.add( new UI.Text( 'Opacity' ).setWidth( '90px' ) );
@@ -280,6 +302,7 @@ Sidebar.Material = function ( editor ) {
 	// transparent
 
 	var materialTransparentRow = new UI.Panel();
+    materialTransparentRow.setClass('Panel final-row');
 	var materialTransparent = new UI.Checkbox().setLeft( '100px' ).onChange( update );
 
 	materialTransparentRow.add( new UI.Text( 'Transparent' ).setWidth( '90px' ) );
@@ -291,6 +314,7 @@ Sidebar.Material = function ( editor ) {
 	// wireframe
 
 	var materialWireframeRow = new UI.Panel();
+    materialWireframeRow.setClass('Panel final-row');
 	var materialWireframe = new UI.Checkbox( false ).onChange( update );
 	var materialWireframeLinewidth = new UI.Number( 1 ).setWidth( '60px' ).setRange( 0, 100 ).onChange( update );
 

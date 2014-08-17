@@ -7,6 +7,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	// radius
 
 	var radiusRow = new UI.Panel();
+    radiusRow.setClass('Panel final-row');
 	var radius = new UI.Number( geometry.radius ).onChange( update );
 
 	radiusRow.add( new UI.Text( 'Radius' ).setWidth( '90px' ) );
@@ -17,6 +18,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	// widthSegments
 
 	var widthSegmentsRow = new UI.Panel();
+    widthSegmentsRow.setClass('Panel final-row');
 	var widthSegments = new UI.Integer( geometry.widthSegments ).setRange( 1, Infinity ).onChange( update );
 
 	widthSegmentsRow.add( new UI.Text( 'Width segments' ).setWidth( '90px' ) );
@@ -27,6 +29,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	// heightSegments
 
 	var heightSegmentsRow = new UI.Panel();
+    heightSegmentsRow.setClass('Panel final-row');
 	var heightSegments = new UI.Integer( geometry.heightSegments ).setRange( 1, Infinity ).onChange( update );
 
 	heightSegmentsRow.add( new UI.Text( 'Height segments' ).setWidth( '90px' ) );
@@ -37,6 +40,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	// phiStart
 
 	var phiStartRow = new UI.Panel();
+    phiStartRow.setClass('Panel final-row');
 	var phiStart = new UI.Number( geometry.phiStart ).onChange( update );
 
 	phiStartRow.add( new UI.Text( 'Phi start' ).setWidth( '90px' ) );
@@ -47,6 +51,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	// phiLength
 
 	var phiLengthRow = new UI.Panel();
+    phiLengthRow.setClass('Panel final-row');
 	var phiLength = new UI.Number( geometry.phiLength ).onChange( update );
 
 	phiLengthRow.add( new UI.Text( 'Phi length' ).setWidth( '90px' ) );
@@ -57,6 +62,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	// thetaStart
 
 	var thetaStartRow = new UI.Panel();
+    thetaStartRow.setClass('Panel final-row');
 	var thetaStart = new UI.Number( geometry.thetaStart ).onChange( update );
 
 	thetaStartRow.add( new UI.Text( 'Theta start' ).setWidth( '90px' ) );
@@ -67,6 +73,7 @@ Sidebar.Geometry.SphereGeometry = function ( signals, object ) {
 	// thetaLength
 
 	var thetaLengthRow = new UI.Panel();
+    thetaLengthRow.setClass('Panel final-row');
 	var thetaLength = new UI.Number( geometry.thetaLength ).onChange( update );
 
 	thetaLengthRow.add( new UI.Text( 'Theta length' ).setWidth( '90px' ) );

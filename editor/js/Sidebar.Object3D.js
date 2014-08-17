@@ -3,6 +3,7 @@ Sidebar.Object3D = function ( editor ) {
 	var signals = editor.signals;
 
 	var container = new UI.Panel();
+    container.dom.classList.add( 'Mesh' );
 	container.setDisplay( 'none' );
 
 	var objectType = new UI.Text().setTextTransform( 'uppercase' );
@@ -12,6 +13,7 @@ Sidebar.Object3D = function ( editor ) {
 	// uuid
 
 	var objectUUIDRow = new UI.Panel();
+    objectUUIDRow.setClass('Panel final-row');
 	var objectUUID = new UI.Input().setWidth( '115px' ).setColor( '#444' ).setFontSize( '12px' ).setDisabled( true );
 	var objectUUIDRenew = new UI.Button( '⟳' ).setMarginLeft( '7px' ).onClick( function () {
 
@@ -20,6 +22,8 @@ Sidebar.Object3D = function ( editor ) {
 		editor.selected.uuid = objectUUID.getValue();
 
 	} );
+
+    objectUUIDRenew.setClass('Button refresh');
 
 	objectUUIDRow.add( new UI.Text( 'UUID' ).setWidth( '90px' ) );
 	objectUUIDRow.add( objectUUID );
@@ -30,6 +34,7 @@ Sidebar.Object3D = function ( editor ) {
 	// name
 
 	var objectNameRow = new UI.Panel();
+    objectNameRow.setClass('Panel final-row');
 	var objectName = new UI.Input().setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( function () {
 
 			editor.setObjectName( editor.selected, objectName.getValue() );
@@ -44,6 +49,7 @@ Sidebar.Object3D = function ( editor ) {
 	// parent
 
 	var objectParentRow = new UI.Panel();
+    objectParentRow.setClass('Panel final-row');
 	var objectParent = new UI.Select().setWidth( '150px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( update );
 
 	objectParentRow.add( new UI.Text( 'Parent' ).setWidth( '90px' ) );
@@ -54,6 +60,7 @@ Sidebar.Object3D = function ( editor ) {
 	// position
 
 	var objectPositionRow = new UI.Panel();
+    objectPositionRow.setClass('Panel final-row');
 	var objectPositionX = new UI.Number().setWidth( '50px' ).onChange( update );
 	var objectPositionY = new UI.Number().setWidth( '50px' ).onChange( update );
 	var objectPositionZ = new UI.Number().setWidth( '50px' ).onChange( update );
@@ -66,6 +73,7 @@ Sidebar.Object3D = function ( editor ) {
 	// rotation
 
 	var objectRotationRow = new UI.Panel();
+    objectRotationRow.setClass('Panel final-row');
 	var objectRotationX = new UI.Number().setWidth( '50px' ).onChange( update );
 	var objectRotationY = new UI.Number().setWidth( '50px' ).onChange( update );
 	var objectRotationZ = new UI.Number().setWidth( '50px' ).onChange( update );
@@ -78,6 +86,7 @@ Sidebar.Object3D = function ( editor ) {
 	// scale
 
 	var objectScaleRow = new UI.Panel();
+    objectScaleRow.setClass('Panel final-row');
 	var objectScaleLock = new UI.Checkbox().setPosition( 'absolute' ).setLeft( '75px' );
 	var objectScaleX = new UI.Number( 1 ).setWidth( '50px' ).onChange( updateScaleX );
 	var objectScaleY = new UI.Number( 1 ).setWidth( '50px' ).onChange( updateScaleY );
@@ -92,6 +101,7 @@ Sidebar.Object3D = function ( editor ) {
 	// fov
 
 	var objectFovRow = new UI.Panel();
+    objectFovRow.setClass('Panel final-row');
 	var objectFov = new UI.Number().onChange( update );
 
 	objectFovRow.add( new UI.Text( 'Fov' ).setWidth( '90px' ) );
@@ -102,6 +112,7 @@ Sidebar.Object3D = function ( editor ) {
 	// near
 
 	var objectNearRow = new UI.Panel();
+    objectNearRow.setClass('Panel final-row');
 	var objectNear = new UI.Number().onChange( update );
 
 	objectNearRow.add( new UI.Text( 'Near' ).setWidth( '90px' ) );
@@ -112,6 +123,7 @@ Sidebar.Object3D = function ( editor ) {
 	// far
 
 	var objectFarRow = new UI.Panel();
+    objectFarRow.setClass('Panel final-row');
 	var objectFar = new UI.Number().onChange( update );
 
 	objectFarRow.add( new UI.Text( 'Far' ).setWidth( '90px' ) );
@@ -122,6 +134,7 @@ Sidebar.Object3D = function ( editor ) {
 	// intensity
 
 	var objectIntensityRow = new UI.Panel();
+    objectIntensityRow.setClass('Panel final-row');
 	var objectIntensity = new UI.Number().setRange( 0, Infinity ).onChange( update );
 
 	objectIntensityRow.add( new UI.Text( 'Intensity' ).setWidth( '90px' ) );
@@ -132,6 +145,7 @@ Sidebar.Object3D = function ( editor ) {
 	// color
 
 	var objectColorRow = new UI.Panel();
+    objectColorRow.setClass('Panel final-row');
 	var objectColor = new UI.Color().onChange( update );
 
 	objectColorRow.add( new UI.Text( 'Color' ).setWidth( '90px' ) );
@@ -142,6 +156,7 @@ Sidebar.Object3D = function ( editor ) {
 	// ground color
 
 	var objectGroundColorRow = new UI.Panel();
+    objectGroundColorRow.setClass('Panel final-row');
 	var objectGroundColor = new UI.Color().onChange( update );
 
 	objectGroundColorRow.add( new UI.Text( 'Ground color' ).setWidth( '90px' ) );
@@ -152,6 +167,7 @@ Sidebar.Object3D = function ( editor ) {
 	// distance
 
 	var objectDistanceRow = new UI.Panel();
+    objectDistanceRow.setClass('Panel final-row');
 	var objectDistance = new UI.Number().setRange( 0, Infinity ).onChange( update );
 
 	objectDistanceRow.add( new UI.Text( 'Distance' ).setWidth( '90px' ) );
@@ -162,6 +178,7 @@ Sidebar.Object3D = function ( editor ) {
 	// angle
 
 	var objectAngleRow = new UI.Panel();
+    objectAngleRow.setClass('Panel final-row');
 	var objectAngle = new UI.Number().setPrecision( 3 ).setRange( 0, Math.PI / 2 ).onChange( update );
 
 	objectAngleRow.add( new UI.Text( 'Angle' ).setWidth( '90px' ) );
@@ -172,6 +189,7 @@ Sidebar.Object3D = function ( editor ) {
 	// exponent
 
 	var objectExponentRow = new UI.Panel();
+    objectExponentRow.setClass('Panel final-row');
 	var objectExponent = new UI.Number().setRange( 0, Infinity ).onChange( update );
 
 	objectExponentRow.add( new UI.Text( 'Exponent' ).setWidth( '90px' ) );
@@ -182,6 +200,7 @@ Sidebar.Object3D = function ( editor ) {
 	// visible
 
 	var objectVisibleRow = new UI.Panel();
+    objectVisibleRow.setClass('Panel final-row');
 	var objectVisible = new UI.Checkbox().onChange( update );
 
 	objectVisibleRow.add( new UI.Text( 'Visible' ).setWidth( '90px' ) );
@@ -192,6 +211,7 @@ Sidebar.Object3D = function ( editor ) {
 	// user data
 
 	var objectUserDataRow = new UI.Panel();
+    objectUserDataRow.setClass('Panel final-row');
 	var objectUserData = new UI.TextArea().setWidth( '150px' ).setHeight( '40px' ).setColor( '#444' ).setFontSize( '12px' ).onChange( update );
 	objectUserData.onKeyUp( function () {
 

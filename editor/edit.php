@@ -2,37 +2,39 @@
 /**
  * Initial page for model editor
  *
- * @author Renfei Song & Three-r68.min.js
+ * @author Renfei Song
  */
+
 require_once "../functions.php";
-	
-	if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])
-	&& sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {	
-		$id = $_GET["id"];
-		$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-		$query = "SELECT * FROM dimensions_models INNER JOIN dimensions_users ON dimensions_users.id = dimensions_models.uploader_id WHERE dimensions_models.id = '$id'";
-		$result = mysqli_query($dbc, $query);
-		if ($row = mysqli_fetch_array($result)) {
-			if ($row['username'] == $_COOKIE['username']) {
-				$file_url = "/" . UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["model_name"];
-			} else {
-				exit_with_error();
-			}
-		} else {
-			exit_with_error();
-		}
-	} else {
-		exit_with_error();
-	}
-	
-	function exit_with_error() {
-		require_once('../header.php');
-		?>
-			<div class="alert alert-error"><strong>错误：</strong>拒绝访问。</div>
-		<?php
-		require_once('../footer.php');
-		exit;
-	}
+
+if (isset($_COOKIE['mask']) && isset($_COOKIE['username']) && isset($_COOKIE['email'])
+    && sha1($_COOKIE['email'].$_COOKIE['username']) == $_COOKIE['mask']) {
+    $id = $_GET["id"];
+    $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    $query = "SELECT * FROM dimensions_models INNER JOIN dimensions_users ON dimensions_users.id = dimensions_models.uploader_id WHERE dimensions_models.id = '$id'";
+    $result = mysqli_query($dbc, $query);
+    if ($row = mysqli_fetch_array($result)) {
+        if ($row['username'] == $_COOKIE['username']) {
+            $file_url = "/" . UPLOAD_PATH . "/" . $row["file_stamp"] . "/" . $row["model_name"];
+        } else {
+            exit_with_error();
+        }
+    } else {
+        exit_with_error();
+    }
+} else {
+    exit_with_error();
+}
+
+function exit_with_error() {
+require_once('../header.php');
+?>
+<div class="alert alert-error"><strong>错误：</strong>拒绝访问。</div>
+<?php
+require_once('../footer.php');
+exit;
+}
+
 ?><!DOCTYPE html>
 <html>
 	<head>

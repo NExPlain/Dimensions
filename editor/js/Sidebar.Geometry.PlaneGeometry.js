@@ -7,6 +7,7 @@ Sidebar.Geometry.PlaneGeometry = function ( signals, object ) {
 	// width
 
 	var widthRow = new UI.Panel();
+    widthRow.setClass('Panel final-row');
 	var width = new UI.Number( geometry.width ).onChange( update );
 
 	widthRow.add( new UI.Text( 'Width' ).setWidth( '90px' ) );
@@ -17,6 +18,7 @@ Sidebar.Geometry.PlaneGeometry = function ( signals, object ) {
 	// height
 
 	var heightRow = new UI.Panel();
+    heightRow.setClass('Panel final-row');
 	var height = new UI.Number( geometry.height ).onChange( update );
 
 	heightRow.add( new UI.Text( 'Height' ).setWidth( '90px' ) );
@@ -27,6 +29,7 @@ Sidebar.Geometry.PlaneGeometry = function ( signals, object ) {
 	// widthSegments
 
 	var widthSegmentsRow = new UI.Panel();
+    widthSegmentsRow.setClass('Panel final-row');
 	var widthSegments = new UI.Integer( geometry.widthSegments ).setRange( 1, Infinity ).onChange( update );
 
 	widthSegmentsRow.add( new UI.Text( 'Width segments' ).setWidth( '90px' ) );
@@ -37,6 +40,7 @@ Sidebar.Geometry.PlaneGeometry = function ( signals, object ) {
 	// heightSegments
 
 	var heightSegmentsRow = new UI.Panel();
+    heightSegmentsRow.setClass('Panel final-row');
 	var heightSegments = new UI.Integer( geometry.heightSegments ).setRange( 1, Infinity ).onChange( update );
 
 	heightSegmentsRow.add( new UI.Text( 'Height segments' ).setWidth( '90px' ) );
